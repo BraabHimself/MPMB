@@ -40,7 +40,7 @@ MagicItemsList["staff of flame"] = {
 	weaponOptions : {
 		baseWeapon : "quarterstaff",
 		regExpSearch : /staff of flame/i,
-		name : "Staff Flame",
+		name : "Staff of Flame",
 		source : ["D&DW", 0],
 		range : "Melee",
 		description : "Versatile (1d8)"
