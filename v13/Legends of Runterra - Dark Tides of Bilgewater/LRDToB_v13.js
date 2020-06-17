@@ -41,7 +41,7 @@ AddSubClass("barbarian", "depths", {
 			name : "Gift of the Drowned Ones",
 			source : ["LRDToB", 0],
 			minlevel : 3,
-			description : desc(["I have a swimming speed equal to my walking speed and can breathe underwater."]),
+			description : desc(["I have a swimming speed equal to my walking speed and can breathe underwater"]),
 			eval : function () {
 				SetProf("speed", true, { swim : { spd : 'walk', enc : 'walk' } }, "Gift of the Drowned Ones");
 			},
