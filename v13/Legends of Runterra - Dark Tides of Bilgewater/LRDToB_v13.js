@@ -54,7 +54,7 @@ AddSubClass("barbarian", "depths", {
 			source : ["LRDToB", 0],
 			minlevel : 3,
 			description : desc([
-				"When I rage, I manifest an extra magical appendage, such as a tentacle.",
+				"When I rage, I manifest an extra magical appendage, such as a tentacle",
 				"I can use a bonus action to strike a creature within 15 with it",
 				"It makes a DC 8 + prof + Str mod save or is pulled 10 ft straight towards me"
 			]),
@@ -159,8 +159,8 @@ AddSubClass("fighter", "renegade", {
 			name : "Scoundrel’s Wit",
 			source : ["LRDToB", 0],
 			minlevel : 3,
-			description : desc(["I gain proficiency with two of the following skills: Deception, Persuasion, or Sleight of Hand"]),
-			skillstxt : "\n\n" + toUni("Renegade") + ": Choose two from: Deception, Persuasion, Sleight of Hand."
+			description : desc(["I gain proficiency with two of the following skills: Deception, Persuasion, Sleight of Hand"]),
+			skillstxt : "\n\n" + toUni("Renegade") + ": Choose two from: Deception, Persuasion, or Sleight of Hand."
 		},
 		"subclassfeature3.1" : {
 			name : "Gunfighter Form",
@@ -794,7 +794,7 @@ MagicItemsList["adaptive helm"] = {
 	notLegalAL : true,
 	attunement : true,
 	allowDuplicates : true,
-	description : "When attacked with acid, cold, fire, lightning, or thunder damage, I can use my reaction to gain resistance to that damage type. This effect laststs for 10 mins.",
+	description : "When hit with acid, cold, fire, lightning, or thunder damage, I can use my reaction to gain resistance to that damage type. This effect lasts for 10 mins.",
 	descriptionFull : "This metal helmet is set with crystals that change color when exposed to elemental energy. While wearing this helm, if you are the target of an attack which would deal acid, cold, fire, lightning, or thunder damage you can use a reaction to adapt to that damage type. While adapted, you have resistance to that damage type. The helm returns to its normal state after ten minutes.",
 	action : ["reaction", " (adapt)"]
 };
