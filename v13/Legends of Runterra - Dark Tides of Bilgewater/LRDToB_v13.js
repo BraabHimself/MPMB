@@ -153,7 +153,7 @@ AddSubClass("fighter", "renegade", {
 	subname : "Renegade",
 	source : ["LRDToB", ],
 	fullname : "Renegade",
-	abilitySave : 2,
+	abilitySave : 6,
 	features : {
 		"subclassfeature3" : {
 			name : "Scoundrel’s Wit",
@@ -297,7 +297,7 @@ AddSubClass("fighter", "renegade", {
 					regExpSearch : /caliber net/i,
 					name : "Caliber Net",
 					source : ["LRDToB", 0],
-					ability : 2,
+					ability : 6,
 					dc : true,
 					list : "ranged",
 					type : "Martial",
@@ -403,7 +403,7 @@ AddSubClass("fighter", "renegade", {
 					regExpSearch : /barrage/i,
 					name : "Barrage",
 					source : ["LRDToB", 0],
-					ability : 2,
+					ability : 6,
 					dc : true,
 					list : "ranged",
 					type : "Martial",
@@ -419,7 +419,7 @@ AddSubClass("fighter", "renegade", {
 							if (v.isRangedWeapon && (/barrage/i).test(v.WeaponName)) {
 								var fightingStyle = GetFeatureChoice('class', 'fighter', 'fighting style');
 								
-								output.extraHit -= (fightingStyle == 'archery' ? -2 : fightingStyle == 'close quarters shooter' ? -1 : 0);
+								output.extraHit -= (fightingStyle == 'archery' ? 2 : fightingStyle == 'close quarters shooter' ? 1 : 0);
 							}
 						},""
 					]
@@ -450,7 +450,7 @@ AddSubClass("fighter", "renegade", {
 					regExpSearch : /lightning round/i,
 					name : "Lightning Round",
 					source : ["LRDToB", 0],
-					ability : 2,
+					ability : 6,
 					dc : true,
 					list : "ranged",
 					type : "Martial",
@@ -542,7 +542,7 @@ AddSubClass("fighter", "renegade", {
 				regExpSearch : /explosive/i,
 				name : "Explosive",
 				source : ["LRDToB", 0],
-				ability : 2,
+				ability : 6,
 				dc : true,
 				list : "ranged",
 				type : "Martial",
