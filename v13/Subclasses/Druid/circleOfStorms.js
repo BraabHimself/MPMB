@@ -88,7 +88,7 @@ AddSubClass("druid", "circle of storms", {
 				"I roll the expended dice and add the number as extra lightning or thunder damage",
 				"I can spend up to half my druid level worth of dice from the pool at once"
 			]),
-			usages : ["", "2d10 per ", "3d10 per ", "4d10 per ", "5d10 per ", "6d10 per ", "7d10 per ", "8d10 per ", "9d10 per ", "10d10 per ", "11d10 per ", "12d10 per ", "13d10 per ", "14d10 per ", "15d10 per ", "16d10 per ", "17d10 per ", "18d10 per ", "19d10 per ", "20d10 per "],
+			usages : ["", "2d8 per ", "3d8 per ", "4d8 per ", "5d8 per ", "6d8 per ", "7d8 per ", "8d8 per ", "9d8 per ", "10d8 per ", "11d8 per ", "12d8 per ", "13d8 per ", "14d8 per ", "15d8 per ", "16d8 per ", "17d8 per ", "18d8 per ", "19d8 per ", "20d8 per "],
 			recovery : "long rest"
 		},
 		"subclassfeature3" : {
