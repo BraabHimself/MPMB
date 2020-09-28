@@ -340,7 +340,7 @@ FeatsList["serpent form-xgteerf"] = {
 		name : "Snake Bite",
 		source : ["XGtE:ERF", 2],
 		damage : [1, 4, "piercing"],
-		description : "Once per long rest, deal an additional 2d6 poison damage"
+		description : "Only in snake form; Once per long rest, deal an additional 2d6 poison damage"
 	},
 	weaponsAdd : ['Snake Bite'],
 	limfeaname : "Serpent Form (2d6 Poison Damage)",
