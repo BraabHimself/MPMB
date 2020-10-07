@@ -112,7 +112,7 @@ AddSubClass("cleric", "winter domain", {
 			minlevel : 17,
 			description : desc([
 				"As an action, I can surround myself with swirling blizzard",
-				"The blizzard lasts for 1 min or until I use an action to stop it"
+				"The blizzard lasts for 1 min or until I use an action to stop it",
 				"While the blizzard is active I gain the following benefits:",
 				" \u2022 I am immune to cold damage",
 				" \u2022 Ranged weapon attacks against me have disadvantage",
