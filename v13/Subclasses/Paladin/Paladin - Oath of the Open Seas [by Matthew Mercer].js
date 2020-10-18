@@ -23,7 +23,7 @@ SourceList["MM:OotOS"] = {
 	abbreviation : "MM:OotOS",
 	group : "D&D Beyond",
 	url : "https://www.dndbeyond.com/classes/paladin#OathoftheOpenSea",
-	date : "2020/10/17"
+	date : "2020/10/16"
 };
 
 AddSubClass("paladin", "oath of the open seas", {
