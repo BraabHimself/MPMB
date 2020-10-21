@@ -34,33 +34,58 @@ AddSubClass("monk", "way of the cobalt soul-dndbeyond", {
 			name: "Extract Aspects",
 			source: [["MM:WCS", 1]],
 			minlevel: 3,
-			description: desc([
-				"If I hit a creature with a Flurry of Blows attack, it becomes analyzed until my next rest",
-				"I learn its damage vulnerabilities/resistances/immunities and condition immunities",
-				"If an analyzed creature misses me with an attack, I can use a reaction to make an unarmed strike against it"
-			]),
-			action : ["reaction", " (after analyzed creature miss)"]
+			description: "",
+			toNotesPage : [{
+				name : "Extort Truth",
+				source : ["MM:WCS", 1],
+				popupName : "Extort Truth",
+				page3notes : true,
+				note : [
+					"If I hit a creature with a Flurry of Blows attack, it is analyzed until my next rest",
+					"I learn its damage vulnerabilities/resistances/immunities and condition immunities",
+					"If an analyzed target misses me with an attack, I can retaliate against it",
+					"I can do so by using a reaction to make an unarmed strike against it"
+				]
+			}],
+			action : ["reaction", " (after analyzed creature miss)"],
+			additional : "See 3rd page notes"
 		},
 		"subclassfeature6": {
 			name: "Extort Truth",
 			source: [["MM:WCS", 1]],
 			minlevel: 6,
-			description: desc([
-				"If I hit a creature with an unarmed strike, I can spend ki to force it to make a Cha save",
-				"If failed, the creature can't lie for 10 min and all Cha checks directed at target have adv.",
-				"I know if it failed the save; The target is aware of the effect and can give evasive answers"
-			]),
-			additional: "1 ki point"
+			description: (typeA4 ? "" : desc(["If I hit a creature with an unarmed strike, I can spend 1 ki to compel it to tell the truth"])),
+			toNotesPage : [{
+				name : "Extort Truth",
+				source : ["MM:WCS", 1],
+				popupName : "Extort Truth",
+				page3notes : true,
+				note : [
+				   "If I hit a creature with an unarmed strike, I can spend 1 ki to force it to make a Cha save",
+				   "If failed, the creature can't lie for 10 min and all Cha checks directed at target have adv.",
+				   "I know if it failed the save; The target is aware of the effect and can give evasive answers"
+				]
+			}],
+			additional: "1 ki point; See 3rd page notes"
 		},
 		"subclassfeature6.1": {
 			name: "Mystical Erudition",
 			source: [["MM:WCS", 1]],
 			minlevel: 6,
 			description: desc([
-				"I gain a language and proficiency with one skill from Arcana, History, Nature or Religion",
-				"At both 11th and 17th level, I learn one additional language",
-				"At those levels I also gain proficiency or expertise (if proficient) in one skill from list above"
+				"At 6th, 11th, and 17th level gain a language and skill/expertise; See 3rd page notes"
 			]),
+			toNotesPage : [{
+				name : "Mystical Erudition",
+				source : ["MM:WCS", 1],
+				popupName : "Mystical Erudition",
+				page3notes : true,
+				note : [
+					"I gain a language and proficiency with one skill from Arcana, History, Nature or Religion",
+					"At both 11th and 17th level, I learn one additional language",
+					"At those levels I also gain proficiency or expertise (if proficient) in one skill from list above"
+				]
+			}],
 			languageProfs: [1],
 			additional: levels.map(function (n) {
 				if (n < 3) return '';
@@ -139,10 +164,9 @@ AddSubClass("monk", "way of the cobalt soul-dndbeyond", {
 			source: [["MM:WCS", 1]],
 			minlevel: 11,
 			description: desc([
-				"If I have taken my reaction this round, I can spend 1 ki point to take a reaction",
-				"I can only use this feature once per turn in a round"
+				"If I have taken my reaction this round, I can spend 1 ki point to take a reaction"
 			]),
-			additional: "1 ki point"
+			additional: "1 ki point; once per turn"
 		},
 		"subclassfeature17": {
 			name: "Debilitating Barrage",
@@ -150,7 +174,7 @@ AddSubClass("monk", "way of the cobalt soul-dndbeyond", {
 			minlevel: 17,
 			description: desc([
 				"If I hit a creature with a Flurry of Blows attack, I can use 3 ki points to debilitate it",
-				"The target has vulnerability against first instance of a damage type I choose, within 1 min"
+				"It has vulnerability against first instance of a damage type I choose; lasts for 1 min"
 			]),
 			additional: "3 ki points"
 		}
