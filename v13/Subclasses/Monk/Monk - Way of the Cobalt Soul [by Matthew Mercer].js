@@ -81,7 +81,8 @@ AddSubClass("monk", "way of the cobalt soul-dndbeyond", {
 				popupName : "Mystical Erudition",
 				page3notes : true,
 				note : [
-					"I gain a language and proficiency with one skill from Arcana, History, Nature or Religion",
+					"I gain a language",
+					"I also gain proficiency with one skill from Arcana, History, Investigation, Nature, or Religion",
 					"At both 11th and 17th level, I learn one additional language",
 					"At those levels I also gain proficiency or expertise (if proficient) in one skill from list above"
 				]
@@ -108,7 +109,7 @@ AddSubClass("monk", "way of the cobalt soul-dndbeyond", {
 				}
 			},
 			extraname: "Mystical Erudition",
-			extrachoices: ["Arcana Proficiency", "Arcana Expertise", "History Proficiency", "History Expertise", "Nature Proficiency", "Nature Expertise", "Religion Proficiency", "Religion Expertise"],
+			extrachoices: ["Arcana Proficiency", "Arcana Expertise", "History Proficiency", "History Expertise", "Investigation Proficiency", "Investigation Expertise", "Nature Proficiency", "Nature Expertise", "Religion Proficiency", "Religion Expertise"],
 			extraTimes: levels.map(function (n) { return n < 11 ? 1 : n < 17 ? 2 : 3; }),
 			"arcana proficiency" : {
 				name: "Arcana Proficiency", description : "",
@@ -133,6 +134,18 @@ AddSubClass("monk", "way of the cobalt soul-dndbeyond", {
 				source: [["MM:WCS", 1]],
 				prereqeval : function(v) { return classes.known.monk && classes.known.monk.level >= 11 && v.skillProfs.indexOf("History") !== -1; },
 				skills : [["History", "only"]]
+			},
+			"investigation proficiency" : {
+				name: "Investigation Proficiency", description : "",
+				source: [["MM:WCS", 1]],
+				prereqeval : function(v) { return v.skillProfs.indexOf("Investigation") == -1; },
+				skills: ["Investigation"]
+			},
+			"investigation expertise" : {
+				name : "Investigation Expertise", description : "",
+				source: [["MM:WCS", 1]],
+				prereqeval : function(v) { return classes.known.monk && classes.known.monk.level >= 11 && v.skillProfs.indexOf("Investigation") !== -1; },
+				skills : [["Investigation", "only"]]
 			},
 			"nature proficiency" : {
 				name: "Nature Proficiency", description : "",
