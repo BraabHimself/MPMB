@@ -29,7 +29,7 @@ AddSubClass("wizard", "hedge magic", {
 	regExpSearch : /^(?=.*hedge)(?=.*mag(ic|e)).*$/i,
 	subname : "Hedge Magic",
 	fullname : "Hedge Magic",
-	source : ["P", 116],
+	source : ["LL:HW", 1],
 	features : {
 		"subclassfeature2" : {
 			name : "Cantrip Savant",
