@@ -368,7 +368,7 @@ ClassList.gladiator = {
 		"\n \u2022 Two handaxes -or- two javelins;" +
 		"\n \u2022 An explorer's pack -or- an entertainer's pack." +
 		"\n\nAlternatively, choose 5d4 \xD7 10 gp worth of starting equipment instead of both the class' and the background's starting equipment.",
-	subclasses : ["Martial Role", ["gladiator-retiarius"]],
+	subclasses : ["Martial Role", []],
 	attacks : [1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3],
 	features : {
 		"flair for the dramatic" : {
