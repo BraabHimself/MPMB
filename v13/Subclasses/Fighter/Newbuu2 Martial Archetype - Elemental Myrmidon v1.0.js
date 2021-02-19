@@ -100,7 +100,7 @@ AddSubClass("fighter", "elemental myrmidon", {
 					atkAdd : [
 						function (fields, v) {
 							if (v.isMeleeWeapon && !v.isNaturalWeapon && (/\b(lightning imbued)\b/i).test(v.WeaponText)) {
-								var bonusDamage = var bonusDamage = ProficiencyBonusList[classes.totallevel - 1];
+								var bonusDamage = ProficiencyBonusList[classes.totallevel - 1];
 								
 								if((/\b(supercharged?)\b/i).test(v.WeaponText) && classes.known.fighter.level >= 10)
 								{
