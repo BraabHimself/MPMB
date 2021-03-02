@@ -7,7 +7,7 @@ SourceList["NB2:EM"] = {
 	name : "Newbuu2: Martial Archetype - Elemental Myrmidon",
 	abbreviation : "NB2:EM",
 	group : "Homebrew",
-	url : "https://i.redd.it/bq70njnz5wh61.jpg",
+	url : "https://homebrewery.naturalcrit.com/share/2MUlR_py5lvv",
 	date : "2021/02/16"
 };
 
