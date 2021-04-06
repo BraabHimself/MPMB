@@ -81,7 +81,7 @@ RaceList["diamondback mothfolk"] = {
 	weight : " builds tend towards the light and lithe, and they usually weigh between 130 and 160 pounds.",
 	scores : [1, 0, 0, 0, 2, 0],
 	scorestxt : "+2 Wisdom and +1 Strength",
-	trait : "Luna Mothfolk (+2 Wisdom +1 Strength)" + 
+	trait : "Diamondback Mothfolk (+2 Wisdom +1 Strength)" + 
 		" Compound Vision: I can discern colors in dim light" + (typePF ? " and " : "/") + "darkness, but only on the ultraviolet spectrum." +
 		" Wings: I can't use my wings to ascend. If I end a turn flying in the air, I descend by 5 " + (typePF ? "feet" : "ft") + "." +
 		" Armed and Dangerous: I have four arms" + (typePF ? ", each of which" : "; each") + " can hold an object. I don't benefit from a shield if holding a two-handed weapon or " + (typePF ? "more than one weapon" : "multiple weapons") + "." +
@@ -117,7 +117,7 @@ RaceList["royal mothfolk"] = {
 	weight : " builds tend towards the light and lithe, and they usually weigh between 130 and 160 pounds.",
 	scores : [0, 0, 0, 0, 2, 1],
 	scorestxt : "+2 Wisdom and +1 Charisma",
-	trait : "Luna Mothfolk (+2 Wisdom +1 Charisma)" + 
+	trait : "Royal Mothfolk (+2 Wisdom +1 Charisma)" + 
 		" Compound Vision: I can discern colors in dim light" + (typePF ? " and " : "/") + "darkness, but only on the ultraviolet spectrum." +
 		" Wings: I can't use my wings to ascend. If I end a turn flying in the air, I descend by 5 " + (typePF ? "feet" : "ft") + "." +
 		" Armed and Dangerous: I have four arms" + (typePF ? ", each of which" : "; each") + " can hold an object. I don't benefit from a shield if holding a two-handed weapon or " + (typePF ? "more than one weapon" : "multiple weapons") + "." +
