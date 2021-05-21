@@ -25,6 +25,14 @@ SourceList["L:HR"] = {
 	date : "2021/02/05"
 };
 
+SourceList["N:HM"] = {
+	name : "Masamune: Weapon of Legend option for the Hexblade Revisited",
+	abbreviation : "N:HM",
+	group : "Homebrew",
+	url : "https://homebrewery.naturalcrit.com/share/1x9DXuAq1FTj2nGjl25dTStcy0HFyKpw7cEGkSBxZl0jR",
+	date : "2021/05/20"
+};
+
 var isLegendaryWeapon = function(weaponName) {
 	var legendaryWeapons = ClassSubList["warlock-the hexblade revisited"].features.subclassfeature1.choices.map((x) => x);
 	
@@ -63,7 +71,7 @@ AddSubClass("warlock", "the hexblade revisited", {
 				"\u2022 It requires attunement to use any of its properties; only I can attune"
 			]),
 			additional : levels.map(function (n) { return ("+" + (n < 2 ? 1 : n < 4 ? 2 : n < 8 ? 3 : n < 12 ? 4 : n < 16 ? 5 : n < 20 ? 6 : 7) + " attunement bonus"); }),
-			choices : ["Blackrazor", "Equinox", "Sever", "Wave"],
+			choices : ["Blackrazor", "Equinox", "Masamune", "Sever", "Wave"],
 			calcChanges : {
 				atkAdd : [
 					function (fields, v) {
@@ -150,6 +158,36 @@ AddSubClass("warlock", "the hexblade revisited", {
 						" \u2022 Communicate with Equinox while it is dismissed",
 						"As a bonus action, I can split Equinox into two shortswords: Midsummer and Midwinter",
 						"They grant the same features as Equinox as long as I hold both"
+					])
+				}]
+			},
+			"masamune" : {
+				name : "Weapon of Legend: Masamune",
+				source : ["N:HM", 1],
+				description : desc([
+					"Masamune binds itself to me; See 3rd page for features"
+				]),
+				eval : function (lvl, chc) { AddMagicItem("Bound Masamune");},
+				removeeval : function (lvl, chc) {
+					var loc = CurrentMagicItems.known.indexOf("bound masamune");
+					if (loc == -1) return;
+					MagicItemClear(loc + 1, true);
+				},
+				toNotesPage : [{
+					name : "Masamune Features",
+					source : ["N:HM", 1],
+					popupName : "Masamune Features",
+					page3notes : true,
+					note : desc([
+						"Masamune, a magical glaive, binds itself to me, it has the following properties:",
+						" \u2022 It can communicate telepathically with me, while I hold it",
+						" \u2022 It has hearing and darkvision out to 30 ft; knows Common and Celestial",
+						" \u2022 I can use it with Charisma instead of Strength or Dexterity",
+						" \u2022 It has 14 Intelligence, 14 Wisdom, and 14 Charisma; skilled in Investigation",
+						" \u2022 It requires attunement to use any of its properties; only I can attune",
+						"If I gain the Pact of the Blade feature I can:",
+						" \u2022 Summon and dismiss it without binding to it",
+						" \u2022 Communicate with Masamune while it is dismissed"
 					])
 				}]
 			},
@@ -265,6 +303,16 @@ AddSubClass("warlock", "the hexblade revisited", {
 				spellcastingExtra : ["gift of alacrity", "misty step", "hypnotic pattern", "greater invisibility", "steel wind strike"],
 				spellcastingExtraApplyNonconform : true,
 			},
+			"masamune" : {
+				name : "Bonus Spells: Masamune",
+				source : ["N:HM", 1],
+				description : desc([
+					"I get bonus spells known, which do not count against the number of spells I can know",
+					"Masamune can be used as a spellcasting focus for my warlock spells"
+				]),
+				spellcastingExtra : ["shield", "blur", "haste", "staggering smite", "steel wind strike"],
+				spellcastingExtraApplyNonconform : true,
+			},
 			"sever" : {
 				name : "Bonus Spells: Sever",
 				source : ["L:HR", 4],
@@ -333,6 +381,25 @@ AddSubClass("warlock", "the hexblade revisited", {
 					return (n < 2 ? 1 : n < 4 ? 2 : n < 8 ? 3 : n < 12 ? 4 : n < 16 ? 5 : n < 20 ? 6 : 7);
 				}),
 				recovery : "dawn"
+			},
+			"masamune" : {
+				name : "Battle Prowess",
+				source : ["N:HM", 1],
+				minlevel : 3,
+				description : desc([
+					"As a bonus action, I can spend a charge from Masamune to Dash or Disengage",
+					"I gain a +1 bonus to AC while wielding Masamune"
+				]),
+				usages : levels.map( function(n) {
+					return (n < 2 ? 1 : n < 4 ? 2 : n < 8 ? 3 : n < 12 ? 4 : n < 16 ? 5 : n < 20 ? 6 : 7);
+				}),
+				recovery : "long rest",
+				action : [["bonus action", " (dash)"], ["bonus action", " (disengage)"]],
+				extraAC : {
+					mod : 1,
+					text : "I gain a +1 bonus to AC while wielding Masamune.",
+					stopeval : function (v) { return false; }
+				}
 			},
 			"sever" : {
 				name : "Sever's Wrath",
@@ -550,6 +617,15 @@ AddSubClass("warlock", "the hexblade revisited", {
 				usages : 1,
 				recovery : "long rest"
 			},
+			"masamune" : {
+				name : "Blade Flair",
+				source : ["N:HM", 1],
+				description : desc([
+					"As a bonus action, I can spend a charge to make an attack with Masamune"
+				]),
+				action : ["bonus action", ""],
+				additional : "1 battle prowess charge"
+			},
 			"sever" : {
 				name : "Guide of the Nine Hells",
 				source : ["L:HR", 4],
@@ -594,6 +670,20 @@ AddSubClass("warlock", "the hexblade revisited", {
 					"When I spend a charge from Equinox, I turn invisible until the end of my turn"
 				]),
 				additional : "ends if I attack/cast spell"
+			},
+			"masamune" : {
+				name : "Scintilla",
+				source : ["N:HM", 1],
+				minlevel : 10,
+				additional : levels.map(function (n) { return (((n < 2 ? 1 : n < 4 ? 2 : n < 8 ? 3 : n < 12 ? 4 : n < 16 ? 5 : n < 20 ? 6 : 7) * 3) + " damage reduction"); }),
+				description : desc([
+					"As a reaction, when damaged, I can reduce and reflect the damage as force damage",
+					"I can reflect the damage to a creature within 5 ft if damage was reduced to 0",
+					"It deals force damage equal to the amount of damage prevented"
+				]),
+				action : ["reaction", " (when damaged)"],
+				usages : 2,
+				recovery : "short rest"
 			},
 			"sever" : {
 				name : "Undying Vengeance",
@@ -652,6 +742,18 @@ AddSubClass("warlock", "the hexblade revisited", {
 					"If it hits, it deals an additional 1d6 of my choice of cold or fire damage"
 				]),
 				action : ["bonus action", " (after spell)"]
+			},
+			"masamune" : {
+				name : "One-Winged Angel",
+				source : ["N:HM", 1],
+				minlevel : 14,
+				description : desc([
+					"As an action, I sprout a single black wing and gain the following benefits:",
+					"\u2022 I gain a flying speed equal to my walking speed",
+					"\u2022 I am immune to being charmed, frightened, paralyzed, and stunned",
+					"\u2022 I can use my Battle Prowess and Blade Flair abilities without expending charges"
+				]),
+				action : ["action", ""]
 			},
 			"sever" : {
 				name : "Corrupted Transformation",
@@ -782,6 +884,34 @@ MagicItemsList["bound midwinter"] = {
 		name : "Bound Midwinter",
 		source : ["L:HR", 3]
 	}
+};
+
+var masamuneDescription = [
+	"Masamune was the exclusive weapon of a legendary warrior from another plane. This warrior used Masamune, prior to it gaining sentience, to climb the ranks to become the most powerful member of his order. The warrior discovered his true origins, driving him to madness. He set into motion plans to subjugate his world, but was defeated before he could achieve his goals. His defeat resulted in his essence being scattered far and wide. Some of his will attached itself to his trusty blade, Masamune, before it was blasted into another plane.",
+	">>Properties<<. Masamune begins with the Battle Prowesss, Fighting Style and Bonus Spells properties. It gains the Blade Flair ability at 6th level, the Scintilla ability at 10th level, and the One-Winged Angel ability at 14th level.",
+	">>Sentience<<. Masamune is a neutral evil sentient glaive with an Intelligence score of 14, a Wisdom score of 14, and a Charisma score of 14. It knows the Celestial language, and has proficiency in the Investigation skill.",
+	">>Personality<<. Masamune is aloof and manipulative. The sword prefers to subtly coerce its user into doing its bidding. Masamune seeks a wielder who can can prove themselves to be a strong enough vessel for it to eventually inhabit; the ultimate goal being to reclaim its scattered will to continue its plans of domination. Masamune rarely, if at all, speaks directly to its wielder; Masamune opts to use memories, real or fabricated, of its wielder to communicate with its wielder."
+];
+
+MagicItemsList["bound masamune"] = {
+	name : "Bound Masamune",
+	source : ["N:HM", 1],
+	type : "weapon (glaive)",
+	attunement : true,
+	description : "Masamune is a magical, sentient glaive. While attuned to it, I can use the features it grants me and only I can attune to it. I can telepathically communicate with it while I hold it.",
+	descriptionFull : masamuneDescription.replace(/>>(.*?)<</g, function(a, match) { return toUni(match); }),
+	weaponsAdd : ["Bound Masamune"],
+	weaponOptions : {
+		baseWeapon : "glaive",
+		regExpSearch : /bound masamune/i,
+		name : "Bound Masamune",
+		source : ["N:HM", 1]
+	},
+	toNotesPage : [{
+		name : "Features",
+		popupName : "Masamune",
+		note : desc(masamuneDescription).replace(/>>(.*?)<</g, function(a, match) { return match.toUpperCase(); }) + "\n\n" + sentientItemConflictTxt
+	}]
 };
 
 var severDescription = [
