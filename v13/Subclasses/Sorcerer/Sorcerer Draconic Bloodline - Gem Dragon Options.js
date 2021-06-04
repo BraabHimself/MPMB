@@ -31,13 +31,7 @@ if(ClassSubList["sorcerer-draconic bloodline"])
 	var ElementalAffinityFeature = ClassSubList["sorcerer-draconic bloodline"].features["subclassfeature6"];
 	
 	if(DragonAncestorFeature && ElementalAffinityFeature)
-	{
-		app.alert({
-			cTitle : "Made it",
-			nIcon : 3,
-			cMsg : "Both features detected."
-		});
-		
+	{		
 		// add draconic ancestor choices
 		AddFeatureChoice(DragonAncestorFeature, false, "Amethyst Dragon Ancestor", {
 			name : "Amethyst Dragon Ancestor",
