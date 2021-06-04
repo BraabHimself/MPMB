@@ -17,9 +17,9 @@ var iFileName = "Sorcerer Draconic Bloodline - Gem Dragon Options.js";
 
 RequiredSheetVersion(13);
 
-SourceList["NB2:GDO"] = {
+SourceList["NB2:GD"] = {
 	name : "Sorcerer Draconic Bloodline - Gem Dragon Options",
-	abbreviation : "NB2:GDO",
+	abbreviation : "NB2:GD",
 	group : "Homebrew",
 	url : "https://github.com/BraabHimself/MPMB/blob/master/v13/Subclasses/Sorcerer/Sorcerer%20Draconic%20Bloodline%20-%20Gem%20Dragon%20Options.js",
 	date : "2021/06/04"
@@ -35,9 +35,9 @@ if(ClassSubList["sorcerer-draconic bloodline"])
 		// add draconic ancestor choices
 		AddFeatureChoice(DragonAncestorFeature, false, "Amethyst Dragon Ancestor", {
 			name : "Amethyst Dragon Ancestor",
-			source : ["NB2:GDO", 1],
+			source : ["NB2:GD", 1],
 			description : desc([
-				"I have draconic ancestry with amethyst dragons, which are affiliated with force damage",
+				"I have draconic ancestry with amethyst dragons, who are affiliated with force damage",
 				"When interacting with dragons, if I can add my proficiency bonus, I can double it"
 			]),
 			dependentChoices : "force"
@@ -45,9 +45,9 @@ if(ClassSubList["sorcerer-draconic bloodline"])
 		
 		AddFeatureChoice(DragonAncestorFeature, false, "Crystal Dragon Ancestor", {
 			name : "Crystal Dragon Ancestor",
-			source : ["NB2:GDO", 1],
+			source : ["NB2:GD", 1],
 			description : desc([
-				"I have draconic ancestry with crystal dragons, which are affiliated with radiant damage",
+				"I have draconic ancestry with crystal dragons, who are affiliated with radiant damage",
 				"When interacting with dragons, if I can add my proficiency bonus, I can double it"
 			]),
 			dependentChoices : "radiant"
@@ -55,9 +55,9 @@ if(ClassSubList["sorcerer-draconic bloodline"])
 		
 		AddFeatureChoice(DragonAncestorFeature, false, "Emerald Dragon Ancestor", {
 			name : "Emerald Dragon Ancestor",
-			source : ["NB2:GDO", 1],
+			source : ["NB2:GD", 1],
 			description : desc([
-				"I have draconic ancestry with emerald dragons, which are affiliated with psychic damage",
+				"I have draconic ancestry with emerald dragons, who are affiliated with psychic damage",
 				"When interacting with dragons, if I can add my proficiency bonus, I can double it"
 			]),
 			dependentChoices : "psychic"
@@ -65,9 +65,9 @@ if(ClassSubList["sorcerer-draconic bloodline"])
 		
 		AddFeatureChoice(DragonAncestorFeature, false, "Sapphire Dragon Ancestor", {
 			name : "Sapphire Dragon Ancestor",
-			source : ["NB2:GDO", 1],
+			source : ["NB2:GD", 1],
 			description : desc([
-				"I have draconic ancestry with sapphire dragons, which are affiliated with thunder damage",
+				"I have draconic ancestry with sapphire dragons, who are affiliated with thunder damage",
 				"When interacting with dragons, if I can add my proficiency bonus, I can double it"
 			]),
 			dependentChoices : "thunder"
@@ -75,9 +75,9 @@ if(ClassSubList["sorcerer-draconic bloodline"])
 		
 		AddFeatureChoice(DragonAncestorFeature, false, "Topaz Dragon Ancestor", {
 			name : "Topaz Dragon Ancestor",
-			source : ["NB2:GDO", 1],
+			source : ["NB2:GD", 1],
 			description : desc([
-				"I have draconic ancestry with topaz dragons, which are affiliated with necrotic damage",
+				"I have draconic ancestry with topaz dragons, who are affiliated with necrotic damage",
 				"When interacting with dragons, if I can add my proficiency bonus, I can double it"
 			]),
 			dependentChoices : "necrotic"
@@ -86,7 +86,7 @@ if(ClassSubList["sorcerer-draconic bloodline"])
 		// add elemental affinity choices
 		AddFeatureChoice(ElementalAffinityFeature, false, "force", {
 			name : "Force Elemental Affinity",
-			source : ["NB2:GDO", 1],
+			source : ["NB2:GD", 1],
 			description : desc([
 				"I add my Charisma modifier to one damage roll of a spell if it does force damage",
 				"When I do this, I can spend 1 sorcery point to gain force resistance for 1 hour"
@@ -111,7 +111,7 @@ if(ClassSubList["sorcerer-draconic bloodline"])
 		
 		AddFeatureChoice(ElementalAffinityFeature, false, "radiant", {
 			name : "Radiant Elemental Affinity",
-			source : ["NB2:GDO", 1],
+			source : ["NB2:GD", 1],
 			description : desc([
 				"I add my Charisma modifier to one damage roll of a spell if it does radiant damage",
 				"When I do this, I can spend 1 sorcery point to gain radiant resistance for 1 hour"
@@ -136,7 +136,7 @@ if(ClassSubList["sorcerer-draconic bloodline"])
 		
 		AddFeatureChoice(ElementalAffinityFeature, false, "psychic", {
 			name : "Psychic Elemental Affinity",
-			source : ["NB2:GDO", 1],
+			source : ["NB2:GD", 1],
 			description : desc([
 				"I add my Charisma modifier to one damage roll of a spell if it does psychic damage",
 				"When I do this, I can spend 1 sorcery point to gain psychic resistance for 1 hour"
@@ -161,7 +161,7 @@ if(ClassSubList["sorcerer-draconic bloodline"])
 		
 		AddFeatureChoice(ElementalAffinityFeature, false, "thunder", {
 			name : "Thunder Elemental Affinity",
-			source : ["NB2:GDO", 1],
+			source : ["NB2:GD", 1],
 			description : desc([
 				"I add my Charisma modifier to one damage roll of a spell if it does thunder damage",
 				"When I do this, I can spend 1 sorcery point to gain thunder resistance for 1 hour"
@@ -186,7 +186,7 @@ if(ClassSubList["sorcerer-draconic bloodline"])
 		
 		AddFeatureChoice(ElementalAffinityFeature, false, "necrotic", {
 			name : "Necrotic Elemental Affinity",
-			source : ["NB2:GDO", 1],
+			source : ["NB2:GD", 1],
 			description : desc([
 				"I add my Charisma modifier to one damage roll of a spell if it does necrotic damage",
 				"When I do this, I can spend 1 sorcery point to gain necrotic resistance for 1 hour"
