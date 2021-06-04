@@ -21,7 +21,7 @@ SourceList["NB2:GDO"] = {
 	name : "Sorcerer Draconic Bloodline - Gem Dragon Options",
 	abbreviation : "NB2:GDO",
 	group : "Homebrew",
-	url : "https://www.reddit.com/r/UnearthedArcana/comments/ldlh8q/hexblade_revisited_v02_a_reworked_hexblade_that/",
+	url : "https://github.com/BraabHimself/MPMB/blob/master/v13/Subclasses/Sorcerer/Sorcerer%20Draconic%20Bloodline%20-%20Gem%20Dragon%20Options.js",
 	date : "2021/06/04"
 };
 
