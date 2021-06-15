@@ -145,7 +145,7 @@ MagicItemsList["silver eagle studded cuirass"] = {
 	}
 }
 
-https://www.reddit.com/r/UnearthedArcana/comments/am3u3f/the_griffons_saddlebag_silver_eagle_weapons/
+//https://www.reddit.com/r/UnearthedArcana/comments/am3u3f/the_griffons_saddlebag_silver_eagle_weapons/
 
 MagicItemsList["silver eagle weapon"] = {
 	name : "Silver Eagle Weapon",
