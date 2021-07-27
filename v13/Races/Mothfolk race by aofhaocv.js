@@ -22,7 +22,7 @@ RequiredSheetVersion(13);
 SourceList["RUA:MF"] = {
 	name : "Reddit UnearthedArcana: Mothfolk",
 	abbreviation : "RUA:MF",
-	group : "Redding UnearthedArcana",
+	group : "Reddit UnearthedArcana",
 	url : "https://www.reddit.com/r/UnearthedArcana/comments/95pr2i/race_mothfolk_an_enigmatic_uncanny_mysterious/",
 	date : "2018/10/18"
 };
