@@ -23,6 +23,7 @@ SourceList["TDR"] = {
 	date: "2022-01-18"
 };
 
+//Contributions from NodHero
 AddSubClass("barbarian", "juggernaut", {
 	regExpSearch : /path of the juggernaut/i,
 	subname : "Path of the Juggernaut",
@@ -51,21 +52,21 @@ AddSubClass("barbarian", "juggernaut", {
 				]
 			}
 		},
-		"subclassfeature3.1" : {
-			name : "Spirit of the Mountain",
-			source : ["TDR", 166],
-			minlevel : 3,
-			description : desc([
-				"While raging I cannot be knocked prone nor moved along the ground against my will",
-			]),
-			savetxt : { text : ["Immune to being prone/moved on ground in rage"] }
-		},
+        "subclassfeature3.1" : {
+            name : "Spirit of the Mountain",
+            source : ["TDR", 166],
+            minlevel : 3,
+            description : desc([
+                "While raging I cannot be knocked prone nor moved along the ground against my will",
+            ]),
+                savetxt : { immune : ["prone/being moved on ground in rage"] }
+        },
 		"subclassfeature6" : {
 			name : "Demolishing Might",
 			source : ["TDR", 166],
 			minlevel : 6,
 			description : desc([
-				"My melee attacks deal an extra damage to constructs; double damage to objects/structures"
+				"My melee attacks deal extra damage to constructs; double damage to objects/structures"
 			]),
 			additional : "1d8 extra to constructs",
 			calcChanges : {
@@ -84,7 +85,7 @@ AddSubClass("barbarian", "juggernaut", {
 			source : ["TDR", 166],
 			minlevel : 6,
 			description : desc([
-				"At the start of my turn I can take a defensive stance; lasts until the start of my next turn",
+				"At the start of my turn I can take up a defensive stance; ends at start of my next turn",
 				"If I do, I can't be grappled; attacks vs have disadv.; attacks I make have disadv."
 			]),
 			additional : "no action required"
@@ -102,22 +103,16 @@ AddSubClass("barbarian", "juggernaut", {
 			additional : "DC 8 + Str mod + prof bonus",
 			action : [["reaction"]]
 		},
-		"subclassfeature14" : {
-			name : "Unstoppable",
-			source : ["TDR", 166],
-			minlevel : 14,
-			description : desc([
-				"While raging, my speed cannot be reduced and I can't be frightened/paralyzed/stunned",
-				"If I am under one of the above conditions, I can still rage and such effects are suspended"
-			]),
-			savetxt : { text : ["Immune to being prone/moved on ground/frightened/paralyzed/stunned in rage"] }
-			eval : function() {
-				processSaves(false, "Path of the Juggernaut: Unstoppable", ClassList.barbarian.features.rage.savetxt) 
-			},
-			removeeval : function() {
-				processSaves(true, "Path of the Juggernaut: Unstoppable", ClassList.barbarian.features.rage.savetxt) 
-			}
-		}
+        "subclassfeature14" : {
+            name : "Unstoppable",
+            source : ["TDR", 166],
+            minlevel : 14,
+            description : desc([
+                "While raging, my speed cannot be reduced and I can't be frightened/paralyzed/stunned",
+                "If I am under one of the above conditions, I can still rage and such effects are suspended"
+            ]),
+            savetxt : { immune : ["frightened/paralyzed/stunned"] },
+        }
 	}
 });
 
