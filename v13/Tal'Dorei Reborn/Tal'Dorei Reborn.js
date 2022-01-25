@@ -109,7 +109,14 @@ AddSubClass("barbarian", "juggernaut", {
 			description : desc([
 				"While raging, my speed cannot be reduced and I can't be frightened/paralyzed/stunned",
 				"If I am under one of the above conditions, I can still rage and such effects are suspended"
-			])
+			]),
+			savetxt : { text : ["Immune to being prone/moved on ground/frightened/paralyzed/stunned in rage"] }
+			eval : function() {
+				processSaves(false, "Path of the Juggernaut: Unstoppable", ClassList.barbarian.features.rage.savetxt) 
+			},
+			removeeval : function() {
+				processSaves(true, "Path of the Juggernaut: Unstoppable", ClassList.barbarian.features.rage.savetxt) 
+			}
 		}
 	}
 });
