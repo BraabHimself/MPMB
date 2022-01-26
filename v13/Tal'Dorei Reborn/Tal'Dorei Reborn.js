@@ -126,10 +126,10 @@ AddSubClass("bard", "college of tragedy", {
 			source : ["TDCSR", 167],
 			minlevel : 3,
 			description : desc([
-				"If I or an ally within 30 ft rolls a 1 on a save/ability/attack roll, I can use my reaction",
-				"If I do, I regain one expended Bardic Inspiration die"
+				"As a reaction, gain inspiration when I or an ally within 30 ft roll a 1 on a save/ability/attack"
 			]),
-			action : ["reaction", ""]
+			action : ["reaction", " (1 rolled on save/ability/attack)"],
+			additional : "regain 1 Bardic Inspiration"
 		},
 		"subclassfeature3.1" : {
 			name : "Sorrowful Fate",
@@ -138,26 +138,24 @@ AddSubClass("bard", "college of tragedy", {
 			recovery : "short rest",
 			usages : 1,
 			description : desc([
-				"When I or an ally forces a creature to make a save, I can change it to a Cha save",
-				"When I do so, I expend one Bardic Inspiration die",
-				"If the target fails, roll the expended die; they take psychic damage equal to the roll",
-				"The target is plagued with regret for 1 minute",
-				"The target is compelled to utter final words if it's reduced to 0 HP during this time"
+				"When I or an ally forces a creature to make a save, I can change it to a Charisma save",
+				"I expend a Bardic Inspiration die; on a failure, I roll the expended die",
+				"They take psychic damage equal to the roll and are plagued with regret for 1 min",
+				"They are compelled to utter dark, poetic final words if reduced to 0 HP during this time"
 			])
 		},
 		"subclassfeature6" : {
 			name : "Tale of Hubris",
 			source : ["TDCSR", 167],
 			minlevel : 6,
-			action : ["reaction", ""],
+			action : ["reaction", " (critical hit suffered)"],
 			description : desc([
-				"I can use my reaction when a creature lands a critical hit on I or an ally with 60 ft",
-				"I expend a Bardic Inspiration die to draw out their arrogance",
-				"Weapon attacks against the creature score critical hits in a larger range",
+				"I can use a reaction when a creature gets a critical hit on I or an ally within 60 ft",
+				"I expend a Bardic Inspiration; attacker suffers weapon critical hits more often",
 				"This effect lasts for 1 min or until target suffers a critical hit"
 			]),
 			additional : levels.map(function (n) {
-				return (n < 6 ? "" : (n < 14 ? "18-20" : "17-20")) + " crit hit range";
+				return (n < 6 ? "" : (n < 14 ? "18-20" : "17-20")) + " critical hit range";
 			})
 		},
 		"subclassfeature6.1" : {
@@ -167,8 +165,7 @@ AddSubClass("bard", "college of tragedy", {
 			recovery : "short rest",
 			usages : 1,
 			description : desc([
-				"When I make an attack or save, I can gain a +10 bonus to the roll",
-				"When I make my next attack or save, I take a -10 penalty to the roll",
+				"When I make an attack/save, I can gain a +10 bonus; next attack/save gains a -10 penalty",
 				"If not used, the penalty disappears after a rest or I am reduced to 0 HP"
 			])
 		},
@@ -181,10 +178,9 @@ AddSubClass("bard", "college of tragedy", {
 			action : ["action", ""],
 			description : desc([
 				"As an action, I can touch a creature and grant it effects for 1 min:",
-				" - It gains a +4 bonus to AC",
-				" - It has advantage on attack rolls and saving throws",
-				" - Its weapon and spell attacks deal an extra 1d10 radiant damage"
-				" - It suffers a critical hit on a roll of 18-20"
+				" \u2022 +4 bonus to AC and advantage on attack rolls and saving throws",
+				" \u2022 Weapon and spell attacks deal an extra 1d10 radiant damage",
+				" \u2022 Suffers critical hits on a roll of 18-20",
 				"When this effect ends, it immediately drops to 0 HP and is dying"
 			])
 		}
