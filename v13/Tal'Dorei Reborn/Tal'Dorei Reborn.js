@@ -249,24 +249,27 @@ AddSubClass("cleric", "blood domain", {
 			usages : 1,
 			recovery : "long rest",
 			description : desc([
-				"As an action, I can trade vitality for expended spell slots",
-				"The spell slots can have a combined level equal to or less than half your cleric level (rounded up), and none of the slots can be 6th level or higher",
-				"While bonded, I can use an action to learn information about it or use its senses"
-			])
+				"As an action, I can recover a number of 5th-level or lower spell slots",
+				"I take 1d8 necrotic damage per spell slot level recovered; cannot be reduced in any way"
+			]),
+			additional : levels.map(function (n) {
+				var lvls = Math.ceil(n / 2);
+				return lvls + " level" + (lvls > 1 ? "s" : "") + " of spell slots";
+			})
 		},
 		"subclassfeature6.1" : {
 			name : "Channel Divinity: Blood Puppet",
 			source : ["TDCSR", 169],
-			minlevel : 2,
+			minlevel : 6,
 			action : ["action", ""],
 			description : desc([
-				"As an action, attempt to control a creature/corpse within 60 ft that has blood",
+				"As an action, I can attempt to control a creature/corpse within 60 ft that has blood",
 				"I can command ",
 			]),
 			additional : levels.map(function (n) {
 				if (n < 6) return "";
-				return (n < 14 ? "Large" : "Huge") + " or smaller; See Note";
-			})
+				return (n < 14 ? "Large" : "Huge") + " or smaller; See Notes";
+			}),
 			toNotesPage : [{
 				name : "Channel Divinity: Blood Puppet",
 				source : ["TDCSR", 168],
@@ -278,7 +281,7 @@ AddSubClass("cleric", "blood domain", {
 		},
 		"subclassfeature8" : {
 			name : "Divine Strike",
-			source : ["TDCSR", 169],
+			source : ["D", 97],
 			minlevel : 8,
 			description : desc([
 				"Once per turn, when I hit a creature with a weapon attack, I can do extra damage"
@@ -288,7 +291,14 @@ AddSubClass("cleric", "blood domain", {
 				return "+" + (n < 14 ? 1 : 2) + "d8 necrotic damage";
 			}),
 			calcChanges : {
-				atkAdd : ["if (classes.known.cleric && classes.known.cleric.level > 7 && !isSpell) {fields.Description += (fields.Description ? '; ' : '') + 'Once per turn +' + (classes.known.cleric.level < 14 ? 1 : 2) + 'd8 radiant damage'; }; ", "Once per turn, I can have one of my weapon attacks that hit do extra radiant damage."]
+				atkAdd : [
+					function (fields, v) {
+						if (classes.known.cleric && classes.known.cleric.level > 7 && !v.isSpell) {
+							fields.Description += (fields.Description ? '; ' : '') + 'Once per turn +' + (classes.known.cleric.level < 14 ? 1 : 2) + 'd8 necrotic damage';
+						}
+					},
+					"Once per turn, I can have one of my weapon attacks that hit do extra necrotic damage."
+				]
 			}
 		},
 		"subclassfeature17" : {
