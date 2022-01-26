@@ -187,6 +187,124 @@ AddSubClass("bard", "college of tragedy", {
 	}
 });
 
+AddSubClass("cleric", "blood domain", {
+	regExpSearch : /^(?=.*(cleric|priest|clergy|acolyte))(?=.*blood).*$/i,
+	subname : "Blood Domain",
+	source : ["TDCSR", 168],
+	spellcastingExtra : ["false life", "sleep", "hold peson", "ray of enfeeblement", "haste", "slow", "blight", "stoneskin", "dominate person", "hold monster"],
+	features : {
+		"subclassfeature1" : {
+			name : "Bonus Proficiency",
+			source : ["TDCSR", 169],
+			minlevel : 1,
+			description : desc([
+				"I gain proficiency with martial weapons"
+			]),
+			weapons : [false, true]
+		},
+		"subclassfeature1.1" : {
+			name : "Bloodletting Focus",
+			source : ["TDCSR", 169],
+			minlevel : 1,
+			description : desc([
+				"My damaging spells deal extra necrotic damage to creatures with blood",
+				"The spell must be 1st level and up and have a duration of instantaneous"
+			]),
+			additional : "2 + spell level extra damage"
+		},
+		"subclassfeature2" : {
+			name : "Channel Divinity: Crimson Bond",
+			source : ["TDCSR", 169],
+			minlevel : 2,
+			action : ["action", " (during bond)"],
+			description : desc([
+				"I can form a bond with a creature I can see or whose blood I have a sample of",
+				"This bond lasts an hour and I must concentrate on it, as I would a spell",
+				"While bonded, I can use an action to learn information about it or use its senses"
+			]),
+			additional : "See Notes",
+			toNotesPage : [{
+				name : "Channel Divinity: Crimson Bond",
+				source : ["TDCSR", 168],
+				popupName : "Blood Domain Channel Divinity: Crimson Bond",
+				note: desc([
+					"While bonded, I can use an action to learn the following about my target:",
+					" \u2022 Approximate distance from me",
+					" \u2022 Current HP",
+					" \u2022 Any conditions affecting it",
+					"I can do so as long as the target is within 10 miles of me",
+					"Also as an action while bonded, I can attempt to connect to the target's sense",
+					"I take 2d6 necrotic damage and the target makes a Constitution save",
+					"On a success, the bond is broken; on a failure I can choose to see or hear",
+					"This lasts for Wis mod (min 1) minutes; I am blinded or deafened, respectively",
+					"The bond ends when the connection ends",
+					"A wave of unease passes over the target regardless of its save"
+				])
+			}]
+		},
+		"subclassfeature6" : {
+			name : "Sanguine Recall",
+			source : ["TDCSR", 169],
+			minlevel : 6,
+			usages : 1,
+			recovery : "long rest",
+			description : desc([
+				"As an action, I can trade vitality for expended spell slots",
+				"The spell slots can have a combined level equal to or less than half your cleric level (rounded up), and none of the slots can be 6th level or higher",
+				"While bonded, I can use an action to learn information about it or use its senses"
+			])
+		},
+		"subclassfeature6.1" : {
+			name : "Channel Divinity: Blood Puppet",
+			source : ["TDCSR", 169],
+			minlevel : 2,
+			action : ["action", ""],
+			description : desc([
+				"As an action, attempt to control a creature/corpse within 60 ft that has blood",
+				"I can command ",
+			]),
+			additional : levels.map(function (n) {
+				if (n < 6) return "";
+				return (n < 14 ? "Large" : "Huge") + " or smaller; See Note";
+			})
+			toNotesPage : [{
+				name : "Channel Divinity: Blood Puppet",
+				source : ["TDCSR", 168],
+				popupName : "Blood Domain Channel Divinity: Blood Puppet",
+				note: desc([
+					""
+				])
+			}]
+		},
+		"subclassfeature8" : {
+			name : "Divine Strike",
+			source : ["TDCSR", 169],
+			minlevel : 8,
+			description : desc([
+				"Once per turn, when I hit a creature with a weapon attack, I can do extra damage"
+			]),
+			additional : levels.map(function (n) {
+				if (n < 8) return "";
+				return "+" + (n < 14 ? 1 : 2) + "d8 necrotic damage";
+			}),
+			calcChanges : {
+				atkAdd : ["if (classes.known.cleric && classes.known.cleric.level > 7 && !isSpell) {fields.Description += (fields.Description ? '; ' : '') + 'Once per turn +' + (classes.known.cleric.level < 14 ? 1 : 2) + 'd8 radiant damage'; }; ", "Once per turn, I can have one of my weapon attacks that hit do extra radiant damage."]
+			}
+		},
+		"subclassfeature17" : {
+			name : "Indomitable Defense",
+			source : ["UA:CDD", 3],
+			minlevel : 17,
+			usages : 1,
+			recovery : "short rest",
+			action : ["action", " (transfer)"],
+			description : "\n   " + "I gain resistance to two of: bludgeoning, necrotic, piercing, radiant, or slashing damage" + "\n   " + "Whenever I finish a short or long rest, I can change the damage types chosen" + "\n   " + "As an action, I can transfer both resistances to one creature I touch" + "\n   " + "As a bonus action, I can transfer the resistances back to myself" + "\n   " + "Otherwise, the creature keeps this resistance until the end of my next short or long rest",
+			eval : "AddAction('bonus action', 'Indomitable Defense (return)', 'Cleric (Protection Domain)');",
+			removeeval : "RemoveAction('bonus action', 'Indomitable Defense (return)');"
+		}
+	}
+});
+
 //Original transcription by Smashman, updated by u/Newbuu2, updated by NodHero
 AddSubClass("monk", "way of the cobalt soul", {
 	regExpSearch: /^(?=.*\bcobalt)(?=.*\b(soul|spirit))((?=.*(warrior|monk|monastic))|(((?=.*martial)(?=.*(artist|arts)))|((?=.*spiritual)(?=.*warrior)))).*$/i,
