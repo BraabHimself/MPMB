@@ -126,10 +126,10 @@ AddSubClass("bard", "college of tragedy", {
 			source : ["TDCSR", 167],
 			minlevel : 3,
 			description : desc([
-				"If I or an ally within 30 ft rolls a 1 on a save/ability/attack roll, I can use my reaction",
-				"If I do, I regain one expended Bardic Inspiration die"
+				"As a reaction, gain inspiration when I or an ally within 30 ft roll a 1 on a save/ability/attack"
 			]),
-			action : ["reaction", ""]
+			action : ["reaction", " (1 rolled on save/ability/attack)"],
+			additional : "regain 1 Bardic Inspiration"
 		},
 		"subclassfeature3.1" : {
 			name : "Sorrowful Fate",
@@ -138,26 +138,24 @@ AddSubClass("bard", "college of tragedy", {
 			recovery : "short rest",
 			usages : 1,
 			description : desc([
-				"When I or an ally forces a creature to make a save, I can change it to a Cha save",
-				"When I do so, I expend one Bardic Inspiration die",
-				"If the target fails, roll the expended die; they take psychic damage equal to the roll",
-				"The target is plagued with regret for 1 minute",
-				"The target is compelled to utter final words if it's reduced to 0 HP during this time"
+				"When I or an ally forces a creature to make a save, I can change it to a Charisma save",
+				"I expend a Bardic Inspiration die; on a failure, I roll the expended die",
+				"They take psychic damage equal to the roll and are plagued with regret for 1 min",
+				"They are compelled to utter dark, poetic final words if reduced to 0 HP during this time"
 			])
 		},
 		"subclassfeature6" : {
 			name : "Tale of Hubris",
 			source : ["TDCSR", 167],
 			minlevel : 6,
-			action : ["reaction", ""],
+			action : ["reaction", " (critical hit suffered)"],
 			description : desc([
-				"I can use my reaction when a creature lands a critical hit on I or an ally with 60 ft",
-				"I expend a Bardic Inspiration die to draw out their arrogance",
-				"Weapon attacks against the creature score critical hits in a larger range",
+				"I can use a reaction when a creature gets a critical hit on I or an ally within 60 ft",
+				"I expend a Bardic Inspiration; attacker suffers weapon critical hits more often",
 				"This effect lasts for 1 min or until target suffers a critical hit"
 			]),
 			additional : levels.map(function (n) {
-				return (n < 6 ? "" : (n < 14 ? "18-20" : "17-20")) + " crit hit range";
+				return (n < 6 ? "" : (n < 14 ? "18-20" : "17-20")) + " critical hit range";
 			})
 		},
 		"subclassfeature6.1" : {
@@ -167,8 +165,7 @@ AddSubClass("bard", "college of tragedy", {
 			recovery : "short rest",
 			usages : 1,
 			description : desc([
-				"When I make an attack or save, I can gain a +10 bonus to the roll",
-				"When I make my next attack or save, I take a -10 penalty to the roll",
+				"When I make an attack/save, I can gain a +10 bonus; next attack/save gains a -10 penalty",
 				"If not used, the penalty disappears after a rest or I am reduced to 0 HP"
 			])
 		},
@@ -181,12 +178,139 @@ AddSubClass("bard", "college of tragedy", {
 			action : ["action", ""],
 			description : desc([
 				"As an action, I can touch a creature and grant it effects for 1 min:",
-				" - It gains a +4 bonus to AC",
-				" - It has advantage on attack rolls and saving throws",
-				" - Its weapon and spell attacks deal an extra 1d10 radiant damage"
-				" - It suffers a critical hit on a roll of 18-20"
+				" \u2022 +4 bonus to AC and advantage on attack rolls and saving throws",
+				" \u2022 Weapon and spell attacks deal an extra 1d10 radiant damage",
+				" \u2022 Suffers critical hits on a roll of 18-20",
 				"When this effect ends, it immediately drops to 0 HP and is dying"
 			])
+		}
+	}
+});
+
+AddSubClass("cleric", "blood domain", {
+	regExpSearch : /^(?=.*(cleric|priest|clergy|acolyte))(?=.*blood).*$/i,
+	subname : "Blood Domain",
+	source : ["TDCSR", 168],
+	spellcastingExtra : ["false life", "sleep", "hold peson", "ray of enfeeblement", "haste", "slow", "blight", "stoneskin", "dominate person", "hold monster"],
+	features : {
+		"subclassfeature1" : {
+			name : "Bonus Proficiency",
+			source : ["TDCSR", 169],
+			minlevel : 1,
+			description : desc([
+				"I gain proficiency with martial weapons"
+			]),
+			weapons : [false, true]
+		},
+		"subclassfeature1.1" : {
+			name : "Bloodletting Focus",
+			source : ["TDCSR", 169],
+			minlevel : 1,
+			description : desc([
+				"My damaging spells deal extra necrotic damage to creatures with blood",
+				"The spell must be 1st level and up and have a duration of instantaneous"
+			]),
+			additional : "2 + spell level extra damage"
+		},
+		"subclassfeature2" : {
+			name : "Channel Divinity: Crimson Bond",
+			source : ["TDCSR", 169],
+			minlevel : 2,
+			action : ["action", " (during bond)"],
+			description : desc([
+				"I can form a bond with a creature I can see or whose blood I have a sample of",
+				"This bond lasts an hour and I must concentrate on it, as I would a spell",
+				"While bonded, I can use an action to learn information about it or use its senses"
+			]),
+			additional : "See Notes",
+			toNotesPage : [{
+				name : "Channel Divinity: Crimson Bond",
+				source : ["TDCSR", 168],
+				popupName : "Blood Domain Channel Divinity: Crimson Bond",
+				note: desc([
+					"While bonded, I can use an action to learn the following about my target:",
+					" \u2022 Approximate distance from me",
+					" \u2022 Current HP",
+					" \u2022 Any conditions affecting it",
+					"I can do so as long as the target is within 10 miles of me",
+					"Also as an action while bonded, I can attempt to connect to the target's sense",
+					"I take 2d6 necrotic damage and the target makes a Constitution save",
+					"On a success, the bond is broken; on a failure I can choose to see or hear",
+					"This lasts for Wis mod (min 1) minutes; I am blinded or deafened, respectively",
+					"The bond ends when the connection ends",
+					"A wave of unease passes over the target regardless of its save"
+				])
+			}]
+		},
+		"subclassfeature6" : {
+			name : "Sanguine Recall",
+			source : ["TDCSR", 169],
+			minlevel : 6,
+			usages : 1,
+			recovery : "long rest",
+			description : desc([
+				"As an action, I can recover a number of 5th-level or lower spell slots",
+				"I take 1d8 necrotic damage per spell slot level recovered; cannot be reduced in any way"
+			]),
+			additional : levels.map(function (n) {
+				var lvls = Math.ceil(n / 2);
+				return lvls + " level" + (lvls > 1 ? "s" : "") + " of spell slots";
+			})
+		},
+		"subclassfeature6.1" : {
+			name : "Channel Divinity: Blood Puppet",
+			source : ["TDCSR", 169],
+			minlevel : 6,
+			action : ["action", ""],
+			description : desc([
+				"As an action, I can attempt to control a creature/corpse within 60 ft that has blood",
+				"I can command ",
+			]),
+			additional : levels.map(function (n) {
+				if (n < 6) return "";
+				return (n < 14 ? "Large" : "Huge") + " or smaller; See Notes";
+			}),
+			toNotesPage : [{
+				name : "Channel Divinity: Blood Puppet",
+				source : ["TDCSR", 168],
+				popupName : "Blood Domain Channel Divinity: Blood Puppet",
+				note: desc([
+					""
+				])
+			}]
+		},
+		"subclassfeature8" : {
+			name : "Divine Strike",
+			source : ["D", 97],
+			minlevel : 8,
+			description : desc([
+				"Once per turn, when I hit a creature with a weapon attack, I can do extra damage"
+			]),
+			additional : levels.map(function (n) {
+				if (n < 8) return "";
+				return "+" + (n < 14 ? 1 : 2) + "d8 necrotic damage";
+			}),
+			calcChanges : {
+				atkAdd : [
+					function (fields, v) {
+						if (classes.known.cleric && classes.known.cleric.level > 7 && !v.isSpell) {
+							fields.Description += (fields.Description ? '; ' : '') + 'Once per turn +' + (classes.known.cleric.level < 14 ? 1 : 2) + 'd8 necrotic damage';
+						}
+					},
+					"Once per turn, I can have one of my weapon attacks that hit do extra necrotic damage."
+				]
+			}
+		},
+		"subclassfeature17" : {
+			name : "Indomitable Defense",
+			source : ["UA:CDD", 3],
+			minlevel : 17,
+			usages : 1,
+			recovery : "short rest",
+			action : ["action", " (transfer)"],
+			description : "\n   " + "I gain resistance to two of: bludgeoning, necrotic, piercing, radiant, or slashing damage" + "\n   " + "Whenever I finish a short or long rest, I can change the damage types chosen" + "\n   " + "As an action, I can transfer both resistances to one creature I touch" + "\n   " + "As a bonus action, I can transfer the resistances back to myself" + "\n   " + "Otherwise, the creature keeps this resistance until the end of my next short or long rest",
+			eval : "AddAction('bonus action', 'Indomitable Defense (return)', 'Cleric (Protection Domain)');",
+			removeeval : "RemoveAction('bonus action', 'Indomitable Defense (return)');"
 		}
 	}
 });
