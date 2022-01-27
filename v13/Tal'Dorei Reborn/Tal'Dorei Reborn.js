@@ -191,7 +191,7 @@ AddSubClass("cleric", "blood domain", {
 	regExpSearch : /^(?=.*(cleric|priest|clergy|acolyte))(?=.*blood).*$/i,
 	subname : "Blood Domain",
 	source : ["TDCSR", 168],
-	spellcastingExtra : ["false life", "sleep", "hold peson", "ray of enfeeblement", "haste", "slow", "blight", "stoneskin", "dominate person", "hold monster"],
+	spellcastingExtra : ["false life", "sleep", "hold person", "ray of enfeeblement", "haste", "slow", "blight", "stoneskin", "dominate person", "hold monster"],
 	features : {
 		"subclassfeature1" : {
 			name : "Bonus Proficiency",
@@ -263,8 +263,7 @@ AddSubClass("cleric", "blood domain", {
 			minlevel : 6,
 			action : ["action", ""],
 			description : desc([
-				"As an action, I can attempt to control a creature/corpse within 60 ft that has blood",
-				"I can command ",
+				"As an action, I can control a creature/corpse of a certain size within 60 ft that has blood"
 			]),
 			additional : levels.map(function (n) {
 				if (n < 6) return "";
@@ -272,16 +271,31 @@ AddSubClass("cleric", "blood domain", {
 			}),
 			toNotesPage : [{
 				name : "Channel Divinity: Blood Puppet",
-				source : ["TDCSR", 168],
+				source : ["TDCSR", 169],
 				popupName : "Blood Domain Channel Divinity: Blood Puppet",
 				note: desc([
-					""
+					"As an action, I can target a creature or corpse within 60, if it has blood",
+					"If I am below 17th level, it can be Large or smaller; otherwise Huge or smaller",
+					"A conscious creatures make a Wis save or is charmed by me",
+					"An unconscious creature automatically fails and isn't can move while I control it",
+					"A corpse targeted by this effect gains a semblance of life that I control",
+					"On each of its turns, while in control, I can command it (no action required)",
+					"It can move up to half its speed and use its action to do one of the following:",
+					" \u2022 Interact with an object",
+					" \u2022 Make a single attack",
+					" \u2022 Do nothing",
+					"A living, conscious creature retains its turn order",
+					"A corpse or unconscious creature takes its turn immediately after mine",
+					"The target cannot move or take actions unless I command it to do so",
+					"A corpse/unconscious creature retain their stats from life/consciousness",
+					"A living target repeats the save at the end of its turns to end the effect",
+					"This effect lasts for 1 min or until I lose concentration, like on a spell"
 				])
 			}]
 		},
 		"subclassfeature8" : {
 			name : "Divine Strike",
-			source : ["D", 97],
+			source : ["TDCSR", 169],
 			minlevel : 8,
 			description : desc([
 				"Once per turn, when I hit a creature with a weapon attack, I can do extra damage"
@@ -302,15 +316,111 @@ AddSubClass("cleric", "blood domain", {
 			}
 		},
 		"subclassfeature17" : {
-			name : "Indomitable Defense",
-			source : ["UA:CDD", 3],
+			name : "Vascular Corruption Aura",
+			source : ["TDCSR", 169],
 			minlevel : 17,
 			usages : 1,
-			recovery : "short rest",
-			action : ["action", " (transfer)"],
-			description : "\n   " + "I gain resistance to two of: bludgeoning, necrotic, piercing, radiant, or slashing damage" + "\n   " + "Whenever I finish a short or long rest, I can change the damage types chosen" + "\n   " + "As an action, I can transfer both resistances to one creature I touch" + "\n   " + "As a bonus action, I can transfer the resistances back to myself" + "\n   " + "Otherwise, the creature keeps this resistance until the end of my next short or long rest",
-			eval : "AddAction('bonus action', 'Indomitable Defense (return)', 'Cleric (Protection Domain)');",
-			removeeval : "RemoveAction('bonus action', 'Indomitable Defense (return)');"
+			recovery : "long rest",
+			action : ["action", ""],
+			description : desc([
+				"As an action, I can emit a 30 ft necrotic aura that causes nearby enemies' veins to burst",
+				"Enemies entering the aura for the first time on a turn, or start their turn in it are damaged",
+				"They take 3d6 necrotic damage from the aura if they have blood",
+				"Additionally, the aura reduces any healing enemies with blood receive by half"
+			])
+		}
+	}
+});
+
+AddSubClass("cleric", "moon domain", {
+	regExpSearch : /^(?=.*(cleric|priest|clergy|acolyte))(?=.*(moon|lunar)).*$/i,
+	subname : "Moon Domain",
+	source : ["TDCSR", 169],
+	spellcastingExtra : ["faerie fire", "silent image", "invisibility", "moonbeam", "hypnotic pattern", "major image", "greater invisibility", "hallucinatory terrain", "dream", "passwall"],
+	features : {
+		"subclassfeature1" : {
+			name : "Clarity of Catha",
+			source : ["TDCSR", 170],
+			minlevel : 1,
+			usagescalc : "event.value = What('Proficiency Bonus'));",
+			recovery : "long rest",
+			description : desc([
+				"As a reaction when a creature within 30 ft makes a Wis save, I can grant adv. on the save"
+			])
+		},
+		"subclassfeature2" : {
+			name : "Channel Divinity: Blessing of the Full Moon",
+			source : ["TDCSR", 170],
+			minlevel : 2,
+			action : ["action", ""],
+			description : desc([
+				"As an action, I can grant a creature within 30 ft one of the following blessings:",
+				"Blessing of the Watchful Moon (lasts 1 hour)",
+				" \u2022 Movement speed increases by 10 ft",
+				" \u2022 Advantage on Wisdom (Perception) checks involving smell",
+				" \u2022 Advantage on Wisdom (Survival) checks made to track a creature",
+				"Blessing of the Blood-Drenched Moon (lasts 10 min)",
+				" \u2022 Adv. on attacks vs. a target if an ally isn’t incapacitated and within 5 ft of the target"
+			])
+		},
+		"subclassfeature6" : {
+			name : "Channel Divinity: Mind of Two Moons",
+			source : ["TDCSR", 170],
+			minlevel : 6,
+			description : desc([
+				"I can expend a use of my Channel Divinity to concentrate on a second spell",
+				"I can only do so if both spells are on my list of Moon Domain spells",
+				"I make Constitution saves to maintain concentration on them with disadvantage",
+				"On a failure, I lose concentration on both spells"
+			])
+		},
+		"subclassfeature8" : {
+			name : "Empowered Cantrips",
+			source : ["TDCSR", 171],
+			minlevel : 8,
+			description : desc([
+				"I add my Wisdom modifier (minimum of 1) to the damage I deal with my cleric cantrips"
+			]),
+			calcChanges : {
+				atkCalc : [
+					function (fields, v, output) {
+						if (classes.known.cleric && classes.known.cleric.level > 7 && v.thisWeapon[3] && v.thisWeapon[4].indexOf('cleric') !== -1 && SpellsList[v.thisWeapon[3]].level === 0) {
+							output.extraDmg += Math.min(1, What('Wis Mod'));
+						};
+					},
+					"My cleric cantrips get my Wisdom modifier (minimum of 1) added to their damage."
+				],
+				spellAdd : [
+					function (spellKey, spellObj, spName) {
+						if (spName.indexOf("cleric") == -1 || spellObj.psionic || spellObj.level !== 0) return;
+						if (spellKey == "shillelagh") {
+							spellObj.description = spellObj.description.replace("1d8", "1d8+" + Math.min(1, What('Wis Mod')));
+							return true;
+						}
+						return genericSpellDmgEdit(spellKey, spellObj, "\\w+\\.?", "Wis", true);
+					},
+					"My cleric cantrips get my Wisdom modifier (minimum of 1) added to their damage."
+				]
+			}
+		},
+		"subclassfeature17" : {
+			name : "Eclipse of Ill Omen",
+			source : ["TDCSR", 171],
+			minlevel : 17,
+			usages : 1,
+			recovery : "long rest",
+			action : ["bonus action", ""],
+			description : desc([
+				"As a bonus action, I manifest a 60 ft radius of reddish, dim light around me",
+				"Creatures in this area make saving throws with disadvantage",
+				"I can choose any number of creatures to be unaffected by it when I create it",
+				"It lasts while I concentrate, as if concentrating on a spell, for up to 1 minute",
+				"Concentrating on this feature counts as concentrating on a Moon Domain spell",
+				"Once per turn, I can curse a creature after dealing radiant damage to them",
+				"The creature must be in the area of dim light when damaged in order to be cursed",
+				"A creature cursed in this way has its speed halved and can’t regain HP",
+				"The curse disappears when the dim light ends"
+			])
 		}
 	}
 });
