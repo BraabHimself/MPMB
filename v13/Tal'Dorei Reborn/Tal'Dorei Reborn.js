@@ -342,6 +342,7 @@ AddSubClass("cleric", "moon domain", {
 			name : "Clarity of Catha",
 			source : ["TDCSR", 170],
 			minlevel : 1,
+			usages : "Prof. Bonus per ",
 			usagescalc : "event.value = What('Proficiency Bonus'));",
 			recovery : "long rest",
 			description : desc([
@@ -386,7 +387,7 @@ AddSubClass("cleric", "moon domain", {
 					function (fields, v, output) {
 						if (classes.known.cleric && classes.known.cleric.level > 7 && v.thisWeapon[3] && v.thisWeapon[4].indexOf('cleric') !== -1 && SpellsList[v.thisWeapon[3]].level === 0) {
 							output.extraDmg += Math.max(1, What('Wis Mod'));
-						};
+						}
 					},
 					"My cleric cantrips get my Wisdom modifier (minimum of 1) added to their damage."
 				],
@@ -421,6 +422,151 @@ AddSubClass("cleric", "moon domain", {
 				"A creature cursed in this way has its speed halved and can’t regain HP",
 				"The curse disappears when the dim light ends"
 			])
+		}
+	}
+});
+
+AddSubClass("druid", "circle of the blighted", {
+	regExpSearch : /^(?=.*(druid|shaman))(?=.*blight).*$/i,
+	subname : "Circle of the Blighted",
+	source : ["TDCSR", 171],
+	features : {
+		"subclassfeature2" : {
+			name : "Defile Ground",
+			source : ["TDCSR", 172],
+			minlevel : 2,
+			usages : 1,
+			recovery : "short rest",
+ 			description : desc([
+				"As a bonus action, I can blight land/water centered on a point within 60 ft",
+				"The area has a 10 ft radius, which increases to 20 ft at 10th level",
+				"The blight lasts for 1 min and is considered difficult terrain for my enemies",
+				"Creatures on it take extra damage the first time it's damaged each turn by an attack",
+				"As a bonus action, I can move this area of blight up to 30 ft"
+			]),
+			additional : levels.map(function(n) {
+				return (n < 2 ? "" : (n < 10 ? "1d4 necrotic" : n < 14 ? "1d6 necrotic" : "1d8 necrotic"));
+			}),
+			action : [["bonus action", " (create)"], ["bonus action", " (move up to 30 ft)"]]
+		},
+		"subclassfeature2.1" : {
+			name : "Blighted Shape",
+			source : ["TDCSR", 172],
+			minlevel : 2,
+			description : desc([
+				"I gain proficiency with Intimidation and my Wild Shape forms gain a +2 bonus to AC", // Wild shape page does not support modifications
+				"My Wild Shape forms also gain 60 ft darkvision or add 60 ft if it already has it" // Wild shape page does not support modifications
+			]),
+			skills : ["Intimidation"]
+		},
+		"subclassfeature6" : {
+			name : "Call of the Shadowseeds",
+			source : ["TDCSR", 172],
+			minlevel : 6,
+			description : desc([
+				"As a reaction when a creature is damaged on my Defiled Ground, I can summon a sapling",
+				"The damaged creature cannot be undead or a construct",
+				"The sapling appears in an unoccupied space within 5 ft of the damaged creature",
+				"When it appears, the sapling can attack any creature within 5 ft",
+				"The sapling then acts on my initiative and obeys my verbal commands",
+				"The sapling remains until its reduced to 0 HP, my next long rest, or I summon another"
+			]),
+			action : ["reaction", "(creature damaged in Defiled Ground)"],
+			usages : "Prof. Bonus per ",
+			usagescalc : "event.value = What('Proficiency Bonus'));",
+			recovery : "long rest",
+			creaturesAdd : [["Blighted Sapling"]],
+			creatureOptions : [{
+				name : "Blighted Sapling",
+				source : ["TDCSR", 172],
+				size : [3],
+				type : "Plant",
+				alignment : "",
+				ac : "10+Prof",
+				hp : 5,
+				hd : ["", ""],
+				speed : "30 ft",
+				scores : [8, 13, 12, 4, 8, 3],
+				damage_vulnerabilities : "fire",
+				damage_resistances : "necrotic, poison",
+				condition_immunities : " blinded, deafened, poisoned",
+				passivePerception : 9,
+				languages : "understands the languages of its creator but can't speak",
+				senses : "blindsight 60 ft. (blind beyond this radius)",
+				challengeRating : "1",
+				proficiencyBonus : 2,
+				proficiencyBonusLinked : true,
+				attacksAction : 1,
+				attacks : [{
+					name : "Claws",
+					ability : 1,
+					damage : [2, 4, "piercing"],
+					range : "5 ft",
+					description : "",
+					modifiers : ["", "Prof"],
+					abilitytodamage : false,
+					useSpellMod : "druid"
+				}],
+				features : [{
+					name : "Creator",
+					description : "The blighted sapling obeys the commands of its creator and has the same proficiency bonus. It takes its turn immediately after its creator, on the same initiative count. The blighted sapling has a challenge rating equal to my proficiency bonus."
+				}],
+				traits : [{
+					name: "Blighted Resilience (Circle of the Blighted 10)",
+					minlevel : 10,
+					description: "The blighted sapling gains immunity to necrotic and poison damage and to the poisoned condition.",
+				}, {
+					name: "Toxic Demise (Circle of the Blighted 10)",
+					minlevel : 10,
+					description:
+						"The blighted sapling explodes when it is reduced to 0 HP. Each creature within 5 ft of the blighted sapling makes a Constitution save vs. my spell save DC or take necrotic damage based on the blighted sapling’s challenge rating:" + "\n" +
+						" \u2022 CR 1/4 or lower - 1d4 necrotic damage" + "\n" +
+						" \u2022 CR 1/2 - 1d6 necrotic damage" + "\n" +
+						" \u2022 CR 1 or higher - A number of d8s of necrotic damage equal to the creature’s challenge rating" + "\n" +
+						" \u2022 No CR - A number of d6s of necrotic damage equal to my proficiency bonus"
+				},{
+					name: "Multiattack (Circle of the Blighted 14)",
+					minlevel : 14,
+					description: "The blighted sapling makes two attacks with its claws.",
+				}],
+				minlevelLinked : ["druid"],
+				header : "Sapling",
+				calcChanges : {
+					hp : function (totalHD, HDobj, prefix) {
+						if (!classes.known.druid) return;
+						var drdLvl  = classes.known.druid.level;
+						var drdLvl2 = 2 * drdLvl;
+						HDobj.alt.push(drdLvl2);
+						HDobj.altStr.push(" = 0 as a base\n + two times its creator's druid level (" + drdLvl2 + ")");
+					},
+					setAltHp : true
+				}
+			}]
+		},
+		"subclassfeature10" : {
+			name : "Foul Conjuration",
+			source : ["TDCSR", 172],
+			minlevel : 10,
+			description : desc([
+				'Any beast, fey, or plant creatures I summon gain traits; See "Blighted Sapling"'
+			]),
+			action : ["action", " (explode summoned creature)"]
+		},
+		"subclassfeature14" : {
+			name : "Incarnation of Corruption",
+			source : ["TDCSR", 173],
+			minlevel : 14,
+			description : desc([
+				"I gain a +2 bonus to AC and resistance to necrotic damage",
+				"As a bonus action while on Defiled Ground, I can gain proficiency bonus temp HP"
+			]),
+			action : ["bonus action", " (in Defiled Ground)"],
+			dmgres : ["Necrotic"],
+			extraAC : {
+				name : "Incarnation of Corruption",
+				mod : 2,
+				text : "I gain a +2 bonus to AC."
+			}
 		}
 	}
 });
