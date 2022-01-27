@@ -385,7 +385,7 @@ AddSubClass("cleric", "moon domain", {
 				atkCalc : [
 					function (fields, v, output) {
 						if (classes.known.cleric && classes.known.cleric.level > 7 && v.thisWeapon[3] && v.thisWeapon[4].indexOf('cleric') !== -1 && SpellsList[v.thisWeapon[3]].level === 0) {
-							output.extraDmg += Math.min(1, What('Wis Mod'));
+							output.extraDmg += Math.max(1, What('Wis Mod'));
 						};
 					},
 					"My cleric cantrips get my Wisdom modifier (minimum of 1) added to their damage."
@@ -394,7 +394,7 @@ AddSubClass("cleric", "moon domain", {
 					function (spellKey, spellObj, spName) {
 						if (spName.indexOf("cleric") == -1 || spellObj.psionic || spellObj.level !== 0) return;
 						if (spellKey == "shillelagh") {
-							spellObj.description = spellObj.description.replace("1d8", "1d8+" + Math.min(1, What('Wis Mod')));
+							spellObj.description = spellObj.description.replace("1d8", "1d8+" + Math.max(1, What('Wis Mod')));
 							return true;
 						}
 						return genericSpellDmgEdit(spellKey, spellObj, "\\w+\\.?", "Wis", true);
