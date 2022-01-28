@@ -97,10 +97,9 @@ AddSubClass("barbarian", "juggernaut", {
 			description : desc([
 				"As a reaction, after pushing a creature at least 5 ft, I can leap to a space next to them",
 				"The space must be unoccupied; costs no movement; doesn't provoke opportunity attacks",
-				"If I do, the creature makes a Strength save or is knocked prone",
+				"If I do, the creature makes a Str save or is knocked prone; DC 8 + Str mod + prof bonus",
 				"If I push a creature within 5 ft an ally, they can make a melee attack as a reaction"
 			]),
-			additional : "DC 8 + Str mod + prof bonus",
 			action : [["reaction"]]
 		},
         "subclassfeature14" : {
@@ -126,7 +125,7 @@ AddSubClass("bard", "college of tragedy", {
 			source : ["TDCSR", 167],
 			minlevel : 3,
 			description : desc([
-				"As a reaction, gain inspiration when I or an ally within 30 ft roll a 1 on a save/ability/attack"
+				"As a reaction when I/ally within 30 ft roll a 1 on a save/ability/attack, gain inspiration"
 			]),
 			action : ["reaction", " (1 rolled on save/ability/attack)"],
 			additional : "regain 1 Bardic Inspiration"
@@ -165,7 +164,7 @@ AddSubClass("bard", "college of tragedy", {
 			recovery : "short rest",
 			usages : 1,
 			description : desc([
-				"When I make an attack/save, I can gain a +10 bonus; next attack/save gains a -10 penalty",
+				"When I make an attack/save, I can get a +10 bonus; next attack/save gets a -10 penalty",
 				"If not used, the penalty disappears after a rest or I am reduced to 0 HP"
 			])
 		},
@@ -267,7 +266,7 @@ AddSubClass("cleric", "blood domain", {
 			]),
 			additional : levels.map(function (n) {
 				if (n < 6) return "";
-				return (n < 14 ? "Large" : "Huge") + " or smaller; See Notes";
+				return "Up to " + (n < 14 ? "Large" : "Huge") + "; See Notes";
 			}),
 			toNotesPage : [{
 				name : "Channel Divinity: Blood Puppet",
@@ -324,7 +323,7 @@ AddSubClass("cleric", "blood domain", {
 			action : ["action", ""],
 			description : desc([
 				"As an action, I can emit a 30 ft necrotic aura that causes nearby enemies' veins to burst",
-				"Enemies entering the aura for the first time on a turn, or start their turn in it are damaged",
+				"Enemies entering the aura for the first time on a turn, or start a turn in it are damaged",
 				"They take 3d6 necrotic damage from the aura if they have blood",
 				"Additionally, the aura reduces any healing enemies with blood receive by half"
 			])
@@ -346,7 +345,7 @@ AddSubClass("cleric", "moon domain", {
 			usagescalc : "event.value = What('Proficiency Bonus'));",
 			recovery : "long rest",
 			description : desc([
-				"As a reaction when a creature within 30 ft makes a Wis save, I can grant adv. on the save"
+				"As a reaction when a creature within 30 ft makes a Wis save, I can grant adv. on it"
 			])
 		},
 		"subclassfeature2" : {
@@ -464,8 +463,8 @@ AddSubClass("druid", "circle of the blighted", {
 			source : ["TDCSR", 172],
 			minlevel : 6,
 			description : desc([
-				"As a reaction when a creature is damaged on my Defiled Ground, I can summon a sapling",
-				"The damaged creature cannot be undead or a construct",
+				"As a reaction when a creature is damaged on my Defiled Ground, I can summon an ally",
+				"A blighted sapling is summoned if the damaged creature is not undead or a construct",
 				"The sapling appears in an unoccupied space within 5 ft of the damaged creature",
 				"When it appears, the sapling can attack any creature within 5 ft",
 				"The sapling then acts on my initiative and obeys my verbal commands",
