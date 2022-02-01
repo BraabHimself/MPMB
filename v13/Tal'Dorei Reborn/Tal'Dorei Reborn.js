@@ -23,6 +23,10 @@ SourceList["TDCSR"] = {
 	date: "2022-01-18"
 };
 
+/*
+* Subclasses
+*/
+
 //Contributions from NodHero
 AddSubClass("barbarian", "juggernaut", {
 	regExpSearch : /path of the juggernaut/i,
@@ -587,13 +591,15 @@ AddSubClass("monk", "way of the cobalt soul", {
 				popupName : "Extract Aspects",
 				page3notes : true,
 				note : [
-					"If I hit a creature with a Flurry of Blows attack, it is analyzed until my next rest. I learn its",
-					"damage vulnerabilities/resistances/immunities and condition immunities. If an analyzed ",
-					"target misses me with an attack, I can use my reaction to make an unarmed strike against it",
+					"When I hit a creature with a Flurry of Blows attack, I can analyze it",
+					"As a reaction when an analyzed target within reach misses me, I can retaliate",
+					"I make an unarmed strike against it; this benefit lasts until my next rest",
+					"Additionally, when I analyze a creature I learn all of its:",
+					" Damage vulnerabilities, damage resistances, damage immunities, and condition immunities"
 				]
 			}],
-			action : ["reaction", "Unarmed Strike (with analyzed creature miss)"],
-			additional : "See 3rd page notes"
+			action : ["reaction", "Unarmed Strike (on analyzed creature miss)"],
+			additional : "See 3rd page"
 		},
 		"subclassfeature6": {
 			name: "Extort Truth",
@@ -602,23 +608,27 @@ AddSubClass("monk", "way of the cobalt soul", {
 			description: (typeA4 ? "" : desc(["If I hit a creature with an unarmed strike, I can spend 1 ki to compel it to tell the truth"])),
 			toNotesPage : [{
 				name : "Extort Truth",
+				additional : "1 ki",
 				source : ["TDCSR", 174],
 				popupName : "Extort Truth",
 				page3notes : true,
 				note : [
-				   "If I hit a creature with an unarmed strike (can chose to deal no damage), I can spend 1 ki to",
-				   "force it to make a Cha save. I know if it failed. If failed, the creature can't lie for 10 minutes",
-				   "and all Charisma checks directed at target have advantage. The target is aware of the effect",
+				   "When I hit a creature with an unarmed strike, I can spend 1 ki to make it unable to lie",
+				   "I can choose for the unarmed strike to deal no damage, imposing the effect without injury",
+				   "The creature makes a Charisma save or it can't speak a deliberate lie",
+				   "All Charisma checks against the creature are made with advantage",
+				   "These effects last for 10 min and I know whether the creature saved or not",
+				   "The creature is aware of this effect and can avoid answering, instead of telling a lie"
 				]
 			}],
-			additional: "1 ki point; See 3rd page notes"
+			additional: "1 ki; See 3rd page"
 		},
 		"subclassfeature6.1": {
 			name: "Mystical Erudition",
 			source: [["TDCSR", 174]],
 			minlevel: 6,
 			description: desc([
-				"At 6th, 11th, and 17th level gain a language and skill/expertise; See 3rd page notes"
+				"At 6th, 11th, and 17th level gain a language and skill/expertise; See 3rd page"
 			]),
 			toNotesPage : [{
 				name : "Mystical Erudition",
@@ -626,8 +636,8 @@ AddSubClass("monk", "way of the cobalt soul", {
 				popupName : "Mystical Erudition",
 				page3notes : true,
 				note : [
-					"At lvls 6, 11, and 17, I gain a language and proficiency with one skill from Arcana, History,",
-					"Investigation, Nature, or Religion or expertise if already proficient with one of those skills",
+					"At 6th, 11th, and 17th level gain a language and skill, or expertise if already proficient",
+					"I can gain proficiency/expertise in Arcana, History, Investigation, Nature, or Religion"
 				]
 			}],
 			languageProfs: [1],
@@ -720,22 +730,145 @@ AddSubClass("monk", "way of the cobalt soul", {
 			source: [["TDCSR", 174]],
 			minlevel: 11,
 			description: desc([
-				"Once per turn, if I've taken my reaction this round, I can spend 1 ki point to take a reaction"
+				"Once per turn, if I've used my reaction this round, I can spend 1 ki to take a reaction"
 			]),
 			action : ["reaction", " (1 Ki; 1/turn)"],
-			additional: "1 ki point; once per turn"
+			additional: "1 ki; once per turn"
 		},
 		"subclassfeature17": {
 			name: "Debilitating Barrage",
 			source: [["TDCSR", 174]],
 			minlevel: 17,
 			description: desc([
-				"If I hit a creature with an unarmed strike, I can use 3 ki points to give it vulnerability to one",
-				"damage type. Lasts for one minute or until the end of a turn in which it has taken damage",
-				"of that type. If the creature has resistance to the chosen type, the resistance is suppressed",
-				"instead of vulnerability. A creature cannot be affected by this feature again for 24 hours",
+				"When I hit a creature with an unarmed strike, I can use 3 ki to make it vulnerable"
 			]),
-			additional: "3 ki points; See 3rd page notes"
+			toNotesPage : [{
+				name : "Debilitating Barrage",
+				additional : "1 ki",
+				source : ["TDCSR", 174],
+				popupName : "Debilitating Barrage",
+				page3notes : true,
+				note : [
+					"When I hit a creature with an unarmed strike, I can use 3 ki to make it vulnerable",
+					"It gains vulnerability to a damage type of my choice",
+					"This lasts for 1 min or until the end of a turn in which it has taken damage of that type",
+					"If the creature has resistance to the type, it loses it for 1 min instead",
+					"If the creature has immunity to the type it's unaffected",
+					"A creature can only be affected once every 24 hours"
+				]
+			}],
+			additional: "3 ki; See 3rd page"
 		}
 	}
 });
+
+AddSubClass("paladin", "oath of the open seas", {
+	regExpSearch : /^(((?=.*(sea|pirate|swashbuckler))((?=.*paladin)|((?=.*(exalted|sacred|holy|divine))(?=.*(knight|fighter|warrior|warlord|trooper)))))|((?=.*(sea|pirate|swashbuckler))(?=.*(knight|fighter|warrior|warlord|trooper)))).*$/i,
+	subname : "Oath of the Open Seas",
+	source: [["TDCSR", 174]],
+	features : {
+		"subclassfeature3" : {
+			name : "Channel Divinity: Marine Layer",
+			source: [["TDCSR", 175]],
+			minlevel : 3,
+			description : desc([
+				"As an action, I can surround myself with a 20 ft radius of heavily obscuring fog",
+				"It lasts for 10 minutes, spreads around corners, moves with me, and cannot be dispersed",
+				"I and creatures within 5 ft of me treat it as lightly obscured; can dismiss (no action " + (typePF ? "required" : "") + ")",
+			]),
+			action : ["action", ""],
+			spellcastingExtra : ["create or destroy water", "expeditious retreat", "augury", "misty step", "call lightning", "freedom of the waves", "control water", "freedom of movement", "commune with nature", "freedom of the winds"]
+		},
+		"subclassfeature3.1" : {
+			name : "Channel Divinity: Fury of the Tides",
+			source: [["TDCSR", 175]],
+			minlevel : 3,
+			description : desc([
+				"As a bonus action, I can empower my attacks to push creatures away from me for 1 min",
+				"Once per turn, when I hit a creature with a weapon attack, I can push it 10 ft away",
+				"If pushed into another creature or obstacle, they take Cha mod bludgeoning damage"
+			]),
+			action : ["bonus action", ""]
+		},
+		"subclassfeature7" : {
+			name : "Aura of Liberation",
+			source: [["TDCSR", 176]],
+			minlevel : 7,
+			description : desc([
+				"While not incapacitated, creatures of my choice within range and I gain benefits:",
+				" \u2022 We can't be grappled/restrained; ignore movement/attack penalties while underwater",
+				" \u2022 If already grappled/restrained use 5 ft of movement to escape nonmagical restraints"
+			]),
+			additional : levels.map( function(n) {
+				return (n < 7 ? "" : (n < 18 ? "10-foot aura" : "30-foot aura"));
+			})
+		},
+		"subclassfeature15" : {
+			name : "Stormy Waters",
+			source: [["TDCSR", 176]],
+			minlevel : 15,
+			description : desc([
+				"I can use my reaction to crash water on a creature that enters/exits my melee range",
+				"It takes 1d12 bludgeoning damage and makes a Strength save or is knocked prone"
+			]),
+			action : ["reaction", ""]
+		},
+		"subclassfeature20" : {
+			name : "Mythic Swashbuckler",
+			source: [["TDCSR", 176]],
+			minlevel : 20,
+			description : desc([
+				"As an action, I channel the spirits of historic sea captains for 1 minute; See 3rd page"
+			]),
+			toNotesPage : [{
+				name : "Mythic Swashbuckler Benefits",
+				popupName : "Oath of the Open Seas: Mythic Swashbuckler",
+				page3notes : true,
+				note : [
+					" \u2022 Climbing costs no additional movement; I have advantage on Strength (Athletics) checks",
+					" \u2022 My attacks have advantage against a creature within 5 ft if no one else within 5 ft of me",
+					" \u2022 I can take the Dodge action as a bonus action",
+					" \u2022 I have advantage on Dexterity checks and Dexterity saves against seen effects"
+				]
+			}],
+			recovery : "long rest",
+			usages : 1,
+			action : ["action", ""]
+		}
+	}
+});
+
+/*
+* Spells
+*/
+
+SpellsList["freedom of the waves"] = {
+	name : "Freedom of the Waves",
+	classes : ["paladin"],
+	source: [["TDCSR", 176]],
+	level : 3,
+	school : "Conj",
+	time : "1 a",
+	range : "120 ft",
+	components : "V,S,M",
+	compMaterial : "A strand of wet hair",
+	duration : "Instantaneous",
+	save : "Str",
+	description : "15-ft rad 10-ft high all crea 2d8 Bludg. dmg and knocked prone; save no dmg and not prone; see book",
+	descriptionFull : "You conjure a deluge of seawater in a 15-foot-radius, 10-foot-tall cylinder centered on a point within range. This water takes the form of a tidal wave, a whirlpool, a waterspout, or another form of your choice. Each creature in the area must succeed on a Strength saving throw against your spell save DC or take 2d8 bludgeoning damage and fall prone. You can choose a number of creatures equal to your spellcasting modifier (minimum of 1) to automatically succeed on this saving throw." + "\n   " + "If you are within the spell’s area, as part of the action you use to cast the spell, you can vanish into the deluge and teleport to an unoccupied space that you can see within the spell’s area."
+};
+
+SpellsList["freedom of the winds"] = {
+	name : "Freedom of the Winds",
+	classes : ["paladin"],
+	source: [["TDCSR", 176]],
+	level : 5,
+	school : "Abjur",
+	time : "1 a",
+	range : "Self",
+	components : "V,S,M",
+	compMaterial : "A scrap of sailcloth",
+	duration : "Conc, 10 min",
+	description : "Gain 60-ft fly speed; adv. on checks vs. grappled and on saves vs. restrained/paralyzed; see book",
+	descriptionFull : "Wind wraps around your body, tugging at your hair and clothing as your feet lift off the ground. You gain a flying speed of 60 feet. Additionally, you have advantage on ability checks to avoid being grappled, and on saving throws against being restrained or paralyzed. " + "\n   " + "When you are targeted by a spell or attack while this spell is in effect, you can use a reaction to teleport up to 60 feet to an unoccupied space you can see. If this movement takes you out of range of the triggering spell or attack, you are unaffected by it. This spell then ends when you reappear."
+};
