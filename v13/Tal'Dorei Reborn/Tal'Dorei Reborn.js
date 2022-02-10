@@ -838,6 +838,154 @@ AddSubClass("paladin", "oath of the open seas", {
 	}
 });
 
+AddSubClass("sorcerer", "runechild", {
+	regExpSearch : /runechild/i,
+	subname : "Runechild",
+	fullname : "Runechild",
+	source: [["TDCSR", 176]],
+	features : {
+		"subclassfeature1" : {
+			name : "Essence Runes",
+			source: [["TDCSR", 177]],
+			minlevel : 1,
+			description : desc([
+				"A number of essence runes appear on my body, which are invisible while inert",
+				"If I spend sorcery points, an equal number of runes become charged at the end of my turn",
+				"If I have 5 or more charged runes, I emit 5 ft of bright light and 5 ft of dim light",
+				"Charged runes become inert after being spent or after a long rest"
+			]),
+			additional : levels.map(function (n) {
+				return n + " essence rune" + (n > 1 ? "s" : "");
+			}),
+			action : ["bonus action", "Charge Runes"]
+		},
+		"subclassfeature1.1" : {
+			name : "Runic Magic",
+			source: [["TDCSR", 177]],
+			minlevel : 1,
+			description : desc([
+				"I learn additional spells, which do not count towards the number of spell I can know",
+				"Whenever I gain a sorcerer level, I can replace one of these with another of the same level",
+				"It must be an abjuration or transmutation spell on the sorcerer, wizard, or warlock spell list"
+			]),
+			spellcastingBonus : [{
+				name : "Runic Magic (1st-level)",
+				"class" : ["sorcerer", "warlock", "wizard"],
+				school : ["Abjur", "Trans"],
+				level : [1, 1],
+				firstCol : "RM",
+				extraspells : ["longstrider", "protection from evil and good"],
+				selection : ["longstrider", "protection from evil and good"],
+				times : 2
+			}, {
+				name : "Runic Magic (2nd-level)",
+				"class" : ["sorcerer", "warlock", "wizard"],
+				school : ["Abjur", "Trans"],
+				level : [2, 2],
+				firstCol : "RM",
+				extraspells : ["lesser restoration", "protection from poison"],
+				selection : ["lesser restoration", "protection from poison"],
+				times : levels.map(function (n) { return n < 3 ? 0 : 2; })
+			}, {
+				name : "Runic Magic (3rd-level)",
+				"class" : ["sorcerer", "warlock", "wizard"],
+				school : ["Abjur", "Trans"],
+				level : [3, 3],
+				firstCol : "RM",
+				extraspells : ["glyph of warding", "magic circle"],
+				selection : ["glyph of warding", "magic circle"],
+				times : levels.map(function (n) { return n < 5 ? 0 : 2; })
+			}, {
+				name : "Runic Magic (4th-level)",
+				"class" : ["sorcerer", "warlock", "wizard"],
+				school : ["Abjur", "Trans"],
+				level : [4, 4],
+				firstCol : "RM",
+				extraspells : ["death ward", "freedom of movement"],
+				selection : ["death ward", "freedom of movement"],
+				times : levels.map(function (n) { return n < 7 ? 0 : 2; })
+			}, {
+				name : "Runic Magic (5th-level)",
+				"class" : ["sorcerer", "warlock", "wizard"],
+				school : ["Abjur", "Trans"],
+				level : [5, 5],
+				firstCol : "RM",
+				extraspells : ["greater restoration", "telekinesis"],
+				selection : ["greater restoration", "telekinesis"],
+				times : levels.map(function (n) { return n < 9 ? 0 : 2; })
+			}]
+		},
+		"subclassfeature1.2" : {
+			name : "Glyph of Aegis",
+			source: [["TDCSR", 177]],
+			minlevel : 1,
+			description : desc([
+				"As a reaction when damaged, I can expend charged runes to reduce the damage I take",
+				"I roll dice equal to the number of expended runes and reduce the damage by the total"
+			]),
+			additional : levels.map(function (n) {
+				return n < 14 ? "d6" : "d8";
+			})
+		},
+		"subclassfeature6" : {
+			name : "Sigilic Augmentation",
+			source: [["TDCSR", 177]],
+			minlevel : 6,
+			description : desc([
+				"As a reaction, I can spend a charged rune to gain adv. on a Str/Dex/Con check or save"
+			]),
+			action : [
+				["action"  , "Grant Glyph of Aegis (max 3 charged runes)"],
+				["reaction", " (Str/Dex/Con check)"],
+				["reaction", " (Str/Dex/Con save)"]
+			],
+			usages : 1,
+			recovery : "long rest",
+			additional : "Advantage on save"
+		},
+		//When you reach 6th level, you can touch a creature as an action and expend up to 3 charged runes to transfer your protective power to it for up to 1 hour. The next time that creature takes damage within the next hour, it rolls 1d6 per charged rune spent and reduces the damage by the total. You can’t transfer this power to a creature already under the effect of Glyph of Aegis.
+		"subclassfeature6.1" : {
+			name : "Manifest Inscriptions",
+			source: [["TDCSR", 177]],
+			minlevel : 6,
+			description : desc([
+				"As an action, I can expend one charged rune to reveal hidden/invisible arcane things",
+				"Arcane traps/marks/runes/wards/sensors/glyphs within 60 ft are revealed for 1 min",
+				"I have advantage on Arcana checks to discern their nature",
+				"They glow dim light in 5 ft and I can read any revealed writing"
+			]),
+			action : [["action", ""]]
+		},
+		"subclassfeature14" : {
+			name : "Runic Torrent",
+			source: [["TDCSR", 177]],
+			minlevel : 14,
+			description : desc([
+				"When I cast a spell, I can expend 2 charged runes to make it deal force damage instead",
+				"All targeted/in area of the spell make a Str save or knocked prone/pushed 15 ft away"
+			]),
+			usages : 1,
+			recovery : "short rest"
+		},
+		"subclassfeature18" : {
+			name : "Arcane Exemplar",
+			source: [["TDCSR", 177]],
+			minlevel : 18,
+			description : desc([
+				"As a bonus action, I can expend a charged rune to assume my exemplar form:",
+				" \u2022 I gain resistance to damage dealt by spells and a flying speed of 60 ft",
+				" \u2022 Creatures have disadvantage against my sorcerer spells",
+				" \u2022 Whenever I cast a spell of 1st level or higher, I regain HP equal to its level",
+				"This form lasts until the end of my turn; I can expend another rune to extend its duration",
+				"When this form ends, I am stunned until the end of my next turn"
+			]),
+			action : ["bonus action", " (1 charged rune)"],
+			usages : 1,
+			recovery : "long rest"
+		}
+	}
+});
+
 /*
 * Spells
 */
