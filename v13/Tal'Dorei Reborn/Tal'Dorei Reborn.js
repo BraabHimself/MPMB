@@ -992,7 +992,75 @@ AddSubClass("sorcerer", "runechild", {
 	}
 });
 
-
+AddSubClass("wizard","blood magic", {
+	regExpSearch : /^(?=.*wizard)(?=.*blood)(?=.*mag(i|ic|e)).*$|hemocraft/i,
+	subname : "Blood Magic",
+	source: [["TDCSR", 178]],
+	features : {
+		"subclassfeature2" : {
+			name : "Blood Channeling",
+			source: [["TDCSR", 178]],
+			minlevel : 2,
+			description : desc([
+				"I can use my body as an arcane focus as long as my HP are are below my max HP",
+				"When casting a wizard spell with a costly material component, I can forego it",
+				"I take 1d10 necrotic damage per 50g of its cost (min 1d10), which cannot be reduced",
+				"If it reduces me to 0 HP, the spell fails, but no spell slot is expended"
+			])
+		},
+		"subclassfeature2.1" : {
+			name : "Sanguine Burst",
+			source: [["TDCSR", 179]],
+			minlevel : 2,
+			description : desc([
+				"When I cast a spell of 1st-level or higher, I can spend my vitality to empower it",
+				"I take necrotic damage equal to the spell's level, which cannot be reduced",
+				"I can reroll a number of damage dice up to my Intelligence mod (min 1)",
+				"I must use the new rolls"
+			])
+		},
+		"subclassfeature6" : {
+			name : "Bond of Mutual Suffering",
+			source: [["TDCSR", 179]],
+			minlevel : 6,
+			description : desc([
+				"As a reaction when attacked, I can share my pain with the attacker",
+				"The attacker takes damage equal to the damage I took",
+				"I cannot use this against constructs or undead"
+			]),
+			action : [["reaction", " (when attacked)"]],
+			usages : levels.map(function(n) {
+				return n < 14 ? 1 : 2;
+			}),
+			recovery : "short rest"
+		},
+		"subclassfeature10" : {
+			name : "Glyph of Hemorrhaging",
+			source: [["TDCSR", 179]],
+			minlevel : 10,
+			description : desc([
+				"When I damage a creature with a spell, I can curse it for 1 minute",
+				"While cursed, it takes an extra 1d6 necrotic damage when hit by an attack",
+				"The creature makes a Con save at the end of each of its turns to end the curse"
+			]),
+			usages : 1,
+			recovery : "short rest"
+		},
+		"subclassfeature14" : {
+			name : "Thicker than Water",
+			source: [["TDCSR", 179]],
+			minlevel : 14,
+			description : desc([
+				"Whenever I regain HP via magic, I regain extra HP equal to my proficiency bonus",
+				"While concentrating on a spell, I am resistant to nonmagical " + (typePF ? "bludg/piercing/slashing" : "bludg/slash/pierc damage") + " damage"
+			]),
+			additional : levels.map( function(n) {
+				if (n < 14) return "";
+				return (n < 5 ? 2 : n < 9 ? 3 : n < 13 ? 4 : n < 17 ? 5 : 6) + " extra HP regained";
+			})
+		}
+	}
+});
 
 /*
 * Spells
