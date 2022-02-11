@@ -838,6 +838,9 @@ AddSubClass("paladin", "oath of the open seas", {
 	}
 });
 
+var runchildGlyphOfAegisPreLvl6  = ["As a reaction when damaged, I can expend charged runes to reduce the damage I take", "I roll dice equal to the number of expended runes and reduce the damage by the total"];
+var runchildGlyphOfAegisPostLvl6 = ["As an action, I can touch a creature and expend up to 3 charged runes to protect it for 1 hr", "The next time it's damaged, it rolls dice equal to the number of runes expended", "The damage it takes is reduced by total rolled", "A creature can have only one instance of the effect at a time"];
+
 AddSubClass("sorcerer", "runechild", {
 	regExpSearch : /runechild/i,
 	subname : "Runechild",
@@ -850,7 +853,7 @@ AddSubClass("sorcerer", "runechild", {
 			minlevel : 1,
 			description : desc([
 				"A number of essence runes appear on my body, which are invisible while inert",
-				"If I spend sorcery points, an equal number of runes become charged at the end of my turn",
+				"If I spend sorcery points, an equal number of runes " + (typePF ? "become" : "are") + " charged at the end of my turn",
 				"If I have 5 or more charged runes, I emit 5 ft of bright light and 5 ft of dim light",
 				"Charged runes become inert after being spent or after a long rest"
 			]),
@@ -866,7 +869,7 @@ AddSubClass("sorcerer", "runechild", {
 			description : desc([
 				"I learn additional spells, which do not count towards the number of spell I can know",
 				"Whenever I gain a sorcerer level, I can replace one of these with another of the same level",
-				"It must be an abjuration or transmutation spell on the sorcerer, wizard, or warlock spell list"
+				"It must be " + (typePF ? "an abjuration or transmutation" : "a transmutation/abjuration") + " spell on the sorcerer, wizard, or warlock spell list"
 			]),
 			spellcastingBonus : [{
 				name : "Runic Magic (1st-level)",
@@ -919,12 +922,9 @@ AddSubClass("sorcerer", "runechild", {
 			name : "Glyph of Aegis",
 			source: [["TDCSR", 177]],
 			minlevel : 1,
-			description : desc([
-				"As a reaction when damaged, I can expend charged runes to reduce the damage I take",
-				"I roll dice equal to the number of expended runes and reduce the damage by the total"
-			]),
+			description : desc(runchildGlyphOfAegisPreLvl6),
 			additional : levels.map(function (n) {
-				return n < 14 ? "d6" : "d8";
+				return (n < 14 ? "d6" : "d8") + (n < 6 ? "" : "; See 3rd page");
 			})
 		},
 		"subclassfeature6" : {
@@ -941,9 +941,15 @@ AddSubClass("sorcerer", "runechild", {
 			],
 			usages : 1,
 			recovery : "long rest",
-			additional : "Advantage on save"
+			additional : "Advantage on save",
+			toNotesPage : [{
+				name : "Glyph of Aegis",
+				source: [["TDCSR", 177]],
+				popupName : "Glyph of Aegis",
+				page3notes : true,
+				note : runchildGlyphOfAegisPostLvl6
+			}],
 		},
-		//When you reach 6th level, you can touch a creature as an action and expend up to 3 charged runes to transfer your protective power to it for up to 1 hour. The next time that creature takes damage within the next hour, it rolls 1d6 per charged rune spent and reduces the damage by the total. You can’t transfer this power to a creature already under the effect of Glyph of Aegis.
 		"subclassfeature6.1" : {
 			name : "Manifest Inscriptions",
 			source: [["TDCSR", 177]],
@@ -976,12 +982,82 @@ AddSubClass("sorcerer", "runechild", {
 				" \u2022 I gain resistance to damage dealt by spells and a flying speed of 60 ft",
 				" \u2022 Creatures have disadvantage against my sorcerer spells",
 				" \u2022 Whenever I cast a spell of 1st level or higher, I regain HP equal to its level",
-				"This form lasts until the end of my turn; I can expend another rune to extend its duration",
+				(typePF ? "This form" : "It") + " lasts until the end of my turn; I can expend another rune to extend its duration",
 				"When this form ends, I am stunned until the end of my next turn"
 			]),
 			action : ["bonus action", " (1 charged rune)"],
 			usages : 1,
 			recovery : "long rest"
+		}
+	}
+});
+
+AddSubClass("wizard","blood magic", {
+	regExpSearch : /^(?=.*wizard)(?=.*blood)(?=.*mag(i|ic|e)).*$|hemocraft/i,
+	subname : "Blood Magic",
+	source: [["TDCSR", 178]],
+	features : {
+		"subclassfeature2" : {
+			name : "Blood Channeling",
+			source: [["TDCSR", 178]],
+			minlevel : 2,
+			description : desc([
+				"I can use my body as an arcane focus as long as my HP are are below my max HP",
+				"When casting a wizard spell with a costly material component, I can forego it",
+				"I take 1d10 necrotic damage per 50g of its cost (min 1d10), which cannot be reduced",
+				"If it reduces me to 0 HP, the spell fails, but no spell slot is expended"
+			])
+		},
+		"subclassfeature2.1" : {
+			name : "Sanguine Burst",
+			source: [["TDCSR", 179]],
+			minlevel : 2,
+			description : desc([
+				"When I cast a spell of 1st-level or higher, I can spend my vitality to empower it",
+				"I take necrotic damage equal to the spell's level, which cannot be reduced",
+				"I can reroll a number of damage dice up to my Intelligence mod (min 1)",
+				"I must use the new rolls"
+			])
+		},
+		"subclassfeature6" : {
+			name : "Bond of Mutual Suffering",
+			source: [["TDCSR", 179]],
+			minlevel : 6,
+			description : desc([
+				"As a reaction when attacked, I can share my pain with the attacker",
+				"The attacker takes damage equal to the damage I took",
+				"I cannot use this against constructs or undead"
+			]),
+			action : [["reaction", " (when attacked)"]],
+			usages : levels.map(function(n) {
+				return n < 14 ? 1 : 2;
+			}),
+			recovery : "short rest"
+		},
+		"subclassfeature10" : {
+			name : "Glyph of Hemorrhaging",
+			source: [["TDCSR", 179]],
+			minlevel : 10,
+			description : desc([
+				"When I damage a creature with a spell, I can curse it for 1 minute",
+				"While cursed, it takes an extra 1d6 necrotic damage when hit by an attack",
+				"The creature makes a Con save at the end of each of its turns to end the curse"
+			]),
+			usages : 1,
+			recovery : "short rest"
+		},
+		"subclassfeature14" : {
+			name : "Thicker than Water",
+			source: [["TDCSR", 179]],
+			minlevel : 14,
+			description : desc([
+				"Whenever I regain HP via magic, I regain extra HP equal to my proficiency bonus",
+				"While concentrating on a spell, I am resistant to nonmagical " + (typePF ? "bludg/piercing/slashing" : "bludg/slash/pierc damage") + " damage"
+			]),
+			additional : levels.map( function(n) {
+				if (n < 14) return "";
+				return (n < 5 ? 2 : n < 9 ? 3 : n < 13 ? 4 : n < 17 ? 5 : 6) + " extra HP regained";
+			})
 		}
 	}
 });
