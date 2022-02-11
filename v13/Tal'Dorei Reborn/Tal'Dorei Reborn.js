@@ -838,6 +838,9 @@ AddSubClass("paladin", "oath of the open seas", {
 	}
 });
 
+var runchildGlyphOfAegisPreLvl6  = ["As a reaction when damaged, I can expend charged runes to reduce the damage I take", "I roll dice equal to the number of expended runes and reduce the damage by the total"];
+var runchildGlyphOfAegisPostLvl6 = ["As an action, I can touch a creature and expend up to 3 charged runes to protect it for 1 hr", "The next time it's damaged, it rolls dice equal to the number of runes expended", "The damage it takes is reduced by total rolled", "A creature can have only one instance of the effect at a time"];
+
 AddSubClass("sorcerer", "runechild", {
 	regExpSearch : /runechild/i,
 	subname : "Runechild",
@@ -919,12 +922,9 @@ AddSubClass("sorcerer", "runechild", {
 			name : "Glyph of Aegis",
 			source: [["TDCSR", 177]],
 			minlevel : 1,
-			description : desc([
-				"As a reaction when damaged, I can expend charged runes to reduce the damage I take",
-				"I roll dice equal to the number of expended runes and reduce the damage by the total"
-			]),
+			description : desc(runchildGlyphOfAegisPreLvl6),
 			additional : levels.map(function (n) {
-				return n < 14 ? "d6" : "d8";
+				return (n < 14 ? "d6" : "d8") + (n < 6 ? "" : "; See 3rd page");
 			})
 		},
 		"subclassfeature6" : {
@@ -941,9 +941,15 @@ AddSubClass("sorcerer", "runechild", {
 			],
 			usages : 1,
 			recovery : "long rest",
-			additional : "Advantage on save"
+			additional : "Advantage on save",
+			toNotesPage : [{
+				name : "Glyph of Aegis",
+				source: [["TDCSR", 177]],
+				popupName : "Glyph of Aegis",
+				page3notes : true,
+				note : runchildGlyphOfAegisPostLvl6
+			}],
 		},
-		//When you reach 6th level, you can touch a creature as an action and expend up to 3 charged runes to transfer your protective power to it for up to 1 hour. The next time that creature takes damage within the next hour, it rolls 1d6 per charged rune spent and reduces the damage by the total. You can’t transfer this power to a creature already under the effect of Glyph of Aegis.
 		"subclassfeature6.1" : {
 			name : "Manifest Inscriptions",
 			source: [["TDCSR", 177]],
@@ -985,6 +991,8 @@ AddSubClass("sorcerer", "runechild", {
 		}
 	}
 });
+
+
 
 /*
 * Spells
