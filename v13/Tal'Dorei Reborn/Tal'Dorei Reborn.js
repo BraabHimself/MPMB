@@ -853,7 +853,7 @@ AddSubClass("sorcerer", "runechild", {
 			minlevel : 1,
 			description : desc([
 				"A number of essence runes appear on my body, which are invisible while inert",
-				"If I spend sorcery points, an equal number of runes become charged at the end of my turn",
+				"If I spend sorcery points, an equal number of runes " + (typePF ? "become" : "are") + " charged at the end of my turn",
 				"If I have 5 or more charged runes, I emit 5 ft of bright light and 5 ft of dim light",
 				"Charged runes become inert after being spent or after a long rest"
 			]),
@@ -869,7 +869,7 @@ AddSubClass("sorcerer", "runechild", {
 			description : desc([
 				"I learn additional spells, which do not count towards the number of spell I can know",
 				"Whenever I gain a sorcerer level, I can replace one of these with another of the same level",
-				"It must be an abjuration or transmutation spell on the sorcerer, wizard, or warlock spell list"
+				"It must be " + (typePF ? "an abjuration or transmutation" : "a transmutation/abjuration") + " spell on the sorcerer, wizard, or warlock spell list"
 			]),
 			spellcastingBonus : [{
 				name : "Runic Magic (1st-level)",
@@ -982,7 +982,7 @@ AddSubClass("sorcerer", "runechild", {
 				" \u2022 I gain resistance to damage dealt by spells and a flying speed of 60 ft",
 				" \u2022 Creatures have disadvantage against my sorcerer spells",
 				" \u2022 Whenever I cast a spell of 1st level or higher, I regain HP equal to its level",
-				"This form lasts until the end of my turn; I can expend another rune to extend its duration",
+				(typePF ? "This form" : "It") + " lasts until the end of my turn; I can expend another rune to extend its duration",
 				"When this form ends, I am stunned until the end of my next turn"
 			]),
 			action : ["bonus action", " (1 charged rune)"],
