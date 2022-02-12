@@ -1063,6 +1063,114 @@ AddSubClass("wizard","blood magic", {
 });
 
 /*
+* Backgrounds
+*/
+
+var ashariLanguages = {
+	"vesrah" : ["Aquan"],
+	"pyrah" : ["Ignan"],
+	"terrah" : ["Terran"],
+	"zephrah" : ["Auran"]
+};
+
+BackgroundList["ashari"] = {
+	regExpSearch : /^(?=.*pyrah)(?=.*ashari).*$/i,
+	name : "Ashari, Pyrah",
+	source: [["TDCSR", 179]],
+	skills : ["Nature"],
+	skillstxt : "Nature and choose one from Arcana or Survival",
+	languageProfs : ashariLanguages.pyrah,
+	toolProfs : ["Herbalism Kit"],
+	gold : 10,
+	equipright : [
+		["Traveler's clothes", "", 4],
+		["A staff carved with symbols of my tribe", "", 4],
+		["Belt pouch (with coins)", "", 1],
+		["Herbalism Kit", "", 3],
+	],
+	feature : "Elemental Harmony (Pyrah)",
+	trait : [
+		"I like to keep my hands busy, no matter where I am.",
+		"I love to explore new places and meet new people",
+		"I meditate at dawn each day—and I can’t stand it when my routine is interrupted.",
+		"I like noticing patterns in the world around me, whether or not they mean anything.",
+		"I don’t let anything—or anyone—stand in the way of my mission.",
+		"I’m a plain talker, even with people who outrank me.",
+		"I’ve always got some of my native element with me in some form. (This might be modeling clay, pure water, special burning incense, or a bottled cloud.)",
+		"I talk with everyone like I’ve known them all my life. Because most people I know, I have known all my life!"
+	],
+	ideal : [
+		["Destiny", "Destiny: I believe that everyone has a role to play. Now I just have to find mine. (Neutral)"],
+		["Community", "Community: It’s important to surround yourself with people you can count on, and who will support you. (Good)"],
+		["Knowledge", "Knowledge: I want to learn everything I can about the Elemental Planes—and maybe even visit them myself. (Neutral)"],
+		["Freedom", "Freedom: I don’t care what anyone says. Even if it causes problems, the elements must be free. And so should I. (Chaotic)"],
+		["Structure", "Structure: The elements are in harmony when they are free to act as they will, within the safe boundaries set by the Ashari. People are much the same. (Lawful)"],
+		["Virtuous Cycle", "Virtuous Cycle: If I see someone who needs help, I feel compelled to assist them. Surely they’ll return the favor someday! (Good)"],
+	],
+	bond : [
+        "I have a cousin in another Ashari tribe whom I’ve never met, but someday I want to visit my extended family",
+        "The leader of my tribe thinks I could be their successor, but I worry that I don’t have enough experience to lead my people.",
+        "A mysterious person killed a member of my family. I’ve left home to discover who the killer was—and to seek vengeance.",
+        "My older sibling set out on their Aramante a year ago, and I haven’t seen them since.",
+        "When I was a baby, a giant eagle brought me to Zephrah. I love my family, but I often wonder who my birth parents are.",
+        "I trust my animal friends more than any humanoid ally."
+    ],
+	flaw : [
+        "Big cities are overwhelming. I get nervous when surrounded by people I don’t know.",
+        "I know all too well that elemental power is dangerous—but I like playing around with it anyway.",
+        "I get surly if I go too long without being in contact with my native element",
+        "I think the mission of my people is a fool’s errand. They should abandon isolation, let the elements be, and enjoy the pleasures of the world!",
+        "I can’t stand it when people say one thing and mean another! Just say what you mean!",
+        "Ugh, I know it’s not right, but I can’t help but look down on people who can’t manipulate the elements. It’s not like it’s hard!"
+    ]
+};
+
+AddBackgroundVariant("ashari", "terrah", {
+	regExpSearch : /^(?=.*terrah)(?=.*ashari).*$/i,
+	name : "Ashari, Terrah",
+	feature : "Elemental Harmony (Terrah)",
+	languageProfs : ashariLanguages.terrah
+});
+
+AddBackgroundVariant("ashari", "vesrah", {
+	regExpSearch : /^(?=.*vesrah)(?=.*ashari).*$/i,
+	name : "Ashari, Vesrah",
+	feature : "Elemental Harmony (Vesrah)",
+	languageProfs : ashariLanguages.vesrah
+});
+
+AddBackgroundVariant("ashari", "zephrah", {
+	regExpSearch : /^(?=.*zephrah)(?=.*ashari).*$/i,
+	name : "Ashari, Zephrah",
+	feature : "Elemental Harmony (Zephrah)",
+	languageProfs : ashariLanguages.zephrah
+});
+
+BackgroundFeatureList["elemental harmony (pyrah)"] = {
+    description: "As an action, I can instantaneously create and control a burst of flame small enough to light a candle, a torch, or a small campfire. Alternatively, I snuff out a flame of the same size.",
+    source: [["TDCSR", 179]],
+	action : ["action", ""]
+};
+
+BackgroundFeatureList["elemental harmony (terrah)"] = {
+    description: "As an action, I can instantaneously create a small rock no larger than a gold coin. The rock appears in my hand, then turns to dust after 1 minute.",
+    source: [["TDCSR", 179]],
+	action : ["action", ""]
+};
+
+BackgroundFeatureList["elemental harmony (vesrah)"] = {
+    description: "As an action, I can instantaneously create enough hot or cold water to fill a small drinking vessel.",
+    source: [["TDCSR", 179]],
+	action : ["action", ""]
+};
+
+BackgroundFeatureList["elemental harmony (zephrah)"] = {
+    description: "As an action, I can create an instantaneous puff of wind strong enough to blow papers off a desk or mess up someone’s hair.",
+    source: [["TDCSR", 179]],
+	action : ["action", ""]
+};
+
+/*
 * Spells
 */
 
