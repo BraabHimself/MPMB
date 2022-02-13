@@ -1066,20 +1066,13 @@ AddSubClass("wizard","blood magic", {
 * Backgrounds
 */
 
-var ashariLanguages = {
-	"vesrah" : ["Aquan"],
-	"pyrah" : ["Ignan"],
-	"terrah" : ["Terran"],
-	"zephrah" : ["Auran"]
-};
-
 BackgroundList["ashari"] = {
 	regExpSearch : /^(?=.*pyrah)(?=.*ashari).*$/i,
 	name : "Ashari, Pyrah",
-	source: [["TDCSR", 179]],
+	source: [["TDCSR", 180]],
 	skills : ["Nature"],
 	skillstxt : "Nature and choose one from Arcana or Survival",
-	languageProfs : ashariLanguages.pyrah,
+	languageProfs : ["Ignan"],
 	toolProfs : ["Herbalism Kit"],
 	gold : 10,
 	equipright : [
@@ -1118,7 +1111,7 @@ BackgroundList["ashari"] = {
 	flaw : [
         "Big cities are overwhelming. I get nervous when surrounded by people I don’t know.",
         "I know all too well that elemental power is dangerous—but I like playing around with it anyway.",
-        "I get surly if I go too long without being in contact with my native element",
+        "I get surly if I go too long without being in contact with my native element.",
         "I think the mission of my people is a fool’s errand. They should abandon isolation, let the elements be, and enjoy the pleasures of the world!",
         "I can’t stand it when people say one thing and mean another! Just say what you mean!",
         "Ugh, I know it’s not right, but I can’t help but look down on people who can’t manipulate the elements. It’s not like it’s hard!"
@@ -1129,45 +1122,177 @@ AddBackgroundVariant("ashari", "terrah", {
 	regExpSearch : /^(?=.*terrah)(?=.*ashari).*$/i,
 	name : "Ashari, Terrah",
 	feature : "Elemental Harmony (Terrah)",
-	languageProfs : ashariLanguages.terrah
+	languageProfs : ["Terran"],
+	source: [["TDCSR", 180]]
 });
 
 AddBackgroundVariant("ashari", "vesrah", {
 	regExpSearch : /^(?=.*vesrah)(?=.*ashari).*$/i,
 	name : "Ashari, Vesrah",
 	feature : "Elemental Harmony (Vesrah)",
-	languageProfs : ashariLanguages.vesrah
+	languageProfs : ["Aquan"],
+	source: [["TDCSR", 180]]
 });
 
 AddBackgroundVariant("ashari", "zephrah", {
 	regExpSearch : /^(?=.*zephrah)(?=.*ashari).*$/i,
 	name : "Ashari, Zephrah",
 	feature : "Elemental Harmony (Zephrah)",
-	languageProfs : ashariLanguages.zephrah
+	languageProfs : ["Auran"],
+	source: [["TDCSR", 180]]
 });
 
 BackgroundFeatureList["elemental harmony (pyrah)"] = {
     description: "As an action, I can instantaneously create and control a burst of flame small enough to light a candle, a torch, or a small campfire. Alternatively, I snuff out a flame of the same size.",
-    source: [["TDCSR", 179]],
+    source: [["TDCSR", 180]],
 	action : ["action", ""]
 };
 
 BackgroundFeatureList["elemental harmony (terrah)"] = {
     description: "As an action, I can instantaneously create a small rock no larger than a gold coin. The rock appears in my hand, then turns to dust after 1 minute.",
-    source: [["TDCSR", 179]],
+    source: [["TDCSR", 180]],
 	action : ["action", ""]
 };
 
 BackgroundFeatureList["elemental harmony (vesrah)"] = {
     description: "As an action, I can instantaneously create enough hot or cold water to fill a small drinking vessel.",
-    source: [["TDCSR", 179]],
+    source: [["TDCSR", 180]],
 	action : ["action", ""]
 };
 
 BackgroundFeatureList["elemental harmony (zephrah)"] = {
     description: "As an action, I can create an instantaneous puff of wind strong enough to blow papers off a desk or mess up someone’s hair.",
-    source: [["TDCSR", 179]],
+    source: [["TDCSR", 180]],
 	action : ["action", ""]
+};
+
+BackgroundList["clasp member"] = {
+	regExpSearch : /^(?=.*clasp)(?=.*member).*$/i,
+	name : "Clasp Member",
+	source: [["TDCSR", 181]],
+	skills : ["Deception"],
+	skillstxt : "Deception and choose one from Sleight of Hand or Stealth",
+	languageProfs : ["Thieves' Cant"],
+	toolProfs : [["Disguise kit, forgery kit, or thieves' tools", 1]],
+	gold : 10,
+	equipleft : [
+		["Set of tools with which I'm proficient", "", ""]
+	],
+	equipright : [
+		["Inconspicuous common clothes", "", 4],
+		["Belt pouch (with coins)", "", 1]
+	],
+	feature : "A Favor in Turn",
+	trait : [
+		"What’s life without risk? I’m always willing to take a risk if the reward seems worth it.",
+		"I only show my emotions around people I really trust.",
+		'I don’t need friends; I need allies. When I do make "friends," I only consider what they can do for me.',
+		"I look for simple solutions. The world’s full of tough problems, but a well-placed knife is a one-size-fits-all answer.",
+		"Money talks. I don’t. We’ve got an efficient relationship.",
+		"I used to have one rule—don’t get involved in other people’s problems. Why are things so complicated now?",
+		"Crime is a game, and I play to win. I have no sympathy for players who don’t get that.",
+		"This organization has a lot of folks who cling to ugly, brutal practices. I’m not like that. I’m a professional, and professionals have standards."
+	],
+	ideal : [
+		["By Any Means", "By Any Means: I complete jobs. Collateral damage isn’t my problem. (Chaotic)"],
+		["Ambition", "Ambition: I will climb to the top of the ladder. Everything I do is a stepping-stone to a Spireling’s position. (Neutral)"],
+		["Decisiveness", "Decisiveness: It’s important to make up your mind so you can act swiftly and without delay. (Neutral)"],
+		["Honor", "Honor: There’s room in the Clasp for both good and evil. Every day, I awake and choose to do what’s right. (Good)"],
+		["Family", "Family: The Clasp is family. Anything that’s good for the family is good for me. (Lawful)"],
+		["Self-Interest", "Self-Interest: There are too many bleeding hearts in the Clasp these days. Doing the right thing means doing the thing that makes my life better. (Evil)"],
+	],
+	bond : [
+        "I’d do anything—anything—to protect my comrades.",
+        "I’ll always be grateful to the Spireling who took me in when I was an orphaned kid.",
+        "I was inspired to join the Clasp by the stories my parents told of being saved from the Chroma Conclave’s attack on Emon. I can look past the organization’s flaws.",
+		"I was nearly killed by the Myriad. If the Clasp is the enemy of those villains, then the Clasp is my friend.",
+        "I’ve got family back in the old town who are counting on me for money. They don’t know how I get it, but they don’t need to know.",
+        "I joined the Clasp to become rich, powerful, and beloved. That’s all there is to it."
+    ],
+	flaw : [
+        "I’m hopeless at organizing my belongings, and I’m always losing things.",
+        "I get bored whenever a plan is going too smoothly. A win is always more fun when it’s by the skin of my teeth!",
+        "I’ve seen Spirelings walk out among cheering crowds of thousands. Gods, I wish that were me. I need that to be me.",
+        "I’m rubbish with money, and never seem to leave town with a full purse. Keeps me coming back to the life, I suppose.",
+        "I can’t work with shoddy, makeshift thieves’ tools. I need everything involving my work to be perfect.",
+        "Any slight against me, no matter how small, is cause for revenge."
+    ]
+};
+
+AddBackgroundVariant("clasp member", "myriad operative", {
+	regExpSearch : /^(?=.*myriad)(?=.*operative).*$/i,
+	name : "Myriad Operative",
+	feature : "A Favor in Turn",
+	source: [["TDCSR", 182]],
+});
+
+BackgroundFeatureList["a favor in turn"] = {
+    description: "I can call in a favor from my organization when close enough to syndicate activity. This favor can take on any form, per DM approval. Eventually, the favor will be called in for repayment. Refusing to repay will result in my death. The DM determines the form of repayment, which should be proportionate to the favor bestowed - or that I'm paid for a service that exceeds the scope of repayment.",
+    source: [["TDCSR", 180]]
+};
+
+BackgroundList["lyceum scholar"] = {
+	regExpSearch : /^(?=.*lyceum)(?=.*scholar).*$/i,
+	name : "Lyceum Scholar",
+	source: [["TDCSR", 183]],
+	skills : ["Deception"],
+	skillstxt : "Choose two from Arcana, History, or Persuasion",
+	languageProfs : [2],
+	toolProfs : [["Disguise kit, forgery kit, or thieves' tools", 1]],
+	gold : 10,
+	equipleft : [
+		["Small pouch, with:", "", 1],
+		["Small knife", "", 0.25],
+		["Quill", "", ""],
+		["Ink", "", ""],
+		["Folded parchment", "", ""],
+		["Penknife", "", ""]
+	],
+	equipright : [
+		["Fine clothes", "", 6],
+		["Student uniform", "", 3],
+		["Belt pouch (with coins)", "", 1]
+	],
+	feature : "Academic Requisition",
+	trait : [
+		"I can’t believe I’m here! At the Alabaster Lyceum. Oh, gods, I’ve dreamed of this my whole life, and now I’m here!",
+		"I can’t believe I squandered all the opportunities I had at school. I was supposed to be learning good stuff, but I wasted it all daydreaming about fighting monsters.",
+		"Every night at school, I’d knock back a couple of meads and read with my pals! Just a bunch of nerds having fun, and I loved it.",
+		"Everyone at school was such a stick in the mud. Dressing the same, listening to the same bards…ugh, it’s sad. Just be yourself.",
+		"I’m happiest when I’ve got my little party with me. At school, it was like we were a squad of heroes, slaying projects like monsters.",
+		"I’d really rather you didn’t bother me. Can’t you see I’m studying here?",
+		"I don’t care. I just don’t care about it all. The dates I had to memorize, the formulae I learned... I just want to run away and live!",
+		"I’m just…tired. All the time. Oh, adventuring, sure, that’s fine, as long as I can find time to... nap... goodnight."
+	],
+	ideal : [
+		["Preparedness", "Preparedness: I can’t go out into the world unless I know what I’m up against. Study first, act later. (Neutral)"],
+		["Stardom", "Stardom: Having a team is good and all, but you can’t win a game of ball without the star charger, and you know that’s me. (Evil)"],
+		["Individuality", "Individuality: The world keeps us down by trying to put us all into little boxes. I’m tired of living in my box, and I don’t care what you think about it. (Chaotic)"],
+		["Purpose", "Purpose: I study because there are things I need to know. I’ll find my place in the world, and I’ll make the world better. (Good)"],
+		["Code of Conduct", "Code of Conduct: The student code is there to benefit all students, you know. It’s the same for laws! (Lawful)"],
+		["Recreation", "Recreation: All this studying crap wasn’t worth anything if you weren’t partying when you were done. Meet me down at the tavern, okay? (Chaotic)"],
+	],
+	bond : [
+        "I came to the Lyceum with no one, but I fell in love with the city of Emon. I’ve finally found a place that feels like home!",
+        "Most of my professors drove me to frustration, but there’s one who was kind and wise. I know they’ll always have my back.",
+        "My family saved every copper piece to give me the opportunities I have now. I can’t let them down.",
+		"I came to the Lyceum with a childhood friend, but we’ve long been drifting apart.",
+        "Discovery is the only thing that matters to me. The topic doesn’t matter. Books keep me company on my loneliest days.",
+        "The Lyceum is my life. I’d give up anything—everything—to protect it from harm."
+    ],
+	flaw : [
+        "The Lyceum taught me to never want to leave my room. The campus was so huge, and the crowds were so horrible.",
+        "You think you’re so great just because you’ve got muscles, and endurance, and…shut up! Read a book sometime!",
+        "Huh? What? Sorry, I was thinking about a test I need to retake when I get back to school...",
+        "I spent too much time studying. Now I don’t have any friends.",
+        "If you don’t match my aesthetic, I’m not interested in you. We can work together, but we won’t be friends. Got it?",
+        "I’m always striving for perfection. I got top of my class, sure, but only with a 98 average. And that’s. Not. Perfect."
+    ]
+};
+
+BackgroundFeatureList["academic requisition"] = {
+    description: "Whenever I'm at a major academic institution, I can requisition any set of tools. These tools are magically marked and will sound an alarm if removed from the premises. I also receive a 25 percent discount for services such as spellcasting from members of the Alabaster Lyceum or related institutions.",
+    source: [["TDCSR", 184]]
 };
 
 /*
