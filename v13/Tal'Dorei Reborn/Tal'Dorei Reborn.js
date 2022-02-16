@@ -1805,50 +1805,261 @@ FeatsList["fortune's grace (boon)"] = {
 FeatsList["cruel"] = {
   name: "Cruel",
   source: [["TDCSR", 190]],
-  descriptionFull: "",
-  description: "",
+  descriptionFull:
+    "The challenges and struggles you've faced throughout your life have led you to delight in inflicting pain and anguish upon others. You gain a number of cruelty dice equal to your proficiency bonus. Your cruelty dice are d6s. You can roll only one cruelty die per turn, and a cruelty die is spent when you roll it." +
+    "\n   " +
+    "You can roll a cruelty die under any of the following circumstances, with the indicated result:" +
+    "\n" +
+    "\u2022 When you deal damage to a creature, spend one cruelty die to deal extra damage to the creature equal to the roll." +
+    "\n" +
+    "\u2022 When you score a critical hit, spend one cruelty die to gain temporary hit points equal to the roll." +
+    "\n" +
+    "\u2022 When you make a Charisma (Intimidation) check, spend one cruelty die and add the roll to your check." +
+    "\n   " +
+    "You regain all spent cruelty dice when you finish a long rest.",
+  description:
+    "I gain a number of cruelty dice equal to my proficiency bonus, which are d6s. Oncer per turn, I can spend " +
+    (typePF ? "and roll" : "") +
+    " one die for an effect when I damage a creature, score a critical hit, or make an Intimidation check. I regain all expended dice after a long rest. See See 3rd page.",
+  usages: "Prof Bonus per ",
+  usagescalc: "event.value = How('Proficiency Bonus');",
+  recovery: "long rest",
+  toNotesPage: [
+    {
+      name: "Cruel",
+      source: [["TDCSR", 190]],
+      popupName: "Cruel (Feat)",
+      page3notes: true,
+      note: [
+        "I gain a number of cruelty dice equal to my proficiency bonus, which are d6s",
+        "Once per turn I can spend and roll a cruelty die when I:",
+        " \u2022 Deal damage to a creature, to deal extra damage equal to the roll",
+        " \u2022 Score a critical hit, to gain temporary HP equal to the roll",
+        " \u2022 Make an Intimidation check, to add the roll to the check",
+        "I regain all spent cruelty dice after a long rest",
+      ],
+    },
+  ],
 };
+
+var preparedCasters = [];
+
+for (var classKey in ClassList) {
+  var spellCasting = ClassList[classKey].spellcastingKnown;
+
+  if (spellCasting !== undefined && spellCasting.prepared) {
+    preparedCasters.push(classKey);
+  }
+}
 
 FeatsList["flash recall"] = {
   name: "Flash Recall",
   source: [["TDCSR", 190]],
-  descriptionFull: "",
-  description: "",
+  descriptionFull:
+    "You've developed the ability to instantly recall an unprepared spell in moments of sudden necessity. As a bonus action, you prepare a spell of 1st level or higher from your spellbook (if you're a wizard) or from your class spell list (if you're not a wizard). This spell must be of a level for which you have spell slots, and it replaces another spell of an equal or higher level that you had previously prepared." +
+    "\n   " +
+    "Once you use this feat to recall a spell, you can't do so again until you complete a short or long rest.",
+  description:
+    "As a bonus action, I can prepare a spell of 1st level or higher from my spellbook (wizard)/class spell list (non-wizard), replacing an already prepared spell. To do so, it must be of a level for which I have spell slots and of the replaced spell's level or lower.",
+  usages: 1,
+  recovery: "short rest",
+  action: ["bonus action", ""],
+  prerequisite: "Spellcasting feature from a class that prepares spells",
+  prereqeval: function (v) {
+    var isPreparedCastingClass = false;
+
+    if (v.isSpellcaster) {
+      for (var idx = 0; idx < preparedCasters.length; idx++) {
+        if (classes.known[preparedCasters[idx]]) {
+          isPreparedCastingClass = true;
+          break;
+        }
+      }
+    }
+
+    return isPreparedCastingClass;
+  },
 };
 
 FeatsList["mystic conflux"] = {
   name: "Mystic Conflux",
   source: [["TDCSR", 190]],
-  descriptionFull: "",
-  description: "",
+  descriptionFull:
+    "You possess an intuitive understanding of the way magic ebbs and flows within enchanted items. Such items attune easily to you, and you are able to sound out their secrets. You gain the following benefits:" +
+    "\n" +
+    "\u2022 You can attune to up to four magic items at once." +
+    "\n" +
+    "\u2022 You can cast the identify spell without expending a spell slot or material components. You must finish a long rest before you can do so again.",
+  description:
+    "I can attune to up to four magic items. One per short rest, I can cast Identify without material components.",
+  spellcastingBonus: {
+    name: "Once per dawn",
+    spells: ["identify"],
+    selection: ["identify"],
+    firstCol: "oncelr",
+  },
+  spellChanges: {
+    identify: {
+      components: "V,S",
+      compMaterial: "",
+      allowUpCasting: false,
+      description:
+        "1 magical item or magic-imbued crea/obj; learn properties, how to use, and spells affecting it",
+      changes:
+        "With the Mystic Conflux feat, I can cast Identify without a material component.",
+    },
+  },
 };
 
 FeatsList["remarkable recovery"] = {
   name: "Remarkable Recovery",
   source: [["TDCSR", 190]],
-  descriptionFull: "",
-  description: "",
+  descriptionFull:
+    "Your body has the ability to recover quickly from terrible injuries, and is unusually receptive to healing magic. You gain the following benefits:" +
+    "\n" +
+    "\u2022 Increase your Constitution score by 1, to a maximum of 20." +
+    "\n" +
+    "\u2022 When you are successfully stabilized while dying, you regain hit points equal to your Constitution modifier (minimum of 1)." +
+    "\n" +
+    "\u2022 Whenever you regain hit points as a result of a spell, potion, or class feature (but not this feat), you regain additional hit points equal to your Constitution modifier (minimum of 1).",
+  description:
+    "When I am stabilized while dying, I regain HP equal to my Constitution modifier (min 1). When I regain HP from a spell, potion, or class feature, I regain extra HP equal to my Constitution modifier (min 1). [+1 Constitution]",
+  scores: [0, 0, 1, 0, 0, 0],
 };
 
 FeatsList["spelldriver"] = {
   name: "Spelldriver",
   source: [["TDCSR", 190]],
-  descriptionFull: "",
-  description: "",
+  descriptionFull:
+    "Through intense focus, training, and dedication, you've harnessed the techniques of rapid spellcasting. When you use your bonus action to cast a spell of 1st level or higher, you can also use your action to cast another spell of 1st level or higher. However, if you cast two or more spells in a single turn, only one of them can be 3rd level or higher.",
+  description:
+    "When I use my bonus action to cast a 1st level spell or higher, I can also use my action to cast another 1st level spell or higher. If I do cast two spells during a turn, only one of them can be 3rd level or higher.",
+  prerequisite: "11th level, Spellcasting or Pact Magic feature",
+  prereqeval: function (v) {
+    return v.characterLevel >= 11 && v.isSpellcastingClass;
+  },
 };
 
 FeatsList["thrown arms master"] = {
   name: "Thrown Arms Master",
   source: [["TDCSR", 191]],
-  descriptionFull: "",
-  description: "",
+  descriptionFull:
+    "You've honed your ability to lob weaponry into the fray, including weapons not meant for ranged combat. You gain the following benefits:" +
+    "\n" +
+    "\u2022 Increase your Strength or Dexterity score by 1, to a maximum of 20." +
+    "\n" +
+    "\u2022 Simple and martial melee weapons without the thrown property have the thrown property for you. One-handed weapons have a normal range of 20 feet and a long range of 60 feet, while two-handed weapons have a normal range of 15 feet and a long range of 30 feet." +
+    "\n" +
+    "\u2022 Weapons that already have the thrown property increase their short range by 20 feet and their long range by 40 feet for you." +
+    "\n" +
+    "\u2022 When you miss with a thrown weapon attack using a light weapon, the weapon returns to your grasp like a boomerang at the end of your turn, unless something prevents it from returning. You can catch and stow as many weapons as you threw in this way.",
+  description:
+    "Simple and martial weapons without the thrown property gain it. Weapons that already have the thrown property have their range increased. When I miss with a thrown light weapon, it returns to my hand and the end of my turn. See third page.[+1 Str or Dex]",
+  scorestxt: "+1 Strength or Dexterity",
+  calcChanges: {
+    atkAdd: [
+      function (fields, v) {
+        if (
+          v.isMeleeWeapon &&
+          /simple|martial/i.test(v.theWea.type) &&
+          !v.isNaturalWeapon
+        ) {
+          if (/^(?=.*thrown).*$/i.test(v.WeaponText)) {
+            var rangeNumbers = fields.Range.match(/\d+([.,]\d+)?/g);
+            var notNumbers = fields.Range.split(RegExp(rangeNumbers.join("|")));
+            fields.Range = "";
+            rangeNumbers.forEach(function (dR, idx) {
+              fields.Range +=
+                (notNumbers[idx] ? notNumbers[idx] : "") +
+                (parseFloat(dR.toString().replace(",", ".")) +
+                  (idx == 0 ? 20 : 40));
+            });
+
+            if (notNumbers.length > rangeNumbers.length) {
+              fields.Range += notNumbers[notNumbers.length - 1];
+            }
+          } else {
+            fields.Description += (fields.Description ? "; " : "") + "thrown";
+
+            if (/((^|[^+-]\b)2|\btwo).?hand(ed)?s?\b/i.test(v.WeaponText)) {
+              fields.Range = "Melee, 15/30 ft";
+            } else {
+              fields.Range = "Melee, 20/60 ft";
+            }
+          }
+        }
+      },
+      "Simple and martial weapons without the thrown property gain it. One-handed weapons gain a normal range of 20 ft and a long range of 60 ft. Two-handed weapons gain a normal range of 15 ft and a long range of 15 ft. Weapons that alread have the thrown property increase their normal range by 20 ft and their long range by 40 ft.",
+    ],
+    atkCalc: [
+      function (fields, v, output) {
+        if (
+          v.isMeleeWeapon &&
+          /^(?=.*returning)(?=.*thrown).*$/i.test(v.WeaponText)
+        ) {
+          output.magic = v.thisWeapon[1] + 1;
+        }
+      },
+      "",
+    ],
+  },
+  toNotesPage: [
+    {
+      name: "Thrown Arms Master",
+      source: [["TDCSR", 191]],
+      popupName: "Thrown Arms Master (Feat)",
+      page3notes: true,
+      note: [
+        "I gain the following benefits:",
+        "\u2022 Increase my Strength or Dexterity score by 1, to a maximum of 20",
+        "\u2022 Simple and martial weapons without the thrown property gain it",
+        "   One handed weapons have a normal range of 20 ft and a long range of 60 ft",
+        "   Two handed weapons have a normal range of 15 ft and a long range of 30 ft",
+        "\u2022 Weapons already with the thrown property have their ranged increased",
+        "   Short range increased by 20 ft; Long range range increased by 40 ft",
+        "\u2022 When I miss with a light, thrown weapon it returns to my grasp at the end of my turn",
+        "   The weapon may not return if something blocks its path back to me",
+        "   I can catch and stow as many weapons thrown in this manner",
+      ],
+    },
+  ],
 };
 
 FeatsList["vital sacrifice"] = {
   name: "Vital Sacrifice",
   source: [["TDCSR", 191]],
-  descriptionFull: "",
-  description: "",
+  descriptionFull:
+    "You've learned secrets of hemocraft that grant you esoteric power at the price of your own life force. As a bonus action, you can choose to take 1d6 necrotic damage to gain a blood boon. Your blood boon lasts for 1 hour or until expended." +
+    "\n   " +
+    "You can expend this blood boon to gain one of the following benefits:" +
+    "\n" +
+    "\u2022 When you make an attack roll, you roll 1d6 and add it to the total." +
+    "\n" +
+    "\u2022 When you hit with an attack or spell, you deal an additional 2d6 necrotic damage." +
+    "\n" +
+    "\u2022 When you cause a creature to make a Strength, Dexterity, or Constitution saving throw, roll a d4 and reduce their save by the amount rolled." +
+    "\n   " +
+    "The damage you take to gain a blood boon can't be reduced in any way.",
+  description:
+    "As a bonus action, I can take 1d6 necrotic damage, which cannot be reduced, to gain a blood boon. This boon lasts for 1 hour or until it is expended. I can expend this blood boon to gain benefits. See third page.",
+  action: ["bonus action", " (1d6 necrotic damage)"],
+  toNotesPage: [
+    {
+      name: "Vital Sacrifice",
+      source: [["TDCSR", 191]],
+      popupName: "Vital Sacrifice (Feat)",
+      page3notes: true,
+      note: [
+        "As a bonus action, I can take 1d6 necrotic damage for a blood boon",
+        "This damage cannot be reduced in any way",
+        "This boon lasts for 1 hour, or until it is expended",
+        "I can expend the blood boon to gain one of the following benefits:",
+        " \u2022 When I make an attack roll, add 1d6 to the total",
+        " \u2022 When I hit with an attack or spell, it deals an extra 2d6 necrotic damage",
+        " \u2022 When I force a creature to make a Str/Dex/Con save, reduce their save by 1d4",
+      ],
+    },
+  ],
 };
 
 /*
