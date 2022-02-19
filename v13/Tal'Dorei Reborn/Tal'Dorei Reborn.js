@@ -2063,6 +2063,178 @@ FeatsList["vital sacrifice"] = {
 };
 
 /*
+ * Magic Items
+ */
+
+MagicItemsList["boots of haste"] = {
+  name: "Boots of Haste",
+  source: [["TDCSR", 194]],
+  type: "wondrous item",
+  rarity: "very rare",
+  attunement: true,
+  description:
+    "As a bonus action while wearing these boots, I can click my heels together to cast haste on myself. I don't suffer from lethargy when the spells ends when cast in this manner. Once used, the boots can't be used again until the next dawn.",
+  descriptionFull:
+    "While you wear these boots, you can click your heels together to cast the haste spell on yourself as a bonus action. You don't suffer from lethargy when the spell ends when cast using these boots. Once this property is used, it can't be used again until next dawn.",
+  action: ["bonus action", ""],
+  usages: 1,
+  recovery: "dawn",
+  spellFirstColTitle: "Ch",
+  spellcastingBonus: [
+    {
+      name: "Boots of Haste",
+      spells: ["haste"],
+      selection: ["haste"],
+      firstCol: 1,
+    },
+  ],
+  spellChanges: {
+    haste: {
+      changes:
+        "I don't suffer from lethargy when the spell ends when casting haste using these boots.",
+    },
+  },
+};
+
+MagicItemsList["boots of the vigilant"] = {
+  name: "Boots of the Vigilant",
+  source: [["TDCSR", 194]],
+  type: "wondrous item",
+  rarity: "uncommon",
+  description:
+    "While I wear these boots, I can sense impending danger. After I roll initiative, I can choose to roll a d8 and add it to my initiative roll. Once this property is used, it can't be used again until the next dawn.",
+  descriptionFull:
+    "While you wear these boots, you can sense impending danger. After you roll initiative, you can choose to roll a d8 and add it to your initiative roll. Once this property is used, it can't be used again until the next dawn.",
+  usages: 1,
+  recovery: "dawn",
+};
+
+var cataclysmBoltsTable = [
+  "1-2\tThe bolt explodes in a blast of fire, dealing 3d8 fire damage to the target and each creature within 5 feet of it.",
+  "3-4\tThe bolt freezes the air around the target into jagged ice. The target and each creature within 5 feet of it must succeed on a DC 17 Dexterity saving throw or take 1d10 cold damage and be restrained until the end of your next turn.",
+  "5\tThe bolt releases a pulse of necrotic energy. The target takes 2d6 necrotic damage and must succeed on a DC 16 Strength saving throw or be stunned until the end of your next turn.",
+  "6\tThe bolt shatters to unleash a burst of shrapnel. Make six additional ranged attacks against the target, each of which has a +7 attack bonus and deals 1d6 piercing damage on a hit.",
+];
+
+MagicItemsList["cataclysm bolts"] = {
+  name: "Cataclysm Bolts",
+  source: [["TDCSR", 194]],
+  type: "weapon (bolts)",
+  rarity: "very rare",
+  description:
+    "When I hit with an attack using a cataclysm bolt, the attack deals normal damage. Then roll a d6 on the Cataclym Bolt Effects table to determine its additional effect. See Notes page.",
+  descriptionFull:
+    "These steel crossbow bolts were first created by the Jaggenstrike Clan during the Scattered War, and the secret to crafting them remains well guarded by the Houses of Kraghammer. Cataclysm bolts are usually kept in sets of ten, though anyone who holds even one can feel it thrumming with magical power. When you hit with an attack using a cataclysm bolt, the attack deals normal damage. Then roll a d6 on the following table to determine its additional effect." +
+    "\n" +
+    toUni("Cataclysm Bolt Effects") +
+    desc([toUni("d6\tEffect")].concat(cataclysmBoltsTable)),
+  allowDuplicates: true,
+  toNotesPage: [
+    {
+      name: "Cataclysm Bolts",
+      note: ["d6\tEffect"].concat(cataclysmBoltsTable),
+    },
+  ],
+};
+
+MagicItemsList["coat of the crest"] = {
+  name: "Coat of the Crest",
+  source: [["TDCSR", 194]],
+  type: "wondrous item",
+  rarity: "rare",
+  attunement: true,
+  description:
+    "While wearing this coat, I gain a +1 bonus to AC, which can be worn over light armor. It has 3 charges, regaining 1d3 at dawn. As a reaction when hit by attack, I can expend a charge to gain resistance to a type of damage dealt by the attack. This affects the triggering attack and lasts until the start of my next turn.",
+  descriptionFull:
+    "This exquisite brocade coat is cut in a long, highcollared style popular among nobles of the Clovis Concord—a nation on the west coast of Wildemount whose stylish fashion is often mimicked in Tal'Dorei. Its shimmering lining hints at its magical properties. You gain a +1 bonus to AC while wearing this coat, which can be worn over light armor." +
+    "\n   " +
+    "Additionally, the coat has 3 charges and regains 1d3 expended charges daily at dawn. When you are the target of an attack while wearing this coat, you can spend 1 charge as a reaction to gain resistance to one type of damage from the triggering attack. This resistance is effective against the triggering attack and lasts until the start of your next turn.",
+  usages: 3,
+  recovery: "dawn",
+  additional: "regains 1d3",
+  action: ["reaction", " (when hit by an attack)"],
+  extraAC: [
+    {
+      mod: 1,
+      name: "Coat of the Crest",
+      magic: true,
+      text: "While wearing the coat, I gain a +1 bonus to AC.",
+    },
+  ],
+};
+
+MagicItemsList["corecut dagger"] = {
+  name: "Corecut Dagger",
+  source: [["TDCSR", 195]],
+  type: "weapon (dagger)",
+  rarity: "very rare",
+  attunement: true,
+  description:
+    "This dagger adds +1 to hit and damage. When I hit with it, I can spend 1 HD to deal an extra 3d6 necrotic damage. It is cursed and once attuned to it, I cannot regain HP via magic unless I spend 1 HD. If I spell all my HD, I die.",
+  descriptionFull:
+    "This dark metal blade bends in a wicked, hooked curve. You gain a +1 bonus to attack and damage rolls made with this magic weapon. When you hit with an attack using this weapon, you can spend 1 Hit Die to deal an extra 3d6 necrotic damage." +
+    "\n   " +
+    toUni("Curse.") +
+    "This weapon is cursed, a fact that is revealed only when an identify spell is cast on the weapon or you attune to it. Attuning to the dagger curses you until you are targeted by the remove curse spell or similar magic; disposing of the dagger fails to end the curse. While cursed, whenever you receive magical healing, you must spend 1 Hit Die to regain any hit points. If you spend all your Hit Dice at any point, you die.",
+  allowDuplicates: true,
+  weaponsAdd: ["Corecut Dagger"],
+  weaponOptions: {
+    baseWeapon: "dagger",
+    regExpSearch: /corecut dagger/i,
+    name: "Corecut Dagger",
+    source: [["TDCSR", 195]],
+    modifiers: [1, 1],
+  },
+};
+
+MagicItemsList["dagger of denial"] = {
+  name: "Dagger of Denial",
+  source: [["TDCSR", 195]],
+  type: "weapon (dagger)",
+  rarity: "rare",
+  attunement: true,
+  description:
+    "This dagger adds +2 to hit and damage. As an action, I can insert it into a keyhole to seal it shut or unseal it. A keyhole sealed in this manner cannot be unlocked unless it's been unsealed. Sealing a keyhole unseals any previously sealed keyholes.",
+  descriptionFull:
+    "This silver stiletto blade bears intricate grooves that spiral from its tip to its ivory hilt and handle. You gain a +2 bonus to attack and damage rolls made with this magic weapon." +
+    "\n   " +
+    "As an action, you can place the point of the blade into any keyhole and seal it shut. A keyhole sealed in this way can’t be unlocked until this dagger is placed into that keyhole once more (though a sealed door or container can still be broken, bypassing the lock). Sealing a keyhole unseals any keyholes previously sealed with this weapon.",
+  allowDuplicates: true,
+  weaponsAdd: ["Dagger of Denial"],
+  weaponOptions: {
+    baseWeapon: "dagger",
+    regExpSearch: /dagger of denial/i,
+    name: "Dagger of Denial",
+    source: [["TDCSR", 195]],
+    modifiers: [2, 2],
+  },
+  action: ["action", " (seal/unseal keyhole)"],
+};
+
+MagicItemsList["doublet of dramatic demise"] = {
+  name: "Doublet of Dramatic Demise",
+  source: [["TDCSR", 195]],
+  type: "wondrous item",
+  rarity: "common",
+  description:
+    "While wearing this jacket, I do not fall unconscious when I drop to 0 HP. Instead, I'm incapacitated and my speed becomes 0, but I can speak and communicate. I make death saving throws as normal, but if I roll a 1 on the d20, I swoon with a loud gasp and die instantly.",
+  descriptionFull:
+    "This striking satin jacket allows you to make the most of your dying moments. When you drop to 0 hit points while wearing this doublet, you do not fall unconscious. Instead, you are incapacitated and your speed becomes 0, but you can speak and communicate. You make death saving throws as normal, but if you roll a 1 on the d20, you swoon with a loud gasp and die instantly.",
+};
+
+MagicItemsList["echo stone"] = {
+  name: "Echo Stone",
+  source: [["TDCSR", 195]],
+  type: "wondrous item",
+  rarity: "uncommon",
+  description:
+    "As an action, I can squeeze this stone causing it to glow for 1 min. For this duration, it records all sound within 15 ft, after which it starts playing what was recorded. As an action, I can squeeze it silence it. As an action, I can squeeze it to play the recorded sounds.",
+  descriptionFull:
+    "This dull-blue river stone is soft to the touch, and makes remarkably little sound if dropped. When an echo stone is squeezed as an action, it glows faintly for 1 minute. The stone records all sound made within 15 feet of it while glowing, then repeats that recorded sound at an equal volume once every 5 minutes. This cycle of repetition continues until the stone is squeezed again as an action, which silences it. Squeezing the stone twice in quick succession as an action causes it to play the sounds it has most recently recorded, rather than recording new sounds.",
+  action: [["action", " (start/stop/play)"]],
+};
+
+/*
  * Spells
  */
 
