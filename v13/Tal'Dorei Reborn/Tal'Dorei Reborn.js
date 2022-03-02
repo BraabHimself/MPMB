@@ -1049,15 +1049,14 @@ AddSubClass("paladin", "oath of the open seas", {
   },
 });
 
-var runchildGlyphOfAegisPreLvl6 = [
+var runechildGlyphOfAegisPreLvl6 = [
   "As a reaction when damaged, I can expend charged runes to reduce the damage I take",
   "I roll dice equal to the number of expended runes and reduce the damage by the total",
 ];
-var runchildGlyphOfAegisPostLvl6 = [
+var runechildGlyphOfAegisPostLvl6 = [
   "As an action, I can touch a creature and expend up to 3 charged runes to protect it for 1 hr",
   "The next time it's damaged, it rolls dice equal to the number of runes expended",
-  "The damage it takes is reduced by total rolled",
-  "A creature can have only one instance of the effect at a time",
+  "The damage it takes is reduced by total rolled; only one instance per creature",
 ];
 
 AddSubClass("sorcerer", "runechild", {
@@ -1161,9 +1160,15 @@ AddSubClass("sorcerer", "runechild", {
       name: "Glyph of Aegis",
       source: [["TDCSR", 177]],
       minlevel: 1,
-      description: desc(runchildGlyphOfAegisPreLvl6),
+      description: levels.map(function (n) {
+        return desc(
+          n < 6
+            ? runechildGlyphOfAegisPreLvl6
+            : runechildGlyphOfAegisPreLvl6.concat(runechildGlyphOfAegisPostLvl6)
+        );
+      }),
       additional: levels.map(function (n) {
-        return (n < 14 ? "d6" : "d8") + (n < 6 ? "" : "; See 3rd page");
+        return n < 14 ? "d6" : "d8";
       }),
     },
     subclassfeature6: {
@@ -1181,15 +1186,6 @@ AddSubClass("sorcerer", "runechild", {
       usages: 1,
       recovery: "long rest",
       additional: "Advantage on save",
-      toNotesPage: [
-        {
-          name: "Glyph of Aegis",
-          source: [["TDCSR", 177]],
-          popupName: "Glyph of Aegis",
-          page3notes: true,
-          note: runchildGlyphOfAegisPostLvl6,
-        },
-      ],
     },
     "subclassfeature6.1": {
       name: "Manifest Inscriptions",
@@ -1198,7 +1194,7 @@ AddSubClass("sorcerer", "runechild", {
       description: desc([
         "As an action, I can expend one charged rune to reveal hidden/invisible arcane things",
         "Arcane traps/marks/runes/wards/sensors/glyphs within 60 ft are revealed for 1 min",
-        "I have advantage on Arcana checks to discern their nature",
+        "I have adv. on Arcana checks to discern their nature",
         "They glow dim light in 5 ft and I can read any revealed writing",
       ]),
       action: [["action", ""]],
@@ -1221,7 +1217,7 @@ AddSubClass("sorcerer", "runechild", {
       description: desc([
         "As a bonus action, I can expend a charged rune to assume my exemplar form:",
         " \u2022 I gain resistance to damage dealt by spells and a flying speed of 60 ft",
-        " \u2022 Creatures have disadvantage against my sorcerer spells",
+        " \u2022 Creatures have disadv. vs. my sorcerer spells",
         " \u2022 Whenever I cast a spell of 1st level or higher, I regain HP equal to its level",
         (typePF ? "This form" : "It") +
           " lasts until the end of my turn; I can expend another rune to extend its duration",
@@ -2110,6 +2106,7 @@ MagicItemsList["boots of the vigilant"] = {
 };
 
 var cataclysmBoltsTable = [
+  ">>d6\tEffect<<",
   "1-2\tThe bolt explodes in a blast of fire, dealing 3d8 fire damage to the target and each creature within 5 feet of it.",
   "3-4\tThe bolt freezes the air around the target into jagged ice. The target and each creature within 5 feet of it must succeed on a DC 17 Dexterity saving throw or take 1d10 cold damage and be restrained until the end of your next turn.",
   "5\tThe bolt releases a pulse of necrotic energy. The target takes 2d6 necrotic damage and must succeed on a DC 16 Strength saving throw or be stunned until the end of your next turn.",
@@ -2127,12 +2124,19 @@ MagicItemsList["cataclysm bolts"] = {
     "These steel crossbow bolts were first created by the Jaggenstrike Clan during the Scattered War, and the secret to crafting them remains well guarded by the Houses of Kraghammer. Cataclysm bolts are usually kept in sets of ten, though anyone who holds even one can feel it thrumming with magical power. When you hit with an attack using a cataclysm bolt, the attack deals normal damage. Then roll a d6 on the following table to determine its additional effect." +
     "\n" +
     toUni("Cataclysm Bolt Effects") +
-    desc([toUni("d6\tEffect")].concat(cataclysmBoltsTable)),
+    desc(cataclysmBoltsTable).replace(/>>(.*?)<</g, function (a, match) {
+      return toUni(match);
+    }),
   allowDuplicates: true,
   toNotesPage: [
     {
       name: "Cataclysm Bolts",
-      note: ["d6\tEffect"].concat(cataclysmBoltsTable),
+      note: desc(cataclysmBoltsTable).replace(
+        />>(.*?)<</g,
+        function (a, match) {
+          return match.toUpperCase();
+        }
+      ),
     },
   ],
 };
@@ -2198,7 +2202,7 @@ MagicItemsList["dagger of denial"] = {
   descriptionFull:
     "This silver stiletto blade bears intricate grooves that spiral from its tip to its ivory hilt and handle. You gain a +2 bonus to attack and damage rolls made with this magic weapon." +
     "\n   " +
-    "As an action, you can place the point of the blade into any keyhole and seal it shut. A keyhole sealed in this way can’t be unlocked until this dagger is placed into that keyhole once more (though a sealed door or container can still be broken, bypassing the lock). Sealing a keyhole unseals any keyholes previously sealed with this weapon.",
+    "As an action, you can place the point of the blade into any keyhole and seal it shut. A keyhole sealed in this way can't be unlocked until this dagger is placed into that keyhole once more (though a sealed door or container can still be broken, bypassing the lock). Sealing a keyhole unseals any keyholes previously sealed with this weapon.",
   allowDuplicates: true,
   weaponsAdd: ["Dagger of Denial"],
   weaponOptions: {
@@ -2232,6 +2236,228 @@ MagicItemsList["echo stone"] = {
   descriptionFull:
     "This dull-blue river stone is soft to the touch, and makes remarkably little sound if dropped. When an echo stone is squeezed as an action, it glows faintly for 1 minute. The stone records all sound made within 15 feet of it while glowing, then repeats that recorded sound at an equal volume once every 5 minutes. This cycle of repetition continues until the stone is squeezed again as an action, which silences it. Squeezing the stone twice in quick succession as an action causes it to play the sounds it has most recently recorded, rather than recording new sounds.",
   action: [["action", " (start/stop/play)"]],
+};
+
+var grazTcharFullDesc = [
+  "This blade appears to be a beautiful cruciform sword of shining silver, inlaid with sparkling rubies. You gain a +3 bonus to attack and damage rolls made with this magic weapon, which has the following properties.",
+  ">>Corrosive Submission.<< When you hit a creature that has an Intelligence score of 4 or higher with an attack using this sword, the target takes an extra 3d6 acid damage and must succeed on a DC 17 Charisma saving throw or be charmed by you for 1 hour. If you attack the creature again while it is charmed in this way, the extra acid damage increases to 10d6 and the charmed condition ends. If the target succeeds on its saving throw or the charm ends for it, it can't be charmed again in this way for 24 hours.",
+  ">>Hidden Nature.<< The acid damage dealt by this greatsword appears to be radiant damage to all who perceive it. A true seeing spell or similar magic reveals that the sword is actually a rusted, pitted blade dripping with acid.",
+  ">>Sentience.<< Graz'tchar is a sentient neutral evil weapon with an Intelligence of 14, a Wisdom of 12, and a Charisma of 18. It has hearing and darkvision out to a range of 120 feet.",
+  "The sword can speak, read, and understand Common, and can communicate with its wielder telepathically. Anyone who holds it hears the wise voice of a sorrowful king, beckoning the user to seize their destiny. A creature that succeeds on a DC 26 Wisdom (Insight) check while listening to the blade's voice hears a sliver of malice that suggests the truth: the voice is a corrupting trick of the Demon Prince of Indulgence.",
+  ">>Personality.<< Graz'tchar slowly attempts to sway its wielder to sow chaos in Exandria, telling lies and spreading malign truths about great leaders, and claiming that the members of the Ta'Dorei Council are corrupt and must be overthrown. The voice of this blade is actually the Demon Prince of Indulgence, speaking from his Abyssal prison.",
+  "If the sword's attuned wielder disobeys the urges of the weapon for an extended period of time, Graz'tchar can attempt to control the wielder, who must succeed on a DC 17 Charisma saving throw or become charmed by the sword for 24 hours. While the wielder is charmed in this way, the sword can compel them to take an action of the sword's choice once per hour, though the wielder believes this action is taken of their own free will. If the chosen action leads to the harm of someone the wielder considers a trusted friend or ally, the charmed condition immediately ends. On a successful saving throw or if the charmed condition ends for the wielder, they are immune to this property of the sword for 24 hours.",
+];
+
+MagicItemsList["graz'tchar, the decadent end"] = {
+  name: "Graz'tchar, the Decadent End",
+  source: [["TDCSR", 195]],
+  type: "weapon (greatsword)",
+  rarity: "legendary",
+  attunement: true,
+  description:
+    "This sentient greatsword adds +3 to hit and damage. On a hit, it deals an extra 3d6 acid damage, which appears as radiant damage, and I can force a creature with an Int score of 4 or higher to make a DC 17 Cha save or become charmed by me for 1 hour. See Notes page.",
+  descriptionFull: grazTcharFullDesc
+    .join("\n   ")
+    .replace(/>>(.*?)<</g, function (a, match) {
+      return toUni(match);
+    }),
+  allowDuplicates: true,
+  weaponsAdd: ["Graz'tchar, the Decadent End"],
+  weaponOptions: {
+    baseWeapon: "greatsword",
+    regExpSearch: /graz'tchar, the decadent end/i,
+    name: "Graz'tchar, the Decadent End",
+    source: [["TDCSR", 195]],
+    modifiers: [3, 3],
+    description:
+      "Heavy, two-handed; +1d6 acid damage; DC 17 Cha save or charmed",
+  },
+  toNotesPage: [
+    {
+      name: "Features",
+      note: desc(grazTcharFullDesc)
+        .replace(/>>(.*?)<</g, function (a, match) {
+          return match.toUpperCase();
+        })
+        .replace(/your/g, "my")
+        .replace(/you are /gi, "I am ")
+        .replace(/(of|on|reduces|grants) you/gi, "$1 me")
+        .replace(/you /gi, "I "),
+    },
+  ],
+};
+
+MagicItemsList["inescapable lash"] = {
+  name: "Inescapable Lash",
+  source: [["TDCSR", 196]],
+  type: "weapon (whip)",
+  rarity: "rare",
+  attunement: true,
+  description:
+    "This whip adds +1 to hit and damage. As a bonus action after a hit, I can attempt to grapple the target. As an action, I can pull a grappled creature 20 ft towards me or restrain it until I let go of the whip. A restrained creature can make an Athletics or Acrobatics check to escape; DC 8 + prof bonus + Str mod",
+  descriptionFull:
+    "This braided cord is dull bronze in color, ends in a splayed set of three barbs, and gleams like metal under any light. You gain a +1 bonus to attack and damage rolls made with this magic weapon, which has a reach of 20 feet. When you hit a creature or object using this whip, you can attempt to grapple the target as a bonus action." +
+    "\n   " +
+    "While you have a creature grappled using this whip, you can use your action to either pull the creature up to 20 feet toward you, or cause the creature to be restrained until you let go of the whip. A creature restrained in this way can escape by making a successful Strength (Athletics) or Dexterity (Acrobatics) check as an action. The DC of this check equals 8 + your proficiency bonus + your Strength modifier.",
+  allowDuplicates: true,
+  weaponsAdd: ["Inescapable Lash"],
+  weaponOptions: {
+    baseWeapon: "whip",
+    regExpSearch: /inescapable lash/i,
+    name: "Inescapable Lash",
+    source: [["TDCSR", 196]],
+    modifiers: [1, 1],
+    description: "Finesse, reach (20 ft)",
+  },
+  action: [
+    ["bonus action", " (grapple on hit)"],
+    ["action", " (pull/restrain)"],
+  ],
+};
+
+MagicItemsList["magician's judge"] = {
+  name: "Magician's Judge",
+  source: [["TDCSR", 196]],
+  type: "weapon (greatsword)",
+  rarity: "rare",
+  attunement: true,
+  description:
+    "When I hit a creature, I can cast dispel magic targetting it. Alternatively, I can use an action to cast dispel magic. If I need to make a check with my spellcasting ability, I gain a +3 bonus to the check. Once I cast dispel magic, I can't do so until the next dawn.",
+  descriptionFull:
+    "An executioner's blade from the Age of Arcanum, this magic greatsword is one of many similar weapons once used to execute magic-wielding criminals. Though most commonly found in the lands now known as Wildemount and Issylra, a few such blades have found their way to Tal'Dorei." +
+    "\n   " +
+    "If you hit a creature with an attack using this weapon, you can cast the dispel magic spell from the sword against the target as part of the attack. Alternatively, you can use an action to cast dispel magic from the sword against a target of your choice. If you need to make a check with your spellcasting ability modifier as part of casting the spell, you make this check with a +3 modifier or your own spellcasting ability modifier, whichever is higher." +
+    "\n   " +
+    "Once you cast dispel magic using this weapon, you can't do so again until the next dawn.",
+  usages: 1,
+  recovery: "dawn",
+  limfeaname: "Magician's Judge (dispel magic)",
+  allowDuplicates: true,
+  weaponsAdd: ["Magician's Judge"],
+  weaponOptions: {
+    baseWeapon: "greatsword",
+    regExpSearch: /magician's judge/i,
+    name: "Magician's Judge",
+    source: [["TDCSR", 196]],
+  },
+  action: [["action", " (dispel magic)"]],
+  spellcastingBonus: {
+    name: "Magician's Judge",
+    spells: ["dispel magic"],
+    selection: ["dispel magic"],
+    firstCol: "oncelr",
+  },
+};
+
+var mirrorOfInfTranspTable = [
+  ">>Mirror Locations<<",
+  ">>d8\tLocation\t\t\tPosessor<<",
+  "1\tEmon\t\t\tSeeker Odessa Tal'Dorei",
+  "2\tWhitestone\t\t--None; the mirror is in an empty dungeon",
+  '3\tKymal\t\t\tSylker "The Millionaire" Uttolot',
+  "4\tWestruun\t\t\tRealmseer Eskil Ryndarien",
+  "5\tSyngorn\t\t\tOuestra, the Voice of Memory",
+  "6\tThe Elemental Plane of Water\tKhedive Xundi, Lord of Silver Silt",
+  "7\tThe Plane of Shadow\t\tA <<Remnant chosen>> (see page 251)",
+  "8\tAn untraceable location\tThe Wonderworker",
+];
+
+MagicItemsList["mirror of infinite transpondence"] = {
+  name: "Mirror of Infinite Transpondence",
+  source: [["TDCSR", 196]],
+  type: "wondrous item",
+  rarity: "very rare",
+  description:
+    "As an action, I can activate the mirror to establish a visual link with its paired mirror for 10 min. The DM determines where the paired mirror is and who possesses it. Once the mirror has been activated three times from either end, it can't be activated again until the next dawn.",
+  descriptionFull:
+    "These silver hand mirrors always come in pairs. When activated as an action, a mirror establishes a visual link with its paired mirror for 10 minutes, with the two mirrors acting as opposite sides of the same open window. The mirrors create this connection even if both are on different planes." +
+    "\n   " +
+    "When a single mirror of infinite transpondence is found, the GM decides where its paired mirror is and who possesses it. A random possessor and location can be determined by rolling on the table below. Named bearers are described in chapter 2." +
+    "\n   " +
+    mirrorOfInfTranspTable
+      .join("\n   ")
+      .replace(/>>(.*?)<</g, function (a, match) {
+        return toUni(match);
+      })
+      .replace(/<<(.*?)>>/g, function (a, match) {
+        return toUni(match);
+      })
+      .replace(/--/g, function (a, match) {
+        return "";
+      }),
+  action: [["action", " (activate)"]],
+  usages: 3,
+  recovery: "dawn",
+  toNotesPage: [
+    {
+      name: "Mirror Locations",
+      note: desc(mirrorOfInfTranspTable)
+        .replace(/>>(.*?)<</g, function (a, match) {
+          return match.toUpperCase();
+        })
+        .replace(/<<(.*?)>>/g, function (a, match) {
+          return match;
+        })
+        .replace(/--/g, function (a, match) {
+          return "\t";
+        }),
+    },
+  ],
+};
+
+MagicItemsList["raven's slumber"] = {
+  name: "Raven's Slumber",
+  source: [["TDCSR", 197]],
+  type: "wondrous item",
+  rarity: "very rare",
+  description:
+    "I can use this pendant as an improvised melee or ranged weapon. On a hit, a large or smaller creature succeeds on a DC 10 Wis save or is trapped inside. A creature can willingly fail, if it so chooses. As a bonus action, I can release a held creature. Only one creature can be held at a time. See Notes.",
+  descriptionFull:
+    "This black crystal pendant is a magical gateway to a small pocket dimension. You can use the pendant as an improvised weapon to make a melee or ranged weapon attack against a Large or smaller creature. On a hit, the target must succeed on a DC 10 Wisdom saving throw or be trapped within the crystal. A creature that wants to be trapped can intentionally fail this saving throw." +
+    "\n   " +
+    "Only one creature at a time can be held in a raven's slumber. That creature is aware of the passage of time and can see the world outside of this talisman as if through a window. You can release a held creature to an unoccupied space within 5 feet of you as a bonus action." +
+    "\n   " +
+    "If a companion creature granted to you by a class feature, or a beast that you've tamed as a companion, is reduced to 0 hit points while within 100 feet of you, it is immediately drawn into the pendant and stabilized. If the pendant already holds a creature, this effect fails.",
+  weaponsAdd: ["Raven's Slumber"],
+  weaponOptions: {
+    baseWeapon: "improvised weapon",
+    regExpSearch: /raven's slumber/i,
+    name: "Raven's Slumber",
+    source: [["TDCSR", 197]],
+    description:
+      "Large or smaller target succeeds on a DC 10 Wis save or is trapped in the crystal",
+  },
+  action: ["bonus action", " (release)"],
+  toNotesPage: [
+    {
+      name: "Features",
+      note: desc([
+        "I can use this pendant as a melee/ranged improvised weapon",
+        "On a hit, a large or smaller create makes a DC 10 Wisdom save",
+        "On a failure, it becomes trapped inside the pendant",
+        "A creature can willingly choose to enter the pendant",
+        "Only one creature can be held inside at a time",
+        "While held, a creature is aware of the passage of time and can see outside",
+        "As a bonus action, I can empty it into unoccupied space within 5 ft",
+        "If a creature I've tamed is reduced to 0 HP within 100 ft, it is:",
+        " \u2022 Immediately drawn into the pendant and stabilized",
+        "If the pendant already holds a creature, this effect fails",
+      ]),
+    },
+  ],
+};
+
+MagicItemsList["rod of mercurial form"] = {
+  name: "Rod of Mercurial Form",
+  source: [["TDCSR", 197]],
+  type: "wondrous item",
+  rarity: "uncommon",
+  description:
+    "As a bonus action, I can speak the name of any simple or martial weapon to transform it into an ordinary weapon of that type. If a ranged weapon is chosen, it creates its own ammunition, which disappears on a hit or miss.",
+  descriptionFull:
+    'This humble steel rod is engraved with tiny symbols representing different weapons, as well as the monogram "T.D." A creature holding this rod can speak the name of any simple or martial weapon aloud as a bonus action, causing the rod to transform into an ordinary weapon of that type. When in the form of a ranged weapon, this rod magically creates its own ammunition, which disappears after a ranged attack hits or misses.',
+  weaponsAdd: ["Raven's Slumber"],
+  action: ["bonus action", " (transform into weapon)"],
 };
 
 /*
