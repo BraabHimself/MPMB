@@ -2456,8 +2456,104 @@ MagicItemsList["rod of mercurial form"] = {
     "As a bonus action, I can speak the name of any simple or martial weapon to transform it into an ordinary weapon of that type. If a ranged weapon is chosen, it creates its own ammunition, which disappears on a hit or miss.",
   descriptionFull:
     'This humble steel rod is engraved with tiny symbols representing different weapons, as well as the monogram "T.D." A creature holding this rod can speak the name of any simple or martial weapon aloud as a bonus action, causing the rod to transform into an ordinary weapon of that type. When in the form of a ranged weapon, this rod magically creates its own ammunition, which disappears after a ranged attack hits or misses.',
-  weaponsAdd: ["Raven's Slumber"],
   action: ["bonus action", " (transform into weapon)"],
+};
+
+MagicItemsList["stormrider boots"] = {
+  name: "Stormrider Boots",
+  source: [["TDCSR", 197]],
+  type: "wondrous item",
+  rarity: "rare",
+  description:
+    "Once per dawn, as a part of moving, I can activate these boots to gain benefits: I gain a flying speed of 90 ft. Opportunity attacks vs. me are made with disadv. Once per turn per enemy, whenever I move within 5 ft of an enemy, it succeeds on a DC 15 Dex save or it takes 3d8 lightning damage.",
+  descriptionFull:
+    "These dark leather boots look to be of common make, but a subtle pattern of swirling storm clouds upon their soles suggests the potency of their enchantment. You can activate these boots as part of your movement, gaining the following benefits until the end of your turn:" +
+    "\n" +
+    "\u2022 You have a flying speed of 90 feet." +
+    "\n" +
+    "\u2022 Opportunity attacks against you are made with disadvantage." +
+    "\n" +
+    "\u2022 Whenever you move within 5 feet of a hostile creature, it must succeed on a DC 15 Dexterity saving throw or take 3d8 lightning damage. A creature can't be damaged in this way more than once per turn." +
+    "\n   " +
+    "Once this property is used, it can't be used again until the next dawn.",
+  usages: 1,
+  recovery: "dawn",
+};
+
+MagicItemsList["summer's dance"] = {
+  name: "Summer's Dance",
+  source: [["TDCSR", 197]],
+  type: "weapon (scimitar)",
+  rarity: "rare",
+  attunement: true,
+  allowDuplicates: true,
+  description:
+    "This scimitar adds +1 to hit and damage. Summer's Dance has 3 charges. I can expend 1 charge as a bonus action to cast misty step. Summer's Dance regains 1 charge at dawn. Summer's Dance regains 1 expended charge daily at dawn.",
+  descriptionFull:
+    "This beautiful golden blade appears to bend and flex like a reed with your movements. You gain a +1 bonus to attack and damage rolls made with this magic weapon." +
+    "\n   " +
+    "Additionally, the scimitar has 3 charges and regains 1 expended charge daily at dawn. While wielding this scimitar, you can expend 1 charge as a bonus action to cast the misty step spell.",
+  weaponsAdd: ["Summer's Dance"],
+  weaponOptions: {
+    baseWeapon: "scimitar",
+    regExpSearch: /summer's dance/i,
+    name: "Summer's Dance",
+    source: [["TDCSR", 197]],
+    modifiers: [1, 1],
+  },
+  action: [["bouns action", " (misty step)"]],
+  usages: 3,
+  limfeaname: "Summer's Dance (misty step)",
+  spellFirstColTitle: "Ch",
+  spellcastingBonus: [
+    {
+      name: "3 charges",
+      spells: ["misty step"],
+      selection: ["misty step"],
+      firstCol: 3,
+    },
+  ],
+};
+
+MagicItemsList["tinkertop boltblaster 1000"] = {
+  name: "Tinkertop Boltblaster 1000",
+  source: [["TDCSR", 197]],
+  type: "weapon (hand crossbow)",
+  rarity: "very rare",
+  attunement: true,
+  allowDuplicates: true,
+  description:
+    "This hand crossbow adds +1 to hit and damage. When I roll a 20 on an attack with this weapon, I can make another attack with it. When I roll a 1 on an attack with this weapon, I must succeed on a DC 14 Dexterity save or take 1d6 piercing damage.",
+  descriptionFull:
+    'This strange contraption of gears, wires, and lacquered wood has a handle with a metal grip and crank. Its stock bears a flamboyant maker\'s mark that reads: "Made in Hupperdook", a city in Wildemount. You gain a +1 bonus to attack and damage rolls made with this magic weapon.' +
+    "\n   " +
+    "When you roll a 20 on an attack roll made with this weapon, you can immediately make another attack with this weapon after resolving the critical hit. When you roll a 1 on an attack roll made with this weapon, you must succeed on a DC 14 Dexterity saving throw or take 1d6 piercing damage as some of its gears and wires spring loose.",
+  weaponsAdd: ["Tinkertop Boltblaster 1000"],
+  weaponOptions: {
+    baseWeapon: "hand crossbow",
+    regExpSearch: /tinkertop boltblaster 1000/i,
+    name: "Tinkertop Boltblaster 1000",
+    source: [["TDCSR", 197]],
+    modifiers: [1, 1],
+  },
+};
+
+var earthboardFullDesc = "An earthboard is a slab of granite about three inches thick, nine feet long, and two feet wide, with smooth, tapered ends. However, its mundane appearance belies its unique elemental power, which reduces its weight to 40 pounds while a creature is attuned to it. The Earth Ashari of Terrah can often be seen with these stone boards upon their backs as they trek into the crags of the Cliffkeep Mountains." + "\n   " + "While standing on an earthboard, you gain the following benefits:" + "\n" + "\u2022 Your speed increases to 60 feet as the board skims across solid ground (but not liquid surfaces)." + "\n" + "\u2022 If you ramp off a surface of solid earth, you can long jump up to 60 feet. When you end this jump, you can choose to slam into the ground, creating a shockwave. Each creature standing on the ground within 20 feet of you must succeed on a DC 14 Strength saving throw or fall prone." + "\n" + "\u2022 You have a burrowing speed of 20 feet that allows you to tunnel through earth or solid rock, leaving a 5-foot-diameter tunnel in your wake. As an action, you can increase this burrowing speed to 60 feet until the start of your next turn." + "\n" + "\u2022 The earthboard always moves with you until you decide to dismount it (no action required)." + "\n   " + "These benefits last until you end your turn not standing on the earthboard."
+
+MagicItemsList["earthboard"] = {
+  name: "Earthboard",
+  source: [["TDCSR", 198]],
+  type: "wondrous item",
+  rarity: "rare",
+  attunement : true,
+  weight : 40,
+  description:
+    "While standing on an earthboard, I gain various movement based benefits. These benefits last until I end my turn not standing on the earthboard. See Notes.",
+  descriptionFull: earthboardFullDesc,
+	toNotesPage : [{
+		name : "Features",
+		note : "\n   " + earthboardFullDesc.replace(/>>(.*?)<</g, function(a, match) { return match.toUpperCase(); }).replace(/your/g, "my").replace(/you /ig, "I ")
+	}]
 };
 
 /*
