@@ -2538,22 +2538,216 @@ MagicItemsList["tinkertop boltblaster 1000"] = {
   },
 };
 
-var earthboardFullDesc = "An earthboard is a slab of granite about three inches thick, nine feet long, and two feet wide, with smooth, tapered ends. However, its mundane appearance belies its unique elemental power, which reduces its weight to 40 pounds while a creature is attuned to it. The Earth Ashari of Terrah can often be seen with these stone boards upon their backs as they trek into the crags of the Cliffkeep Mountains." + "\n   " + "While standing on an earthboard, you gain the following benefits:" + "\n" + "\u2022 Your speed increases to 60 feet as the board skims across solid ground (but not liquid surfaces)." + "\n" + "\u2022 If you ramp off a surface of solid earth, you can long jump up to 60 feet. When you end this jump, you can choose to slam into the ground, creating a shockwave. Each creature standing on the ground within 20 feet of you must succeed on a DC 14 Strength saving throw or fall prone." + "\n" + "\u2022 You have a burrowing speed of 20 feet that allows you to tunnel through earth or solid rock, leaving a 5-foot-diameter tunnel in your wake. As an action, you can increase this burrowing speed to 60 feet until the start of your next turn." + "\n" + "\u2022 The earthboard always moves with you until you decide to dismount it (no action required)." + "\n   " + "These benefits last until you end your turn not standing on the earthboard."
+var earthboardFullDesc =
+  "An earthboard is a slab of granite about three inches thick, nine feet long, and two feet wide, with smooth, tapered ends. However, its mundane appearance belies its unique elemental power, which reduces its weight to 40 pounds while a creature is attuned to it. The Earth Ashari of Terrah can often be seen with these stone boards upon their backs as they trek into the crags of the Cliffkeep Mountains." +
+  "\n   " +
+  "While standing on an earthboard, you gain the following benefits:" +
+  "\n" +
+  "\u2022 Your speed increases to 60 feet as the board skims across solid ground (but not liquid surfaces)." +
+  "\n" +
+  "\u2022 If you ramp off a surface of solid earth, you can long jump up to 60 feet. When you end this jump, you can choose to slam into the ground, creating a shockwave. Each creature standing on the ground within 20 feet of you must succeed on a DC 14 Strength saving throw or fall prone." +
+  "\n" +
+  "\u2022 You have a burrowing speed of 20 feet that allows you to tunnel through earth or solid rock, leaving a 5-foot-diameter tunnel in your wake. As an action, you can increase this burrowing speed to 60 feet until the start of your next turn." +
+  "\n" +
+  "\u2022 The earthboard always moves with you until you decide to dismount it (no action required)." +
+  "\n   " +
+  "These benefits last until you end your turn not standing on the earthboard.";
 
 MagicItemsList["earthboard"] = {
   name: "Earthboard",
   source: [["TDCSR", 198]],
   type: "wondrous item",
   rarity: "rare",
-  attunement : true,
-  weight : 40,
+  attunement: true,
+  weight: 40,
   description:
     "While standing on an earthboard, I gain various movement based benefits. These benefits last until I end my turn not standing on the earthboard. See Notes.",
   descriptionFull: earthboardFullDesc,
-	toNotesPage : [{
-		name : "Features",
-		note : "\n   " + earthboardFullDesc.replace(/>>(.*?)<</g, function(a, match) { return match.toUpperCase(); }).replace(/your/g, "my").replace(/you /ig, "I ")
-	}]
+  toNotesPage: [
+    {
+      name: "Features",
+      note:
+        "\n   " +
+        earthboardFullDesc
+          .replace(/>>(.*?)<</g, function (a, match) {
+            return match.toUpperCase();
+          })
+          .replace(/your/g, "my")
+          .replace(/you /gi, "I "),
+    },
+  ],
+};
+
+var flameFriendFullDesc =
+  "This wrought-iron lantern holds a small fire elemental spirit. To attune to this item, you must also succeed on a DC 10 Charisma check to bond with the spirit inside the lantern." +
+  "\n   " +
+  ">>Light and Flame.<< While attuned to the lantern, you can verbally ask the elemental to glow (no action required), causing the lantern to cast bright light in a radius of your choice up to 60 feet and dim light for the same distance beyond that. You can also cast the produce flame cantrip from the lantern at will. Wisdom is your spellcasting ability for this spell." +
+  "\n   " +
+  ">>Elemental Essence.<< The fire elemental spirit in the lantern can grant you a small fragment of its power. As an action, you gain one of the following benefits of your choice for 1 hour:" +
+  "\n" +
+  "\u2022 You have resistance to fire damage." +
+  "\n" +
+  "\u2022 Whenever a creature hits you with a melee attack, that creature takes fire damage equal to your proficiency bonus." +
+  "\n" +
+  "\u2022 You can cast the burning hands spell (spell save DC 15) from the lantern at 3rd level. Once you cast the spell, you can't do so again until the next time you use this property of the lantern." +
+  "\n   " +
+  "Once the elemental has shared its power with you in this way, it can't do so again until the next dawn." +
+  "\n   " +
+  ">>Willful Attunement.<< Your attunement to the lantern lasts until you choose to end it, or until you anger the elemental (by dousing the lantern in water, attacking another nonhostile elemental being, and so forth). You can attempt to attune to the lantern again and repeat the check to bond with the elemental during a short or long rest, but you make this check with disadvantage until you have made amends to the spirit, as the GM determines.";
+
+MagicItemsList["flamefriend lantern"] = {
+  name: "Flamefriend Lantern",
+  source: [["TDCSR", 198]],
+  type: "wondrous item",
+  rarity: "rare",
+  attunement: true,
+  description:
+    "In order to attune to the lantern, I must succeed on a DC 10 Cha check. I can verbally ask the lantern to cast bright light up to 60 ft in radius and an equal amount if dim light beyond that. I can cast produce flame from the lantern. As an action, I can borrow power from the lantern, gaining benefits for 1 hr. See Notes.",
+  descriptionFull: flameFriendFullDesc.replace(
+    />>(.*?)<</g,
+    function (a, match) {
+      return toUni(match);
+    }
+  ),
+  usages: 1,
+  action: ["action", " (borrow power)"],
+  recovery: "dawn",
+  toNotesPage: [
+    {
+      name: "Features",
+      note:
+        "\n   " +
+        flameFriendFullDesc
+          .replace(/>>(.*?)<</g, function (a, match) {
+            return match.toUpperCase();
+          })
+          .replace(/your/g, "my")
+          .replace(/you /gi, "I "),
+    },
+  ],
+  spellFirstColTitle: "Us",
+  spellcastingAbility: 5,
+  spellcastingBonus: [
+    {
+      name: "At will",
+      spells: ["produce flame"],
+      selection: ["produce flame"],
+      firstCol: "atwill",
+    },
+    {
+      name: "1 use",
+      spells: ["burning hands"],
+      selection: ["burning hands"],
+      firstCol: "checkbox",
+    },
+  ],
+  spellChanges: {
+    "burning hands": {
+      changes: "I cast this spell at 3rd level with a DC of 15.",
+      description:
+        "All in area 5d6 Fire dmg; save halves; unattended flammable objects ignite; DC 15",
+    },
+  },
+};
+
+MagicItemsList["oceanic weapon"] = {
+  name: "Oceanic Weapon",
+  source: [["TDCSR", 199]],
+  type: "weapon (any range or thrown)",
+  rarity: "rare",
+  attunement: true,
+  allowDuplicates: true,
+  usages: 1,
+  action: ["action", " (water breathing)"],
+  recovery: "dawn",
+  description:
+    "This weapon adds +1 to hit and damage. I ignore normal penalties on ranged weapon attacks while using it underwater. While holding it, I gain a swimming speed of 30 ft. Once per dawn, I can cast water breathing.",
+  descriptionFull:
+    "This elegant weapon is adorned with engravings depicting leaping dolphins and drifting jellyfish. You gain a +1 bonus to attack and damage rolls made with this magic weapon, and you ignore the normal penalties on ranged weapon attacks while using this weapon underwater. While holding the weapon in front of you with both hands, you have a swimming speed of 30 feet." +
+    "\n   " +
+    "Additionally, while you hold the weapon, you can use an action to cast the water breathing spell. Once this property is used, it can't be used again until the next dawn.",
+  chooseGear: {
+    type: "weapon",
+    prefixOrSuffix: "brackets",
+    itemName1stPage: ["suffix", "Oceanic"],
+    descriptionChange: ["replace", "weapon"],
+    excludeCheck: function (inObjKey, inObj) {
+      return (
+        !inObj.description || !/thrown/i.test(inObj.description) || !inObj.range
+      );
+    },
+  },
+  calcChanges: {
+    atkAdd: [
+      function (fields, v) {
+        if (
+          !v.theWea.isMagicWeapon &&
+          /oceanic/i.test(v.WeaponTextName) &&
+          (v.isRangedWeapon || /thrown/i.test(fields.Description))
+        ) {
+          v.theWea.isMagicWeapon = true;
+          fields.Description = fields.Description.replace(
+            /(, |; )?Counts as magical/i,
+            ""
+          );
+        }
+      },
+      'If I include the word "Oceanic" in the name of a ranged or thrown weapon, it will be treated as a magical Oceanic weapon. It has +1 to hit and damage.',
+    ],
+    atkCalc: [
+      function (fields, v, output) {
+        if (
+          /oceanic/i.test(v.WeaponTextName) &&
+          (v.isRangedWeapon || /thrown/i.test(fields.Description))
+        ) {
+          output.magic = v.thisWeapon[1] + 1;
+        }
+      },
+      "",
+    ],
+  },
+  spellcastingBonus: {
+    name: "Oceanic Weapon",
+    spells: ["water breathing"],
+    selection: ["water breathing"],
+    firstCol: "oncelr",
+  },
+  speed: { swim: { spd: 30, enc: 20 } },
+};
+
+MagicItemsList["skysail"] = {
+  name: "Skysail",
+  source: [["TDCSR", 199]],
+  type: "wondrous item",
+  rarity: "rare",
+  attunement: true,
+  description:
+    "While riding the skysail, I have a flying speed of 60 ft, but I must descend at least 10 ft per turn and can't gain altitude. Once per dawn, I can cast fly requiring no concentration and with a duration of 1 min. It can also be recharged with powerful elemental air magic.",
+  descriptionFull:
+    "These bat-like wings were first used by the Air Ashari to soar through the sky. They are constructed of either leather and bone, or cloth and wood, and are set onto a sturdy wooden pole that helps their user remain stable during flight." +
+    "\n   " +
+    "While these wings are open and you are riding the skysail, you can glide through the air. You have a flying speed of 60 feet, but you must descend at least 10 feet by the end of each of your turns and you can't gain altitude." +
+    "\n   " +
+    "Additionally, while in contact with the skysail, you can use an action to cast the fly spell on yourself, with a duration of 1 minute and requiring no concentration. The spell ends if you lose physical contact with the skysail. Once this property is used, it can't be used again until the next dawn, or unless the skysail is immersed in powerful magic of elemental air. (This includes magic such as that found at the top of the Summit Peaks near the rift of air in Zephrah, or on the Elemental Plane of Air)." +
+    "\n   " +
+    "When the skysail is not in use, its wings can be retracted, and its pole can be used as a quarterstaff.",
+  usages: 1,
+  recovery: "dawn",
+  spellcastingBonus: {
+    name: "1 charge",
+    spells: ["fly"],
+    selection: ["fly"],
+    firstCol: 1,
+  },
+  spellChanges: {
+    fly: {
+      changes:
+        "I can cast fly on myself, requiring no concentration and with a duration of 1 minute.",
+      duration: "1 min",
+      range: "Self",
+      description: "I gain fly 60 ft speed",
+    },
+  },
 };
 
 /*
