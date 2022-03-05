@@ -3104,6 +3104,743 @@ MagicItemsList["cabal's ruin"] = {
   },
 };
 
+MagicItemsList["circlet of barbed vision"] = {
+  name: "Circlet of Barbed Vision",
+  source: [["TDCSR", 203]],
+  type: "wondrous item",
+  rarity: "legendary",
+  attunement: true,
+  prerequisite: "Requires attunement by a creature of non-good alignment",
+  prereqeval: function (v) {
+    return !/good/i.test(What("Alignment"));
+  },
+  description: "",
+  descriptionFull:
+    "When you don this circlet of gnarled onyx, black barbs dig into your head, imparting power to you as the circlet twists your appearance to amuse the Spider Queen. The current resting place of the Circlet of Barbed Vision is unknown, but rumor has it that a spectral assassin known as the Inevitable End seeks this relic." +
+    "\n" +
+    toUni("Dormant") +
+    "\n" +
+    "While the Circlet of Barbed Vision is in a dormant state, you have advantage on initiative rolls while you wear it, but your Charisma score decreases by 2. Your Charisma score returns to normal if you remove the circlet, but you take 4d6 psychic damage when you do so." +
+    "\n   " +
+    "Additionally, when you make an attack roll, you can use your reaction to gain a +5 bonus to the roll. You make this choice after you see the roll, but before the GM says whether the attack hits or misses. You can't use this property again until you finish a short or long rest." +
+    "\n" +
+    toUni("Awakened") +
+    "\n" +
+    "When the Circlet of Barbed Vision reaches an awakened state, you gain the following benefits:" +
+    "\n" +
+    "\u2022 You have resistance to poison damage, and you are immune to the poisoned condition." +
+    "\n" +
+    "\u2022 Your ability to gain a bonus to an attack roll can be used twice between rests." +
+    "\n" +
+    toUni("Exalted") +
+    "\n" +
+    "\u2022 When the Circlet of Barbed Vision reaches an exalted state, you gain the following benefits:" +
+    "\n" +
+    "\u2022 You are immune to poison damage." +
+    "\n" +
+    "\u2022 You have truesight out to a range of 60 feet." +
+    "\n" +
+    "\u2022 Your ability to gain a bonus to an attack roll can be used three times between rests.",
+  allowDuplicates: false,
+  choices: ["Dormant", "Awakened", "Exalted"],
+  dormant: {
+    name: "Dormant Circlet of Barbed Vision",
+    description:
+      "This circlet grants me advantage on initiative rolls, but my Charisma score decreases by 2. Once per rest, when I attack, I can use my reaction to gain a +5 bonus to the roll. If removed I take 4d6 psychic damage.",
+    usages: 1,
+    recovery: "short rest",
+    action: ["reaction", " (attack bonus)"],
+    scores: [0, 0, 0, 0, 0, -2],
+  },
+  awakened: {
+    name: "Awakened Circlet of Barbed Vision",
+    description:
+      "This circlet grants me advantage on initiative rolls, but my Charisma score decreases by 2. Twice per rest, when I attack, I can use my reaction to gain a +5 bonus to the roll. I have resistance to poison damage and immunity to being poisoned. If removed I take 4d6 psychic damage.",
+    usages: 2,
+    recovery: "short rest",
+    action: ["reaction", " (attack bonus)"],
+    dmgres: ["Poison"],
+    savetxt: { immune: ["poisoned"] },
+    scores: [0, 0, 0, 0, 0, -2],
+  },
+  exalted: {
+    name: "Exalted Circlet of Barbed Vision",
+    description:
+      "This circlet grants me advantage on initiative rolls, but my Charisma score decreases by 2. Thrice per rest, when I attack, I can use my reaction to gain a +5 bonus to the roll. I am immune to poison and have 60 ft truesight. If removed I take 4d6 psychic damage.",
+    usages: 3,
+    recovery: "short rest",
+    action: ["reaction", " (attack bonus)"],
+    savetxt: { immune: ["poison"] },
+    scores: [0, 0, 0, 0, 0, -2],
+    vision: [["Truesight", 60]],
+  },
+};
+
+MagicItemsList["condemner"] = {
+  name: "Condemner",
+  source: [["TDCSR", 204]],
+  type: "weapon (heavy crossbow)",
+  rarity: "legendary",
+  attunement: true,
+  description: "",
+  descriptionFull:
+    "This shadow-touched hand crossbow once served as the weapon of choice for the legendary assassin Todora. Though few know this, Condemner is now in the possession of an equally infamous assassin named Ixrattu Khar (see her statistics in chapter 6)." +
+    "\n" +
+    toUni("Dormant") +
+    "\n" +
+    "When Condemner is in a dormant state, you gain a +1 bonus to attack and damage rolls made with this magic weapon. When you hit with an attack using this weapon, the target takes an extra 1d4 poison damage." +
+    "\n   " +
+    "Additionally, if you hit with an attack using this weapon, you can activate one of the following effects instead of dealing damage:" +
+    "\n" +
+    "\u2022 You cast fog cloud centered on the target's space." +
+    "\n" +
+    "\u2022 You cast silence centered on the target's space." +
+    "\n   " +
+    "When an effect is used, it can't be used again until you finish a short or long rest." +
+    "\n" +
+    toUni("Awakened") +
+    "\n" +
+    "When Condemner reaches an awakened state, you gain the following benefits:" +
+    "\n" +
+    "\u2022 The weapon's bonus to attack and damage rolls increases to +2." +
+    "\n" +
+    "\u2022 The extra poison damage dealt by the weapon increases to 1d6." +
+    "\n" +
+    "\u2022 You gain an additional effect that can be triggered in place of dealing damage when you hit with an attack: You cast hold person on the target (save DC 15). This effect can't be used again until you finish a short or long rest." +
+    "\n" +
+    toUni("Exalted") +
+    "\n" +
+    "\u2022 When Condemner reaches an exalted state, you gain the following benefits:" +
+    "\n" +
+    "\u2022 The weapon's bonus to attack and damage rolls increases to +3." +
+    "\n" +
+    "\u2022 The extra poison damage dealt by the weapon increases to 1d8." +
+    "\n" +
+    "\u2022 The save DC for the weapon's hold person spell increases to 17." +
+    "\n" +
+    "\u2022 You gain an additional effect that can be triggered in place of damage when you hit with an attack: You cast the blight spell on the target (save DC 17). This effect can't be used again until you finish a short or long rest.",
+  allowDuplicates: false,
+  choices: ["Dormant", "Awakened", "Exalted"],
+  dormant: {
+    name: "Dormant Condemner",
+    description:
+      "This crossbow adds +1 to hit and damage and deals an extra 1d4 poison damage on a hit. On a hit with it, I can cast one of the following instead of dealing damage: fog cloud centered on the target or silence centered on the target.",
+    weaponsAdd: ["Dormant Condemner"],
+    weaponOptions: {
+      baseWeapon: "heavy crossbow",
+      regExpSearch: /^(?=.*dormant)(?=.*condemner).*$/i,
+      name: "Dormant Condemner",
+      source: [["TDCSR", 204]],
+      description: "Ammunition, heavy, loading, two-handed; +1d4 poison damage",
+      modifiers: [1, 1],
+    },
+    extraLimitedFeatures: [
+      {
+        name: "Fog Cloud (Condemner, on hit)",
+        usages: 1,
+        recovery: "short rest",
+      },
+      {
+        name: "Silence (Condemner, on hit)",
+        usages: 1,
+        recovery: "short rest",
+      },
+    ],
+    spellFirstColTitle: "Us",
+    spellcastingBonus: [
+      {
+        name: "Once per short rest",
+        spells: ["fog cloud"],
+        selection: ["fog cloud"],
+        firstCol: "oncesr",
+      },
+      {
+        name: "Once per short rest",
+        spells: ["silence"],
+        selection: ["silence"],
+        firstCol: "oncesr",
+      },
+    ],
+    toNotesPage: [
+      {
+        name: "Features",
+        page3notes: true,
+        note: [
+          "On a hit, I can activate one of the following effects, instead of dealing damge:",
+          "\u2022 I cast fog cloud centered on the target's space",
+          "\u2022 I cast silence centered on the target's space",
+          "I can use each effect once per rest",
+        ],
+      },
+    ],
+  },
+  awakened: {
+    name: "Awakened Condemner",
+    description:
+      "This crossbow adds +2 to hit and damage and deals an extra 1d6 poison damage on a hit. On a hit with it, I can cast one of the following instead of dealing damage: fog cloud centered on the target, silence centered on the target, or hold person (DC 15) on the target.",
+    weaponsAdd: ["Awakened Condemner"],
+    weaponOptions: {
+      baseWeapon: "heavy crossbow",
+      regExpSearch: /^(?=.*awakened)(?=.*condemner).*$/i,
+      name: "Awakened Condemner",
+      source: [["TDCSR", 204]],
+      description: "Ammunition, heavy, loading, two-handed; +1d6 poison damage",
+      modifiers: [2, 2],
+    },
+    extraLimitedFeatures: [
+      {
+        name: "Fog Cloud (Condemner, on hit)",
+        usages: 1,
+        recovery: "short rest",
+      },
+      {
+        name: "Silence (Condemner, on hit)",
+        usages: 1,
+        recovery: "short rest",
+      },
+      {
+        name: "Hold Person (Condemner, on hit)",
+        usages: 1,
+        recovery: "short rest",
+      },
+    ],
+    fixedDC: 15,
+    spellFirstColTitle: "Us",
+    spellcastingBonus: [
+      {
+        name: "Once per short rest",
+        spells: ["fog cloud"],
+        selection: ["fog cloud"],
+        firstCol: "oncesr",
+      },
+      {
+        name: "Once per short rest",
+        spells: ["silence"],
+        selection: ["silence"],
+        firstCol: "oncesr",
+      },
+      {
+        name: "Once per short rest",
+        spells: ["hold person"],
+        selection: ["hold person"],
+        firstCol: "oncesr",
+      },
+    ],
+    toNotesPage: [
+      {
+        name: "Features",
+        page3notes: true,
+        note: [
+          "On a hit, I can activate one of the following effects, instead of dealing damge:",
+          "\u2022 I cast fog cloud centered on the target's space",
+          "\u2022 I cast silence centered on the target's space",
+          "\u2022 I cast hold person (DC 15) on the target",
+          "I can use each effect once per rest",
+        ],
+      },
+    ],
+  },
+  exalted: {
+    name: "Exalted Condemner",
+    description:
+      "This crossbow adds +3 to hit and damage and deals an extra 1d8 poison damage on a hit. On a hit with it, I can cast one of the following instead of dealing damage: fog cloud centered on the target, silence centered on the target, hold person (DC 17) on the target, or blight (DC 17) on the target.",
+    weaponsAdd: ["Exalted Condemner"],
+    weaponOptions: {
+      baseWeapon: "heavy crossbow",
+      regExpSearch: /^(?=.*exalted)(?=.*condemner).*$/i,
+      name: "Exalted Condemner",
+      source: [["TDCSR", 204]],
+      description: "Ammunition, heavy, loading, two-handed; +1d8 poison damage",
+      modifiers: [2, 2],
+    },
+    extraLimitedFeatures: [
+      {
+        name: "Fog Cloud (Condemner, on hit)",
+        usages: 1,
+        recovery: "short rest",
+      },
+      {
+        name: "Silence (Condemner, on hit)",
+        usages: 1,
+        recovery: "short rest",
+      },
+      {
+        name: "Hold Person (Condemner, on hit)",
+        usages: 1,
+        recovery: "short rest",
+      },
+      {
+        name: "Blight (Condemner, on hit)",
+        usages: 1,
+        recovery: "short rest",
+      },
+    ],
+    fixedDC: 17,
+    spellFirstColTitle: "Us",
+    spellcastingBonus: [
+      {
+        name: "Once per short rest",
+        spells: ["fog cloud"],
+        selection: ["fog cloud"],
+        firstCol: "oncesr",
+      },
+      {
+        name: "Once per short rest",
+        spells: ["silence"],
+        selection: ["silence"],
+        firstCol: "oncesr",
+      },
+      {
+        name: "Once per short rest",
+        spells: ["hold person"],
+        selection: ["hold person"],
+        firstCol: "oncesr",
+      },
+      {
+        name: "Once per short rest",
+        spells: ["blight"],
+        selection: ["blight"],
+        firstCol: "oncesr",
+      },
+    ],
+    toNotesPage: [
+      {
+        name: "Features",
+        page3notes: true,
+        note: [
+          "On a hit, I can activate one of the following effects, instead of dealing damge:",
+          "\u2022 I cast fog cloud centered on the target's space",
+          "\u2022 I cast silence centered on the target's space",
+          "\u2022 I cast hold person (DC 17) on the target",
+          "\u2022 I cast blight (DC 17) on the target",
+          "I can use each effect once per rest",
+        ],
+      },
+    ],
+  },
+};
+
+MagicItemsList["deathwalker's ward"] = {
+  name: "Deathwalker's Ward",
+  source: [["TDCSR", 204]],
+  type: "armor (studded leather)",
+  rarity: "legendary",
+  attunement: true,
+  description: "",
+  descriptionFull:
+    "This beautiful black leather armor is covered in intricate scrollwork, and has a mantle bearing the black feathers of the Matron of Ravens. Legends say that it has been worn by a number of that deity's champions over the centuries—most recently, Vax'ildan of Vox Machina." +
+    "\n" +
+    toUni("Dormant") +
+    "\n" +
+    "When the Deathwalker's Ward is in a dormant state, you gain a +1 bonus to AC and you have advantage on death saving throws while wearing the armor." +
+    toUni("Awakened") +
+    "\n" +
+    "When the Deathwalker's Ward reaches an awakened state, you gain the following benefits:" +
+    "\n" +
+    "\u2022 The AC bonus of the armor increases to +2." +
+    "\n" +
+    "\u2022 While wearing the armor, you have resistance to one of the following damage types of your choice: acid, cold, fire, lightning, necrotic, or poison. You can change the damage type when you finish a short rest." +
+    toUni("Exalted") +
+    "\n" +
+    "\u2022 When the Deathwalker's Ward reaches an exalted state, you gain the following benefits:" +
+    "\n" +
+    "\u2022 The AC bonus of the armor increases to +3." +
+    "\n" +
+    "\u2022 As a bonus action, you grow large black raven wings that grant you a flying speed of 60 feet and last for 1 hour. Once this property is used, it can't be used again until you finish a long rest.",
+  allowDuplicates: false,
+  choices: ["Dormant", "Awakened", "Exalted"],
+  dormant: {
+    name: "Dormant Deathwalker's Ward",
+    description:
+      "While wearing this armor, I gain a +1 bonus to AC and have advantage on death saves.",
+    savetxt: { text: ["Adv. on death saves"] },
+    armorAdd: "Dormant Deathwalker's Ward",
+    armorOptions: {
+      regExpSearch: /dormant Deathwalker's Ward/i,
+      name: "Dormant Deathwalker's Ward",
+      source: [["TDCSR", 204]],
+      type: "light",
+      ac: 13,
+      weight: 13,
+    },
+  },
+  awakened: {
+    name: "Awakened Deathwalker's Ward",
+    description:
+      "While wearing this armor, I gain a +2 bonus to AC and have advantage on death saves. After a short rest, I gain resistance to one of the following damage types: acid, cold, fire, lightning, necrotic, or poison.",
+    savetxt: { text: ["Adv. on death saves"] },
+    armorAdd: "Awakened Deathwalker's Ward",
+    armorOptions: {
+      regExpSearch: /awakened Deathwalker's Ward/i,
+      name: "Awakened Deathwalker's Ward",
+      source: [["TDCSR", 205]],
+      type: "light",
+      ac: 14,
+      weight: 13,
+    },
+  },
+  exalted: {
+    name: "Exalted Deathwalker's Ward",
+    description:
+      "While wearing this armor, I gain a +3 bonus to AC and have advantage on death saves. After a short rest, I gain resistance to one of the following damage types: acid, cold, fire, lightning, necrotic, or poison. Once per long rest, as a bonus action, I can grow wings which grant me a 60 ft flying speed for 1 hour.",
+    savetxt: { text: ["Adv. on death saves"] },
+    armorAdd: "Exalted Deathwalker's Ward",
+    armorOptions: {
+      regExpSearch: /exalted Deathwalker's Ward/i,
+      name: "Exalted Deathwalker's Ward",
+      source: [["TDCSR", 205]],
+      type: "light",
+      ac: 15,
+      weight: 13,
+    },
+    usages: 1,
+    recovery: "long rest",
+    action: ["bonus action", " (grow wings)"],
+  },
+};
+
+MagicItemsList["fenthras"] = {
+  name: "Fenthras",
+  source: [["TDCSR", 205]],
+  type: "weapon (longbow)",
+  rarity: "legendary",
+  attunement: true,
+  description: "",
+  descriptionFull:
+    "This gorgeous longbow made of everbark from the Fey Realm flexes and shifts like a living entity. It is said to have been wielded by the legendary ranger Vex'ahlia against great evils." +
+    "\n" +
+    toUni("Dormant") +
+    "\n" +
+    "While Fenthras is in a dormant state, you gain a +1 bonus to attack and damage rolls made with this magic weapon." +
+    "\n   " +
+    "When you make an attack with Fenthras, you can declare it an oracle shot, allowing you to experience the area around the arrow using your normal senses for 10 minutes. Once this property is used, it can't be used again until you finish a short or long rest." +
+    "\n   " +
+    "Additionally, when a creature is killed by an attack using this weapon, a six-foot-tall tree rapidly grows out of the corpse over the next minute. The tree is rooted in the ground to make the body difficult to move, but does not permanently damage the corpse or its organs." +
+    "\n" +
+    toUni("Awakened") +
+    "\n" +
+    "When Fenthras reaches an awakened state, you gain the following benefits:" +
+    "\n" +
+    "\u2022 The weapon's bonus to attack and damage rolls increases to +2. Additionally, when you hit with an attack using this weapon, the target takes an extra 1d4 lightning damage" +
+    "\n" +
+    "\u2022 When you hit with an attack using this weapon, you can declare it a bramble shot. The attack deals an extra 3d8 piercing damage, and the target must succeed on a DC 15 Strength saving throw or become restrained by steely brambles that burst from the arrow. A restrained target can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success. Once this property is used, it can't be used again until you finish a short or long rest." +
+    "\n" +
+    toUni("Exalted") +
+    "\n" +
+    "\u2022 When Fenthras reaches an exalted state, you gain the following benefits:" +
+    "\n" +
+    "\u2022 The weapon's bonus to attack and damage rolls increases to +3." +
+    "\n" +
+    "\u2022 The extra lightning damage dealt by attacks using the bow increases to 1d6." +
+    "\n" +
+    "\u2022 You can declare a bramble shot twice between rests, and the saving throw DC increases to 17." +
+    "\n" +
+    "\u2022 You gain an additional effect that can be triggered in place of damage when you hit with an attack: You cast the blight spell on the target (save DC 17). This effect can't be used again until you finish a short or long rest.",
+  allowDuplicates: false,
+  choices: ["Dormant", "Awakened", "Exalted"],
+  dormant: {
+    name: "Dormant Fenthras",
+    description:
+      "This longbow adds +1 to hit and damage. When I kill a creature with Fenthras, a 6 ft tall tree rapidly grows out of it's corpse; the body is hard to move, but isn't damaged. When I attack with Fenthras, I can declare it an oracle shot; see third page.",
+    weaponsAdd: ["Dormant Fenthras"],
+    weaponOptions: {
+      baseWeapon: "longbow",
+      regExpSearch: /^(?=.*dormant)(?=.*fenthras).*$/i,
+      name: "Dormant Fenthras",
+      source: [["TDCSR", 205]],
+      modifiers: [1, 1],
+    },
+    extraLimitedFeatures: [
+      {
+        name: "Oracle Shot (Fenthras)",
+        usages: 1,
+        recovery: "short rest",
+      },
+    ],
+    toNotesPage: [
+      {
+        name: "Features",
+        page3notes: true,
+        note: [
+          "When I attack with Fenthras, I can declare a shot type:",
+          "\u2022 Oracle Shot (once per short rest)",
+          "   I perceive the area around the arrow using my normal senses for 10 min",
+        ],
+      },
+    ],
+  },
+  awakened: {
+    name: "Awakened Fenthras",
+    description:
+      "This longbow adds +2 to hit and damage and deals an extra 1d4 lightning damage on a hit. When I kill a creature with Fenthras, a 6 ft tall tree rapidly grows out of it's corpse; the body is hard to move, but isn't damaged. When I attack with Fenthras, I can declare it an oracle or bramble shot; see third page.",
+    weaponsAdd: ["Awakened Fenthras"],
+    weaponOptions: {
+      baseWeapon: "longbow",
+      regExpSearch: /^(?=.*awakened)(?=.*fenthras).*$/i,
+      name: "Awakened Fenthras",
+      source: [["TDCSR", 205]],
+      modifiers: [2, 2],
+      description: "Ammunition, heavy, two-handed; +1d4 lightning damage",
+    },
+    extraLimitedFeatures: [
+      {
+        name: "Oracle Shot (Fenthras)",
+        usages: 1,
+        recovery: "short rest",
+      },
+      {
+        name: "Bramble Shot (Fenthras)",
+        usages: 1,
+        recovery: "short rest",
+      },
+    ],
+    toNotesPage: [
+      {
+        name: "Features",
+        page3notes: true,
+        note: [
+          "When I attack with Fenthras, I can declare a shot type:",
+          "\u2022 Oracle Shot (once per short rest)",
+          "   I perceive the area around the arrow using my normal senses for 10 min",
+          "\u2022 Bramble Shot (once per short rest)",
+          "   The attack deals an extra 3d8 piercing damage; target makes a DC Str save",
+          "   On a failure, it is restrained by steely brambles",
+          "   It can repeat the save at the end of its turns to end the effect",
+        ],
+      },
+    ],
+  },
+  exalted: {
+    name: "Exalted Fenthras",
+    description:
+      "This longbow adds +3 to hit and damage and deals an extra 1d6 lightning damage on a hit. When I kill a creature with Fenthras, a 6 ft tall tree rapidly grows out of it's corpse; the body is hard to move, but isn't damaged. When I attack with Fenthras, I can declare it an oracle or bramble shot; see third page.",
+    weaponsAdd: ["Exalted Fenthras"],
+    weaponOptions: {
+      baseWeapon: "longbow",
+      regExpSearch: /^(?=.*exalted)(?=.*fenthras).*$/i,
+      name: "Exalted Fenthras",
+      source: [["TDCSR", 205]],
+      modifiers: [3, 3],
+      description: "Ammunition, heavy, two-handed; +1d6 lightning damage",
+    },
+    extraLimitedFeatures: [
+      {
+        name: "Oracle Shot (Fenthras)",
+        usages: 1,
+        recovery: "short rest",
+      },
+      {
+        name: "Bramble Shot (Fenthras)",
+        usages: 2,
+        recovery: "short rest",
+      },
+    ],
+    toNotesPage: [
+      {
+        name: "Features",
+        page3notes: true,
+        note: [
+          "When I attack with Fenthras, I can declare a shot type:",
+          "\u2022 Oracle Shot (once per short rest)",
+          "   I perceive the area around the arrow using my normal senses for 10 min",
+          "\u2022 Bramble Shot (twice per short rest)",
+          "   The attack deals an extra 3d8 piercing damage; target makes a DC Str save",
+          "   On a failure, it is restrained by steely brambles",
+          "   It can repeat the save at the end of its turns to end the effect",
+        ],
+      },
+    ],
+  },
+};
+
+MagicItemsList["honor's last stand"] = {
+  name: "Honor's Last Stand",
+  source: [["TDCSR", 206]],
+  type: "shield",
+  rarity: "legendary",
+  attunement: true,
+  prerequisite: "Requires attunement by a creature of non-evil alignment",
+  prereqeval: function (v) {
+    return !/evil/i.test(What("Alignment"));
+  },
+  description: "",
+  descriptionFull:
+    "This massive silvered shield bears the crest of the Platinum Dragon and never tarnishes. Its metal is always warm to the touch." +
+    "\n" +
+    toUni("Dormant") +
+    "\n" +
+    "While Honor's Last Stand is in a dormant state, you gain a +1 bonus to AC while holding the shield. This bonus is in addition to the shield's normal bonus to AC. You also can't be knocked prone while bearing this shield." +
+    toUni("Awakened") +
+    "\n" +
+    "When Honor's Last Stand reaches an awakened state, you gain the following benefits:" +
+    "\n" +
+    "\u2022 The shield's bonus to AC increases to +2." +
+    "\n" +
+    "\u2022 If you successfully shove a creature while holding this shield, that creature takes 2d6 force damage." +
+    "\n" +
+    "\u2022 When a creature within 5 feet of you misses you with an attack, you can attempt to shove that creature as a reaction." +
+    "\n" +
+    toUni("Exalted") +
+    "\n" +
+    "\u2022 When Honor's Last Stand reaches an exalted state, you gain the following benefits:" +
+    "\n" +
+    "\u2022 The shield's bonus to AC increases to +3." +
+    "\n" +
+    "\u2022 When you successfully shove a creature while holding this shield, you can move it up to 15 feet away from you." +
+    "\n" +
+    "\u2022 As a bonus action, you can protect an ally within 5 feet of you, granting that ally a +3 bonus to AC until the start of your next turn or until they are no longer within 5 feet of you.",
+  allowDuplicates: false,
+  choices: ["Dormant", "Awakened", "Exalted"],
+  dormant: {
+    name: "Dormant Honor's Last Stand",
+    description:
+      "While wearing this shield, I gain a +1 bonus to AC and cannot be knocked prone.",
+    savetxt: { immune: ["prone"] },
+    shieldAdd: ["Dormant Honor's Last Stand", 3, 6],
+  },
+  awakened: {
+    name: "Awakened Honor's Last Stand",
+    description:
+      "While wearing this shield, I gain a +2 bonus to AC and cannot be knocked prone. When I shove a creature, it takes 2d6 force damage. As a reaction when a creature within 5 ft misses me with an attack, I can shove the attacker.",
+    savetxt: { immune: ["prone"] },
+    shieldAdd: ["Awakened Honor's Last Stand", 4, 6],
+    action: ["reaction", " (shove)"],
+  },
+  exalted: {
+    name: "Exalted Honor's Last Stand",
+    description:
+      "While wearing this shield, I gain a +3 bonus to AC and cannot be knocked prone. When I shove a creature, it takes 2d6 force damage and is pushed up to 15 ft away. As a reaction when a creature within 5 ft misses me with an attack, I can shove the attacker. As a bonus action, I can protect an ally; see third page.",
+    savetxt: { immune: ["prone"] },
+    shieldAdd: ["Exalted Honor's Last Stand", 5, 6],
+    action: [
+      ["reaction", " (shove)"],
+      ["bonus action", " (protect ally)"],
+    ],
+    toNotesPage: [
+      {
+        name: "Features",
+        page3notes: true,
+        note: [
+          "As a bonus action, I can grant an ally within 5 ft of me +3 AC",
+          "This lasts until the start of my next turn, or they move more than 5 ft away",
+        ],
+      },
+    ],
+  },
+};
+
+MagicItemsList["kiss of the changebringer"] = {
+  name: "Kiss of the Changebringer",
+  source: [["TDCSR", 206]],
+  type: "wondrous item",
+  rarity: "legendary",
+  attunement: true,
+  description: "",
+  descriptionFull:
+    "A beautiful, glittering emerald is set within this silver chain, humming with power and possibility. It is said that this amulet was stolen from the neck of the Changebringer herself by the Lord of the Hells, and locked within the vaults of Bazzoxan in Wildemount. It was later claimed there by a group of Aurora Watch soldiers during an expedition into that grim fortress' abandoned temples." +
+    "\n" +
+    toUni("Dormant") +
+    "\n" +
+    "While the Kiss of the Changebringer is in a dormant state, you have a +1 bonus to saving throws and are immune to the grappled condition while wearing it." +
+    "\n" +
+    toUni("Awakened") +
+    "\n" +
+    "When the Kiss of the Changebringer reaches an awakened state, you gain the following benefits:" +
+    "\n" +
+    "\u2022 The bonus to saving throws increases to +2." +
+    "\n" +
+    "\u2022 You are immune to the restrained condition." +
+    "\n" +
+    "\u2022 You can use an action to cast the blink spell on yourself. This property of the amulet can't be used again until you finish a long rest." +
+    "\n" +
+    toUni("Exalted") +
+    "\n" +
+    "\u2022 When the Kiss of the Changebringer reaches an exalted state, you gain the following benefits:" +
+    "\n" +
+    "\u2022 The bonus to saving throws increases to +3." +
+    "\n" +
+    "\u2022 You are immune to the paralyzed and petrified conditions." +
+    "\n" +
+    "\u2022 When you make an attack roll, ability check, or saving throw, you can roll an additional d20. You can choose to do so after you make the attack roll, ability check, or saving throw, but before the outcome is determined. You choose which of the d20s to use for your roll. This property of the amulet can't be used again until you finish a short or long rest.",
+  allowDuplicates: false,
+  choices: ["Dormant", "Awakened", "Exalted"],
+  dormant: {
+    name: "Dormant Kiss of the Changebringer",
+    description: "While wearing this amulet, I gain +1 to all saves and am immune to being grappled.",
+    savetxt: { immune: ["grappled"] },
+    addMod: [
+      {
+        type: "save",
+        field: "all",
+        mod: 1,
+        text: "While I wear the Dormant Kiss of the Changebringer, I gain a +1 bonus to all my saving throws.",
+      },
+    ],
+  },
+  awakened: {
+    name: "Awakened Kiss of the Changebringer",
+    description: "While wearing this amulet, I gain +2 to all saves and am immune to being grappled and restrained. Once per long rest, I can cast blink.",
+    savetxt: { immune: ["grappled", "restrained"] },
+    addMod: [
+      {
+        type: "save",
+        field: "all",
+        mod: 2,
+        text: "While I wear the Dormant Kiss of the Changebringer, I gain a +2 bonus to all my saving throws.",
+      },
+    ],
+    action: ["action", " (cast blink)"],
+    extraLimitedFeatures: [
+      {
+        name: "Blink (Kiss of the Changebringer)",
+        usages: 1,
+        recovery: "long rest",
+      },
+    ],
+    spellFirstColTitle: "Us",
+    spellcastingBonus: [
+      {
+        name: "Once per long rest",
+        spells: ["blink"],
+        selection: ["blink"],
+        firstCol: "oncelr",
+      },
+    ],
+  },
+  exalted: {
+    name: "Exalted Kiss of the Changebringer",
+    description: "While wearing this amulet, I gain +3 to all saves and am immune to being grappled/restrained/paralyzed/petrified. Once per long rest, I can cast blink. Once per rest, when I make a check, attack, or save I can roll an extra d20; I do so after the roll, but before the outcome is determined. I then choose which result to use.",
+    savetxt: { immune: ["grappled", "restrained", "paralyzed", "petrified"] },
+    usages: 1,
+    recovery: "short rest",
+    addMod: [
+      {
+        type: "save",
+        field: "all",
+        mod: 3,
+        text: "While I wear the Dormant Kiss of the Changebringer, I gain a +3 bonus to all my saving throws.",
+      },
+    ],
+    action: ["action", " (cast blink)"],
+    extraLimitedFeatures: [
+      {
+        name: "Blink (Kiss of the Changebringer)",
+        usages: 1,
+        recovery: "long rest",
+      },
+    ],
+    spellFirstColTitle: "Us",
+    spellcastingBonus: [
+      {
+        name: "Once per long rest",
+        spells: ["blink"],
+        selection: ["blink"],
+        firstCol: "oncelr",
+      },
+    ],
+  },
+};
+
 /*
  * Spells
  */
