@@ -2750,6 +2750,360 @@ MagicItemsList["skysail"] = {
   },
 };
 
+MagicItemsList["agony"] = {
+  name: "Agony",
+  source: [["TDCSR", 202]],
+  type: "weapon (flail)",
+  rarity: "legendary",
+  attunement: true,
+  prerequisite: "Requires attunement by a creature of non-good alignment",
+  prereqeval: function (v) {
+    return !/good/i.test(What("Alignment"));
+  },
+  description: "",
+  descriptionFull:
+    "Utilized in countless tortures and slow executions, the hooked chains of this brutal weapon constantly show dried blood and rot. Legend says that Agony was wielded in the Calamity by the gnoll scion of a flesh-eating Demon Lord." +
+    "\n" +
+    toUni("Dormant") +
+    "\n" +
+    "While Agony is in a dormant state, you gain a +2 bonus to attack and damage rolls made with this magic weapon. Whenever you damage a creature with Agony, that creature is marked for 10 minutes or until you damage a different creature. When you hit a creature marked in this way with this weapon, the target takes an extra 1d6 piercing damage." +
+    "\n" +
+    toUni("Awakened") +
+    "\n" +
+    "When Agony reaches an awakened state, you gain the following benefits:" +
+    "\n" +
+    "\u2022 The extra damage when you hit a marked creature increases to 1d8." +
+    "\n" +
+    "\u2022 A marked creature has disadvantage on Constitution checks and Constitution saving throws." +
+    "\n" +
+    "\u2022 When you reduce a creature to 0 hit points with an attack using Agony, you can immediately make an additional melee attack with this weapon as a bonus action." +
+    "\n" +
+    toUni("Exalted") +
+    "\n" +
+    "\u2022 When Agony reaches an exalted state, you gain the following benefits:" +
+    "\n" +
+    "\u2022 The weapon's bonus to attack and damage rolls increases to +3." +
+    "\n" +
+    "\u2022 The extra damage when you hit a marked creature increases to 2d8." +
+    "\n" +
+    "\u2022 When you score a critical hit with this weapon, the target must succeed on a DC 17 Wisdom saving throw or become frightened of you for 1 minute. On a success, the target is immune to this effect for 24 hours.",
+  allowDuplicates: false,
+  choices: ["Dormant", "Awakened", "Exalted"],
+  dormant: {
+    name: "Dormant Agony",
+    description:
+      "This flail adds +2 to hit and damage. When I damage a creature with Agony, it is marked for 10 min. A marked creature takes an extra 1d6 piercing damage when hit with Agony.",
+    weaponsAdd: ["Dormant Agony"],
+    weaponOptions: {
+      baseWeapon: "flail",
+      regExpSearch: /^(?=.*dormant)(?=.*agony).*$/i,
+      name: "Dormant Agony",
+      source: [["TDCSR", 202]],
+      description: "+1d6 piercing damage on a marked creature",
+      modifiers: [2, 2],
+    },
+  },
+  awakened: {
+    name: "Awakened Agony",
+    description:
+      "This flail adds +2 to hit and damage. When I damage a creature with Agony, it is marked for 10 min; it has disadv. on Con saves/throws and takes an extra 1d8 piercing damage when hit by Agony. If I reduce a creature to 0 HP with Agony, I can make a melee attack with it as a bonus action.",
+    weaponsAdd: ["Awakened Agony"],
+    weaponOptions: {
+      baseWeapon: "flail",
+      regExpSearch: /^(?=.*awakened)(?=.*agony).*$/i,
+      name: "Awakened Agony",
+      source: [["TDCSR", 202]],
+      description: "+1d8 piercing damage on a marked creature",
+      modifiers: [2, 2],
+    },
+    action: ["bonus action", " (melee attack)"],
+  },
+  exalted: {
+    name: "Exalted Agony",
+    description:
+      "This flail adds +3 to hit/damage. When I damage a creature with Agony, it is marked for 10 min; it has disadv. on Con saves/throws and takes an extra 2d8 piercing damage when hit by Agony. If I reduce a creature to 0 HP with Agony, I can make a melee attack with it as a bonus action. See 3rd page notes.",
+    weaponsAdd: ["Exalted Agony"],
+    weaponOptions: {
+      baseWeapon: "flail",
+      regExpSearch: /^(?=.*exalted)(?=.*agony).*$/i,
+      name: "Exalted Agony",
+      source: [["TDCSR", 202]],
+      description:
+        "+2d8 piercing damage on a marked creature; DC 17 Wis save on critical hit, or frightened for 1 min",
+      modifiers: [3, 3],
+    },
+    action: ["bonus action", " (melee attack)"],
+    toNotesPage: [
+      {
+        name: "Features",
+        page3notes: true,
+        note: [
+          "When I score a critical hit with Agony, the target makes a DC 17 Wis save",
+          "On a failure, the target becomes frightened of me for 1 min",
+          "On a success, the target is immune to this effect for 24 hours",
+        ],
+      },
+    ],
+  },
+};
+
+MagicItemsList["armor of the valiant soul"] = {
+  name: "Armor of the Valiant Soul",
+  source: [["TDCSR", 202]],
+  type: "armor (scale mail)",
+  rarity: "legendary",
+  attunement: true,
+  description: "",
+  descriptionFull:
+    "This antique armor forged from jade and blackdragon scales was once worn by J'mon Sa Ord of Ank'Harel." +
+    "\n" +
+    toUni("Dormant") +
+    "\n" +
+    "While the Armor of the Valiant Soul is in a dormant state, you gain a +1 bonus to AC while wearing it." +
+    "\n   " +
+    "You can also cast the command spell (save DC 14) while attuned to this armor. Once this property is used, it can't be used again until you finish a long rest." +
+    "\n" +
+    toUni("Awakened") +
+    "\n" +
+    "When the Armor of the Valiant Soul reaches an awakened state, you gain the following benefits:" +
+    "\n" +
+    "\u2022 The AC bonus of the armor increases to +2." +
+    "\n" +
+    "\u2022 You have resistance to acid damage while wearing this armor." +
+    "\n" +
+    "\u2022 You are immune to the frightened condition while wearing this armor." +
+    "\n" +
+    "\u2022 The spell save DC for the armor's command spell increases to 16, and the spell can target up to three creatures." +
+    "\n" +
+    toUni("Exalted") +
+    "\n" +
+    "\u2022 When the Armor of the Valiant Soul reaches an exalted state, you gain the following benefits:" +
+    "\n" +
+    "\u2022 The AC bonus of the armor increases to +3." +
+    "\n" +
+    "\u2022 You are immune to acid damage while wearing this armor." +
+    "\n" +
+    "\u2022  All friendly creatures within 15 feet of you are immune to the frightened condition as long as you are conscious." +
+    "\n" +
+    "\u2022 The spell save DC of the armor's command spell increases to 18, and the spell can target up to five creatures.",
+  allowDuplicates: false,
+  choices: ["Dormant", "Awakened", "Exalted"],
+  dormant: {
+    name: "Dormant Armor of the Valiant Soul",
+    description:
+      "While wearing this armor, I gain a +1 bonus to AC. Once per long rest, I can cast command (DC 14).",
+    armorAdd: "Dormant Armor of the Valiant Soul",
+    action: [["action", "Command (Armor of the Valiant Soul)"]],
+    extraLimitedFeatures: [
+      {
+        name: "Command (Armor of the Valiant Soul)",
+        usages: 1,
+        recovery: "long rest",
+      },
+    ],
+    fixedDC: 14,
+    spellcastingBonus: {
+      name: "Once per long rest",
+      spells: ["command"],
+      selection: ["command"],
+      firstCol: "oncelr",
+    },
+    armorOptions: {
+      regExpSearch: /dormant armor of the valiant soul/i,
+      name: "Dormant Armor of the Valiant Soul",
+      source: [["TDCSR", 202]],
+      type: "medium",
+      ac: 15,
+      stealthdis: true,
+      weight: 45,
+    },
+  },
+  awakened: {
+    name: "Awakened Armor of the Valiant Soul",
+    description:
+      "While wearing this armor, I gain a +2 bonus to AC. Once per long rest, I can cast command (DC 16), which can target up to 3 creatures. I cannot be frightened and have resistance to acid damage.",
+    savetxt: { immune: ["frightened"] },
+    dmgres: ["Acid"],
+    action: [["action", "Command (Armor of the Valiant Soul)"]],
+    extraLimitedFeatures: [
+      {
+        name: "Command (Armor of the Valiant Soul)",
+        usages: 1,
+        recovery: "short rest",
+      },
+    ],
+    fixedDC: 16,
+    spellcastingBonus: {
+      name: "Once per long rest",
+      spells: ["command"],
+      selection: ["command"],
+      firstCol: "oncelr",
+    },
+    spellChanges: {
+      command: {
+        description:
+          "Up to 3 crea save or follow one word command, e.g. approach, drop, flee, halt",
+        changes:
+          "I can cast command by using Awakened Armor of the Valiant Soul with a DC of 16 and it can target up to 3 creatures.",
+      },
+    },
+    armorAdd: "Awakened Armor of the Valiant Soul",
+    armorOptions: {
+      regExpSearch: /awakened armor of the valiant soul/i,
+      name: "Awakened Armor of the Valiant Soul",
+      source: [["TDCSR", 202]],
+      type: "medium",
+      ac: 16,
+      stealthdis: true,
+      weight: 45,
+    },
+  },
+  exalted: {
+    name: "Exalted Armor of the Valiant Soul",
+    description:
+      "While wearing this armor, I gain a +3 bonus to AC. Once per long rest, I can cast command (DC 18), which can target up to 5 creatures. I cannot be frightened and have immunity to acid damage. All friendly creatures within 15 ft of me cannot be frightened while I'm conscious.",
+    savetxt: { immune: ["frightened", "acid"] },
+    action: [["action", "Command (Armor of the Valiant Soul)"]],
+    extraLimitedFeatures: [
+      {
+        name: "Command (Armor of the Valiant Soul)",
+        usages: 1,
+        recovery: "short rest",
+      },
+    ],
+    fixedDC: 18,
+    spellcastingBonus: {
+      name: "Once per long rest",
+      spells: ["command"],
+      selection: ["command"],
+      firstCol: "oncelr",
+    },
+    spellChanges: {
+      command: {
+        description:
+          "Up to 5 crea save or follow one word command, e.g. approach, drop, flee, halt",
+        changes:
+          "I can cast command by using Exalted Armor of the Valiant Soul with a DC of 18 and it can target up to 5 creatures.",
+      },
+    },
+    armorAdd: "Exalted Armor of the Valiant Soul",
+    armorOptions: {
+      regExpSearch: /exalted armor of the valiant soul/i,
+      name: "Exalted Armor of the Valiant Soul",
+      source: [["TDCSR", 202]],
+      type: "medium",
+      ac: 17,
+      stealthdis: true,
+      weight: 45,
+    },
+  },
+};
+
+MagicItemsList["cabal's ruin"] = {
+  name: "Cabal's Ruin",
+  source: [["TDCSR", 203]],
+  type: "wondrous item",
+  rarity: "legendary",
+  attunement: true,
+  description: "",
+  descriptionFull:
+    "This cloak is made of heavy dark cloth trimmed with golden patterns, and occasionally shimmers with sparks of arcane energy. It was once worn by the famed gunslinger Percival Fredrickstein von Musel Klossowski de Rolo III of Whitestone." +
+    "\n" +
+    toUni("Dormant") +
+    "\n" +
+    "While Cabal's Ruin is in a dormant state, the cloak has 4 charges and it regains 1d4 expended charges daily at dawn. When you hit with an attack, you can expend any number of charges from the cloak, with the attack dealing an extra 1d6 lightning damage per charge expended. If your attack strikes multiple targets, you choose one target that takes this extra damage." +
+    "\n   " +
+    "When you are targeted by an enemy's spell, you can use your reaction to absorb a portion of the spell's energy into the cloak. The spell affects you normally, but the cloak regains a number of charges equal to the level of the spell. This property can't be used again until you finish a short or long rest." +
+    "\n" +
+    toUni("Awakened") +
+    "\n" +
+    "When Caba's Ruin reaches an awakened state, you gain the following benefits:" +
+    "\n" +
+    "\u2022 You have advantage on saving throws against spells and other magical effects while wearing this cloak." +
+    "\n" +
+    "\u2022 The cloak has 6 charges and it regains 1d4 + 2 expended charges daily at dawn." +
+    "\n" +
+    "\u2022 When you use the cloak to absorb a spell, you gain resistance to one type of damage dealt by the spell (your choice). This resistance then lasts until the end of your next turn." +
+    "\n" +
+    toUni("Exalted") +
+    "\n" +
+    "\u2022 When Cabal's Ruin reaches an exalted state, you gain the following benefit:" +
+    "\n" +
+    "\u2022 The cloak has 10 charges and it regains 1d6 + 4 expended charges daily at dawn.",
+  allowDuplicates: false,
+  choices: ["Dormant", "Awakened", "Exalted"],
+  dormant: {
+    name: "Dormant Cabal's Ruin",
+    description:
+      "This cloak has 4 charges, regaining 1d4 charges at dawn. When I hit with an attack, I can expend charges to deal an extra 1d6 lightning damage per charge to one target. Once per rest, I can use my reaction when targeted by a spell to have the cloak regain charges equal to the spell's level.",
+    extraLimitedFeatures: [
+      {
+        name: "Absorb Spell Energy (Cabal's Ruin)",
+        usages: 1,
+        recovery: "short rest",
+      },
+    ],
+    usages: 4,
+    recovery: "dawn",
+    additional: "regains 1d4",
+    action: ["reaction", " (absorb energy)"],
+  },
+  awakened: {
+    name: "Awakened Cabal's Ruin",
+    description:
+      "This cloak has 6 charges, regaining 1d4+2 charges at dawn. When I hit with an attack, I can expend charges to deal an extra 1d6 lightning damage per charge to one target. Once per rest, I can use my reaction when targeted by a spell to have the cloak regain charges equal to the spell's level. See 3rd page notes.",
+    toNotesPage: [
+      {
+        name: "Features",
+        page3notes: true,
+        note: [
+          "I have advantage on saves against spells and other magical effects",
+          "When I absorb a spell, I can gain resistance to a damage type dealt by the spell",
+          "This resistance lasts until the end of my next turn",
+        ],
+      },
+    ],
+    savetxt: { adv_vs: ["magic"] },
+    extraLimitedFeatures: [
+      {
+        name: "Absorb Spell Energy (Cabal's Ruin)",
+        usages: 1,
+        recovery: "short rest",
+      },
+    ],
+    usages: 6,
+    recovery: "dawn",
+    additional: "regains 1d4+2",
+  },
+  exalted: {
+    name: "Awakened Cabal's Ruin",
+    description:
+      "This cloak has 10 charges, regaining 1d6+4 charges at dawn. When I hit with an attack, I can expend charges to deal an extra 1d6 lightning damage per charge to one target. Once per rest, I can use my reaction when targeted by a spell to have the cloak regain charges equal to the spell's level. See 3rd page notes.",
+    toNotesPage: [
+      {
+        name: "Features",
+        page3notes: true,
+        note: [
+          "I have advantage on saves against spells and other magical effects",
+          "When I absorb a spell with Cabal's Ruin, I can gain resistance to a damage type dealt by the spell",
+          "This resistance lasts until the end of my next turn",
+        ],
+      },
+    ],
+    savetxt: { adv_vs: ["magic"] },
+    extraLimitedFeatures: [
+      {
+        name: "Absorb Spell Energy (Cabal's Ruin)",
+        usages: 1,
+        recovery: "short rest",
+      },
+    ],
+    usages: 10,
+    recovery: "dawn",
+    additional: "regains 1d6+4",
+  },
+};
+
 /*
  * Spells
  */
