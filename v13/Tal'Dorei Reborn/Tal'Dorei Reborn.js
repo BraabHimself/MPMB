@@ -3521,7 +3521,7 @@ MagicItemsList["fenthras"] = {
     "\n" +
     "When Fenthras reaches an awakened state, you gain the following benefits:" +
     "\n" +
-    "\u2022 The weapon's bonus to attack and damage rolls increases to +2. Additionally, when you hit with an attack using this weapon, the target takes an extra 1d4 lightning damage" +
+    "\u2022 The weapon's bonus to attack and damage rolls increases to +2. Additionally, when you hit with an attack using this weapon, the target takes an extra 1d4 lightning damage." +
     "\n" +
     "\u2022 When you hit with an attack using this weapon, you can declare it a bramble shot. The attack deals an extra 3d8 piercing damage, and the target must succeed on a DC 15 Strength saving throw or become restrained by steely brambles that burst from the arrow. A restrained target can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success. Once this property is used, it can't be used again until you finish a short or long rest." +
     "\n" +
@@ -3766,7 +3766,8 @@ MagicItemsList["kiss of the changebringer"] = {
   choices: ["Dormant", "Awakened", "Exalted"],
   dormant: {
     name: "Dormant Kiss of the Changebringer",
-    description: "While wearing this amulet, I gain +1 to all saves and am immune to being grappled.",
+    description:
+      "While wearing this amulet, I gain +1 to all saves and am immune to being grappled.",
     savetxt: { immune: ["grappled"] },
     addMod: [
       {
@@ -3779,7 +3780,8 @@ MagicItemsList["kiss of the changebringer"] = {
   },
   awakened: {
     name: "Awakened Kiss of the Changebringer",
-    description: "While wearing this amulet, I gain +2 to all saves and am immune to being grappled and restrained. Once per long rest, I can cast blink.",
+    description:
+      "While wearing this amulet, I gain +2 to all saves and am immune to being grappled and restrained. Once per long rest, I can cast blink.",
     savetxt: { immune: ["grappled", "restrained"] },
     addMod: [
       {
@@ -3809,7 +3811,8 @@ MagicItemsList["kiss of the changebringer"] = {
   },
   exalted: {
     name: "Exalted Kiss of the Changebringer",
-    description: "While wearing this amulet, I gain +3 to all saves and am immune to being grappled/restrained/paralyzed/petrified. Once per long rest, I can cast blink. Once per rest, when I make a check, attack, or save I can roll an extra d20; I do so after the roll, but before the outcome is determined. I then choose which result to use.",
+    description:
+      "While wearing this amulet, I gain +3 to all saves and am immune to being grappled/restrained/paralyzed/petrified. Once per long rest, I can cast blink. Once per rest, when I make a check, attack, or save I can roll an extra d20; I do so after the roll, but before the outcome is determined. I then choose which result to use.",
     savetxt: { immune: ["grappled", "restrained", "paralyzed", "petrified"] },
     usages: 1,
     recovery: "short rest",
@@ -3836,6 +3839,1050 @@ MagicItemsList["kiss of the changebringer"] = {
         spells: ["blink"],
         selection: ["blink"],
         firstCol: "oncelr",
+      },
+    ],
+  },
+};
+
+MagicItemsList["mythcarver"] = {
+  name: "Mythcarver",
+  source: [["TDCSR", 207]],
+  type: "weapon (longsword)",
+  rarity: "legendary",
+  attunement: true,
+  prerequisite: "Requires attunement by a bard",
+  prereqeval: function (v) {
+    return classes.known.bard ? true : false;
+  },
+  description: "",
+  descriptionFull:
+    "This incredible silvered blade once belonged to the legendary White Duke, a founding member of the Golden Grin, and many other master bards before him. It resonates with nearby musical tones. In the modern era, it is best known as the personal weapon of famed bard Scanlan Shorthalt." +
+    "\n" +
+    toUni("Dormant") +
+    "\n" +
+    "While Mythcarver is in a dormant state, you gain a +1 bonus to attack and damage rolls made with this magic weapon. This longsword's enchantments and light construction also grant it the Finesse property, which allows you to use either your Strength or Dexterity modifier for the attack and damage rolls when making an attack with this weapon." +
+    "\n   " +
+    "Additionally, when you target an ally with your Bardic Inspiration feature, you gain advantage on attacks with this weapon until the end of your turn." +
+    "\n" +
+    toUni("Awakened") +
+    "\n" +
+    "When Mythcarver reaches an awakened state, you gain the following benefits:" +
+    "\n" +
+    "\u2022 The weapon's bonus to attack and damage rolls increases to +2. Additionally, when you hit with an attack using this weapon, the target takes an extra 1d6 force damage." +
+    "\n" +
+    "\u2022 When you use your Bardic Inspiration to affect an enemy while wielding this sword, that enemy has disadvantage on their next saving throw." +
+    "\n" +
+    toUni("Exalted") +
+    "\n" +
+    "\u2022 When Mythcarver reaches an exalted state, you gain the following benefits:" +
+    "\n" +
+    "\u2022 The weapon's bonus to attack and damage rolls increases to +3." +
+    "\n" +
+    "\u2022 As an action, you let the spirit of the sword overtake your body and guide your strikes. You make 4 melee attacks with the sword, then gain 1 level of exhaustion. Once this property is used, it can't be used again until you finish a long rest.",
+  allowDuplicates: false,
+  choices: ["Dormant", "Awakened", "Exalted"],
+  dormant: {
+    name: "Dormant Mythcarver",
+    description:
+      "This longsword adds +1 to hit and damage and has finesse. When I use Bardic Inspiration on an ally, I gain adv. on attacks with it until the end of my turn.",
+    weaponsAdd: ["Dormant Mythcarver"],
+    weaponOptions: {
+      baseWeapon: "longsword",
+      regExpSearch: /^(?=.*dormant)(?=.*mythcarver).*$/i,
+      name: "Dormant Mythcarver",
+      source: [["TDCSR", 207]],
+      modifiers: [1, 1],
+      description: "Versatile (1d10), finesse",
+    },
+  },
+  awakened: {
+    name: "Awakened Mythcarver",
+    description:
+      "This longsword adds +2 to hit and damage, deals an extra 1d6 force damage, and has finesse. When I use Bardic Inspiration on an ally, I gain adv. on attacks with it until the end of my turn. When I use Bardic Inspiration on a foe, they gain disadv. on their next save.",
+    weaponsAdd: ["Awakened Mythcarver"],
+    weaponOptions: {
+      baseWeapon: "longsword",
+      regExpSearch: /^(?=.*awakened)(?=.*mythcarver).*$/i,
+      name: "Awakened Mythcarver",
+      source: [["TDCSR", 207]],
+      modifiers: [2, 2],
+      description: "Versatile (1d10), finesse",
+    },
+  },
+  exalted: {
+    name: "Exalted Mythcarver",
+    description:
+      "This longsword adds +3 to hit and damage, deals an extra 1d6 force damage, and has finesse. When I use Bardic Inspiration on an ally, I gain adv. on attacks with it until the end of my turn. When I use Bardic Inspiration on a foe, they gain disadv. on their next save. See third page.",
+    weaponsAdd: ["Exalted Mythcarver"],
+    weaponOptions: {
+      baseWeapon: "longsword",
+      regExpSearch: /^(?=.*exalted)(?=.*mythcarver).*$/i,
+      name: "Exalted Mythcarver",
+      source: [["TDCSR", 207]],
+      modifiers: [3, 3],
+      description: "Versatile (1d10), finesse",
+    },
+    action: ["action", " (4 melee atacks)"],
+    usages: 1,
+    recovery: "long rest",
+    toNotesPage: [
+      {
+        name: "Features",
+        page3notes: true,
+        note: [
+          "Once per long rest, I can use an action to make 4 melee attacks with Mythcarver",
+          "I gain 1 level of exhaustion afterwards",
+        ],
+      },
+    ],
+  },
+};
+
+MagicItemsList["plate of the dawnmartyr"] = {
+  name: "Plate of the Dawnmartyr",
+  source: [["TDCSR", 208]],
+  type: "armor (plate)",
+  rarity: "legendary",
+  attunement: true,
+  description: "",
+  descriptionFull:
+    "Beautiful silver scrollwork and priceless cut rubies adorn this set of brass-and-gold armor. Legend holds that it was worn by Duana, High Priest of the Dawnfather, when she was martyred in the Battle of Ghor Dranas in the final days of the Calamity. In more recent times, it was worn by Pike Trickfoot, a legendary cleric of the Everlight, while fighting against the Chroma Conclave and the Whispered One." +
+    "\n" +
+    toUni("Dormant") +
+    "\n" +
+    "While the Plate of the Dawnmartyr is in a dormant state, you gain a +1 bonus to AC while wearing it. When a creature within 5 feet of you hits you with a melee attack, you can use your reaction to rebuke that creature, dealing it 1d6 fire damage." +
+    toUni("Awakened") +
+    "\n" +
+    "When the Plate of the Dawnmartyr reaches an awakened state, you gain the following benefits:" +
+    "\n" +
+    "\u2022 The armor's bonus to AC increases to +2." +
+    "\n" +
+    "\u2022 You are immune to the frightened condition." +
+    "\n" +
+    "\u2022 You have resistance to fire damage." +
+    "\n" +
+    "\u2022 The fire damage you deal when you rebuke an attacker increases to 2d6." +
+    "\n" +
+    toUni("Exalted") +
+    "\n" +
+    "\u2022 When the Plate of the Dawnmartyr reaches an exalted state, you gain the following benefits:" +
+    "\n" +
+    "\u2022 The armor's bonus to AC increases to +3." +
+    "\n" +
+    "\u2022 When you rebuke an attacker, you can choose to deal either fire damage or radiant damage." +
+    "\n" +
+    "\u2022 When you are reduced to 0 hit points, you can choose to have a blast of healing flame surround you. You regain 1 hit point and are lifted to your feet. Each enemy within 10 feet of you takes 2d6 fire damage or radiant damage (your choice). This property of the armor can't be used again until you finish a long rest.",
+  allowDuplicates: false,
+  choices: ["Dormant", "Awakened", "Exalted"],
+  dormant: {
+    name: "Dormant Plate of the Dawnmartyr",
+    description:
+      "While wearing this armor, I gain a +1 bonus to AC. As a reaction when damaged by a creature within 5 ft with a melee attack, I can deal 1d6 fire damage to the attacker.",
+    armorAdd: "Dormant Plate of the Dawnmartyr",
+    armorOptions: {
+      regExpSearch: /dormant plate of the dawnmartyr/i,
+      name: "Dormant Plate of the Dawnmartyr",
+      source: [["TDCSR", 208]],
+      type: "heavy",
+      ac: 19,
+      weight: 65,
+    },
+  },
+  awakened: {
+    name: "Awakened Plate of the Dawnmartyr",
+    description:
+      "While wearing this armor, I gain a +2 bonus to AC, resistance to fire damage, and immunity to being frightened. As a reaction when damaged by a creature within 5 ft with a melee attack, I can deal 2d6 fire damage to the attacker.",
+    armorAdd: "Awakened Plate of the Dawnmartyr",
+    dmgres: ["Fire"],
+    savetxt: { immune: ["frightened"] },
+    armorOptions: {
+      regExpSearch: /awakened plate of the dawnmartyr/i,
+      name: "Awakened Plate of the Dawnmartyr",
+      source: [["TDCSR", 208]],
+      type: "heavy",
+      ac: 20,
+      weight: 65,
+    },
+  },
+  exalted: {
+    name: "Exalted Plate of the Dawnmartyr",
+    description:
+      "While wearing this armor, I gain a +3 bonus to AC, resistance to fire damage, and immunity to being frightened. As a reaction when damaged by a creature within 5 ft with a melee attack, I can deal 2d6 fire or radiant damage to the attacker. See third page.",
+    armorAdd: "Exalted Plate of the Dawnmartyr",
+    dmgres: ["Fire"],
+    savetxt: { immune: ["frightened"] },
+    armorOptions: {
+      regExpSearch: /exalted plate of the dawnmartyr/i,
+      name: "Exalted Plate of the Dawnmartyr",
+      source: [["TDCSR", 208]],
+      type: "heavy",
+      ac: 21,
+      weight: 65,
+    },
+    usages: 1,
+    recovery: "long rest",
+    toNotesPage: [
+      {
+        name: "Features",
+        page3notes: true,
+        additional: "1 \u00D7 per long rest",
+        note: [
+          "When reduced to 0 HP, I can have a blast of healing flame surround me",
+          "I regain 1 HP and am lifted to my feet",
+          "Each enemy within 10 ft takes 2d6 fire or radiant damage",
+        ],
+      },
+    ],
+  },
+};
+
+MagicItemsList["pyremaul"] = {
+  name: "Pyremaul",
+  source: [["TDCSR", 208]],
+  type: "weapon (maul)",
+  rarity: "legendary",
+  attunement: true,
+  description: "",
+  descriptionFull:
+    "Forged from deep red iron, this massive hammer is set with a brilliant fire opal that shimmers with eternal flame. It is rumored to be currently wielded by Grand Legate Phaestor, the fire giant ruler of Vulkanon, somewhere beneath the Cliffkeep Mountains." +
+    "\n" +
+    toUni("Dormant") +
+    "\n" +
+    "While Pyremaul is in a dormant state, you gain a +1 bonus to attack rolls made with this magic weapon. When you hit with an attack using this weapon, the target takes an extra 1d6 fire damage." +
+    "\n   " +
+    "Additionally, you can choose to have this weapon shed bright light in a 30-foot radius and dim light for an additional 30 feet (no action required)." +
+    "\n" +
+    toUni("Awakened") +
+    "\n" +
+    "When Pyremaul reaches an awakened state, you gain the following benefits:" +
+    "\n" +
+    "\u2022 The weapon's bonus to attack rolls increases to +2." +
+    "\n" +
+    "\u2022 The extra fire damage dealt by the weapon increases to 2d6." +
+    "\n" +
+    "\u2022 As an action, you can slam Pyremaul into the ground to cast the burning hands spell at 2nd level (save DC 15). You can't use this property again until you finish a short or long rest." +
+    "\n" +
+    "\u2022 Whenever you score a critical hit with this weapon, the target must succeed on a DC 15 Strength saving throw or be knocked prone." +
+    toUni("Exalted") +
+    "\n" +
+    "\u2022 When Pyremaul reaches an exalted state, you gain the following benefits:" +
+    "\n" +
+    "\u2022 The weapon's bonus to attack rolls increases to +3." +
+    "\n" +
+    "\u2022 The extra fire damage dealt by the weapon increases to 3d6." +
+    "\n" +
+    "\u2022 When you cast burning hands with the weapon, you do so at 3rd level and the save DC increases to 17." +
+    "\n" +
+    "\u2022 When you score a critical hit with this weapon, the saving throw to avoid being knocked prone increases to 17. You also roll an extra 3d6 fire damage when determining the extra damage for the critical hit." +
+    "\n" +
+    "\u2022 When you kill a creature with an attack using this weapon, you can take 10d10 fire damage and immolate the creature's corpse. This damage can't be reduced in any way, and you die if this damage reduces you to 0 hit points. The immolated creature and everything it is wearing and carrying, except magic items, are reduced to a pile of ash. The creature can be restored to life only by means of a true resurrection or a wish spell. You can't use this property of the maul again until 7 days have passed.",
+  allowDuplicates: false,
+  choices: ["Dormant", "Awakened", "Exalted"],
+  dormant: {
+    name: "Dormant Pyremaul",
+    description:
+      "This maul adds +1 to hit and damage and deals an extra 1d6 fire damage. I can have it shed bright light in 30 ft, dim light in 30 ft.",
+    weaponsAdd: ["Dormant Pyremaul"],
+    weaponOptions: {
+      baseWeapon: "maul",
+      regExpSearch: /^(?=.*dormant)(?=.*pyremaul).*$/i,
+      name: "Dormant Pyremaul",
+      source: [["TDCSR", 208]],
+      modifiers: [1, 1],
+      description: "Heavy, two-handed; +1d6 fire damage",
+    },
+  },
+  awakened: {
+    name: "Awakened Pyremaul",
+    description:
+      "This maul adds +2 to hit and damage and deals an extra 2d6 fire damage. I can have it shed bright light in 30 ft, dim light in 30 ft. As an action, I can cast burning hands (DC 15) at 2nd level. Whenever I score a critical hit with it, the target makes a DC 15 Str save or knocked prone.",
+    weaponsAdd: ["Awakened Pyremaul"],
+    weaponOptions: {
+      baseWeapon: "maul",
+      regExpSearch: /^(?=.*awakened)(?=.*pyremaul).*$/i,
+      name: "Awakened Pyremaul",
+      source: [["TDCSR", 208]],
+      modifiers: [2, 2],
+      description:
+        "Heavy, two-handed; +2d6 fire damage; DC 15 Str save or knocked prone on critical hit",
+    },
+    action: ["action", " (burning hands)"],
+    extraLimitedFeatures: [
+      {
+        name: "Burning Hands (Pyremaul)",
+        usages: 1,
+        recovery: "short rest",
+      },
+    ],
+    fixedDC: 15,
+    spellcastingBonus: {
+      name: "Once per short rest",
+      spells: ["burning hands"],
+      selection: ["burning hands"],
+      firstCol: "oncesr",
+    },
+    spellChanges: {
+      "burning hands": {
+        allowUpCasting: false,
+        description:
+          "All in area 4d6 Fire dmg; save halves; unattended flammable objects ignite",
+        changes:
+          "As an action, I can slam Pyremaul into the ground to cast the burning hands spell at 2nd level (save DC 15).",
+      },
+    },
+  },
+  exalted: {
+    name: "Exalted Pyremaul",
+    description:
+      "This maul adds +3 to hit and damage and deals an extra 3d6 fire damage. I can have it shed bright light in 30 ft, dim light in 30 ft. As an action, I can cast burning hands (DC 17) at 2nd level. Whenever I score a critical hit with it, the target makes a DC 17 Str save or knocked prone. See third page.",
+    weaponsAdd: ["Exalted Pyremaul"],
+    weaponOptions: {
+      baseWeapon: "maul",
+      regExpSearch: /^(?=.*exalted)(?=.*pyremaul).*$/i,
+      name: "Exalted Pyremaul",
+      source: [["TDCSR", 209]],
+      modifiers: [3, 3],
+      description:
+        "Heavy, two-handed; +3d6 fire damage; DC 17 Str save or knocked prone and +3d6 fire damage on critical hit",
+    },
+    action: ["action", " (burning hands)"],
+    extraLimitedFeatures: [
+      {
+        name: "Burning Hands (Pyremaul)",
+        usages: 1,
+        recovery: "short rest",
+      },
+    ],
+    fixedDC: 17,
+    spellcastingBonus: {
+      name: "Once per short rest",
+      spells: ["burning hands"],
+      selection: ["burning hands"],
+      firstCol: "oncesr",
+    },
+    spellChanges: {
+      "burning hands": {
+        allowUpCasting: false,
+        description:
+          "All in area 4d6 Fire dmg; save halves; unattended flammable objects ignite",
+        changes:
+          "As an action, I can slam Pyremaul into the ground to cast the burning hands spell at 2nd level (save DC 17).",
+      },
+    },
+    usages: 1,
+    recovery: "Week",
+    toNotesPage: [
+      {
+        name: "Features",
+        page3notes: true,
+        additional: "1 \u00D7 per week",
+        note: [
+          "When I kill a creature, I can take 10d10 fire damage to immolate the corpse",
+          "The damage can't be reduced in any way and I die if reduced to 0 HP by it",
+          "The corpse and everything worn/carried by it, except magic items, are turned to ash",
+          "The creature can only be brought back to life by the true resurrection or wish spells",
+        ],
+      },
+    ],
+  },
+};
+
+MagicItemsList["spire of conflux"] = {
+  name: "Spire of Conflux",
+  source: [["TDCSR", 209]],
+  type: "weapon (quarterstaff)",
+  rarity: "legendary",
+  attunement: true,
+  prerequisite: "Requires attunement by a spellcaster",
+  prereqeval: function (v) {
+    return v.isSpellcaster;
+  },
+  description: "",
+  descriptionFull:
+    "A powerful relic passed down from generation to generation of Ashari leaders, the Spire of Conflux was lost over three centuries ago when Joran the Sea-Speaker, a respected leader of the Water Ashari, was devoured by a demon of the Abyss. It was rediscovered by the legendary druid Keyleth of Zephrah, Voice of the Tempest. However, rumors swirl that she is seeking another hero to wield it—one who can travel the land and do good in small ways as she once did" +
+    "\n" +
+    toUni("Dormant") +
+    "\n" +
+    "While the Spire of Conflux is in a dormant state, the staff has 8 charges and regains 1d4 + 2 expended charges daily at dawn. While holding the staff, you can expend 1 or more of its charges to cast one of the following spells from it, using your spell save DC: burning hands (1 charge) or fireball (3 charges)." +
+    "\n   " +
+    "Additionally, while holding this staff, you have a +1 bonus to spell attack rolls and your spell save DC increases by 1." +
+    "\n" +
+    toUni("Awakened") +
+    "\n" +
+    "When the Spire of Conflux reaches an awakened state, you gain the following benefits:" +
+    "\n" +
+    "\u2022 The staff has 12 charges, and it regains 1d6 + 2 expended charges daily at dawn." +
+    "\n" +
+    "\u2022 You can also spend charges to cast the following spells from the staff: conjure elemental (5 charges) or ice storm (4 charges)." +
+    "\n" +
+    "\u2022 When you cast a spell that deals bludgeoning, cold, fire, lightning, or thunder damage and you roll a 1 on a damage die, you can reroll the die and must use the new roll." +
+    "\n" +
+    toUni("Exalted") +
+    "\n" +
+    "\u2022 When the Spire of Conflux reaches an exalted state, you gain the following benefits:" +
+    "\n" +
+    "\u2022 The staff has 20 charges, and it regains 1d6 + 4 expended charges daily at dawn." +
+    "\n" +
+    "\u2022 You can also spend charges to cast the following spells from the staff: chain lightning (6 charges) or fire storm (7 charges)" +
+    "\n" +
+    "\u2022 The bonus to spell attack rolls and your spell save DC increases to +2",
+  allowDuplicates: false,
+  choices: ["Dormant", "Awakened", "Exalted"],
+  dormant: {
+    name: "Dormant Spire of Conflux",
+    description:
+      "This staff adds a +1 bonus to my spell attacks and save DCs of my spells. It has 8 charges, regaining 1d4+2 charges at dawn. I can expend charges to cast spells; see third page.",
+    calcChanges: {
+      spellCalc: [
+        function (type, spellcasters, ability) {
+          if (type == "dc" || type == "attack") return 1;
+        },
+        "I gain a +1 bonus to spell attack rolls and saving throw DCs of my spells.",
+      ],
+    },
+    spellFirstColTitle: "Ch",
+    spellcastingAbility: "class",
+    spellcastingBonus: [
+      {
+        name: "1 charge",
+        spells: ["burning hands"],
+        selection: ["burning hands"],
+        firstCol: 1,
+      },
+      {
+        name: "3 charges",
+        spells: ["fireball"],
+        selection: ["fireball"],
+        firstCol: 3,
+      },
+    ],
+    usages: 8,
+    recovery: "dawn",
+    additional: "regains 1d4+2",
+    weaponsAdd: ["Dormant Spire of Conflux"],
+    weaponOptions: {
+      baseWeapon: "quarterstaff",
+      regExpSearch: /^(?=.*dormant)(?=.*spire of conflux).*$/i,
+      name: "Dormant Spire of Conflux",
+      description: "Versatile (1d8); counts as magical",
+      source: [["TDCSR", 209]],
+    },
+    toNotesPage: [
+      {
+        name: "Features",
+        page3notes: true,
+        note: [
+          "I can spend charges from the Spire of Conflux to cast the following spells:",
+          "\u2022 1 charge: burning hands",
+          "\u2022 3 charges: fireball",
+        ],
+      },
+    ],
+  },
+  awakened: {
+    name: "Awakened Spire of Conflux",
+    description:
+      "This staff adds a +1 bonus to my spell attacks and save DCs of my spells. It has 12 charges, regaining 1d6+2 charges at dawn. I can expend charges to cast spells; see third page. When I cast a spell that deals bludgeoning, cold, fire, lightning, or thunder damage and roll a 1 on a damage die, I can reroll the die and must use the new result.",
+    calcChanges: {
+      spellCalc: [
+        function (type, spellcasters, ability) {
+          if (type == "dc" || type == "attack") return 1;
+        },
+        "I gain a +1 bonus to spell attack rolls and saving throw DCs of my spells.",
+      ],
+    },
+    spellFirstColTitle: "Ch",
+    spellcastingAbility: "class",
+    spellcastingBonus: [
+      {
+        name: "1 charge",
+        spells: ["burning hands"],
+        selection: ["burning hands"],
+        firstCol: 1,
+      },
+      {
+        name: "3 charges",
+        spells: ["fireball"],
+        selection: ["fireball"],
+        firstCol: 3,
+      },
+      {
+        name: "4 charges",
+        spells: ["ice storm"],
+        selection: ["ice storm"],
+        firstCol: 4,
+      },
+      {
+        name: "5 charges",
+        spells: ["conjure elemental"],
+        selection: ["conjure elemental"],
+        firstCol: 5,
+      },
+    ],
+    usages: 12,
+    recovery: "dawn",
+    additional: "regains 1d6+2",
+    weaponsAdd: ["Awakened Spire of Conflux"],
+    weaponOptions: {
+      baseWeapon: "quarterstaff",
+      regExpSearch: /^(?=.*awakened)(?=.*spire of conflux).*$/i,
+      name: "Awakened Spire of Conflux",
+      description: "Versatile (1d8); counts as magical",
+      source: [["TDCSR", 209]],
+    },
+    toNotesPage: [
+      {
+        name: "Features",
+        page3notes: true,
+        note: [
+          "I can spend charges from the Spire of Conflux to cast the following spells:",
+          "\u2022 1 charge: burning hands",
+          "\u2022 3 charges: fireball",
+          "\u2022 4 charges: ice storm",
+          "\u2022 5 charges: conjure elemental",
+        ],
+      },
+    ],
+  },
+  exalted: {
+    name: "Exalted Spire of Conflux",
+    description:
+      "This staff adds a +2 bonus to my spell attacks and save DCs of my spells. It has 20 charges, regaining 1d6+4 charges at dawn. I can expend charges to cast spells; see third page. When I cast a spell that deals bludg./cold/fire/lightning/thunder damage and roll a 1 on a damage die, I can reroll the die using the new result.",
+    calcChanges: {
+      spellCalc: [
+        function (type, spellcasters, ability) {
+          if (type == "dc" || type == "attack") return 2;
+        },
+        "I gain a +2 bonus to spell attack rolls and saving throw DCs of my spells.",
+      ],
+    },
+    spellFirstColTitle: "Ch",
+    spellcastingAbility: "class",
+    spellcastingBonus: [
+      {
+        name: "1 charge",
+        spells: ["burning hands"],
+        selection: ["burning hands"],
+        firstCol: 1,
+      },
+      {
+        name: "3 charges",
+        spells: ["fireball"],
+        selection: ["fireball"],
+        firstCol: 3,
+      },
+      {
+        name: "4 charges",
+        spells: ["ice storm"],
+        selection: ["ice storm"],
+        firstCol: 4,
+      },
+      {
+        name: "5 charges",
+        spells: ["conjure elemental"],
+        selection: ["conjure elemental"],
+        firstCol: 5,
+      },
+      {
+        name: "6 charges",
+        spells: ["chain lightning"],
+        selection: ["chain lightning"],
+        firstCol: 6,
+      },
+      {
+        name: "7 charges",
+        spells: ["fire storm"],
+        selection: ["fire storm"],
+        firstCol: 7,
+      },
+    ],
+    usages: 20,
+    recovery: "dawn",
+    additional: "regains 1d6+4",
+    weaponsAdd: ["Exalted Spire of Conflux"],
+    weaponOptions: {
+      baseWeapon: "quarterstaff",
+      regExpSearch: /^(?=.*exalted)(?=.*spire of conflux).*$/i,
+      name: "Exalted Spire of Conflux",
+      description: "Versatile (1d8); counts as magical",
+      source: [["TDCSR", 209]],
+    },
+    toNotesPage: [
+      {
+        name: "Features",
+        page3notes: true,
+        note: [
+          "I can spend charges from the Spire of Conflux to cast the following spells:",
+          "\u2022 1 charge: burning hands",
+          "\u2022 3 charges: fireball",
+          "\u2022 4 charges: ice storm",
+          "\u2022 5 charges: conjure elemental",
+          "\u2022 6 charges: chain lightning",
+          "\u2022 7 charges: fire storm",
+        ],
+      },
+    ],
+  },
+};
+
+MagicItemsList["star razor"] = {
+  name: "Star Razor",
+  source: [["TDCSR", 210]],
+  type: "weapon (longsword)",
+  rarity: "legendary",
+  attunement: true,
+  description: "",
+  descriptionFull:
+    "The thick, grooved blade of this shining silver longsword is lined with etched runes that sparkle blue in the light. Star Razor—known also as Dwueth'var— was thought to have been destroyed or lost after the Calamity, but new rumors suggest that it might be wielded by a half-orc somewhere in Wildemount." +
+    "\n" +
+    toUni("Dormant") +
+    "\n" +
+    "While Star Razor is in a dormant state, you can hold this magic longsword and use a bonus action to speak the command word Galas-var, causing the sword to emit a pale blue glow that sheds bright light in a 20-foot radius and dim light for an additional 20 feet. This glow lasts until you use a bonus action to speak the command word again, or until you drop or sheathe the sword." +
+    "\n" +
+    "\u2022 While this longsword is glowing, you gain a +1 bonus to attack and damage rolls made with the weapon, and you have resistance to radiant damage." +
+    "\n" +
+    "\u2022 You can cast the faerie fire spell from the weapon as an action, requiring no components (save DC 13). Once a spell has been cast using Star Razor, that spell can't be cast from the sword until the next dawn." +
+    "\n" +
+    toUni("Awakened") +
+    "\n" +
+    "When Star Razor reaches an awakened state, you gain the following benefits:" +
+    "\n" +
+    "\u2022 The weapon's bonus to attack and damage rolls increases to +2." +
+    "\n" +
+    "\u2022 When a creature within 5 feet of you hits you with a melee attack, you can use your reaction to create a burst of radiance from the sword, dealing 1d8 radiant damage to the attacker." +
+    "\n" +
+    "\u2022 You can cast the see invisibility spell from the sword as an action, and the save DC for spells cast using the sword increases to 15." +
+    "\n" +
+    toUni("Exalted") +
+    "\n" +
+    "\u2022 When Star Razor reaches an exalted state, you gain the following benefits:" +
+    "\n" +
+    "\u2022 The weapon's bonus to attack and damage rolls increases to +3." +
+    "\n" +
+    "\u2022 The burst of radiance you can create as a reaction when hit with a melee attack deals 1d12 radiant damage, and you can immediately teleport to an unoccupied space you can see within 15 feet of you as part of the same reaction." +
+    "\n" +
+    "\u2022 You can cast the fly spell from the sword as an action, and the save DC for spells cast using the sword increases to 17.",
+  allowDuplicates: false,
+  choices: ["Dormant", "Awakened", "Exalted"],
+  dormant: {
+    name: "Dormant Star Razor",
+    description:
+      "While holding this sword, I can speak its command word to cause it to glow bright light in 20 ft, dim light in 20 ft. While glowing, it adds +1 to hit and damage and grants resistance to radiant damage. Once per dawn, I can cast faerie fire (DC 13).",
+    weaponsAdd: ["Dormant Star Razor"],
+    weaponOptions: {
+      baseWeapon: "longsword",
+      regExpSearch: /^(?=.*dormant)(?=.*star razor).*$/i,
+      name: "Dormant Star Razor",
+      source: [["TDCSR", 210]],
+    },
+    action: [
+      ["bonus action", " (start/stop glow)"],
+      ["action", " (faerie fire)"],
+    ],
+    calcChanges: {
+      atkCalc: [
+        function (fields, v, output) {
+          if (
+            /\bstar razor\b/i.test(v.WeaponTextName) &&
+            /\bglowing\b/i.test(v.WeaponTextName)
+          ) {
+            output.magic += 1;
+          }
+        },
+        "If I include the word 'Glowing' in Star Razor's name, the calculation will add +1 to hit and damage.",
+      ],
+    },
+    spellFirstColTitle: "Us",
+    fixedDC: 13,
+    spellcastingBonus: [
+      {
+        name: "Once per dawn",
+        spells: ["faerie fire"],
+        selection: ["faerie fire"],
+        firstCol: "checkbox",
+      },
+    ],
+    extraLimitedFeatures: [
+      {
+        name: "Faerie Fire (Star Razor)",
+        usages: 1,
+        recovery: "dawn",
+      },
+    ],
+  },
+  awakened: {
+    name: "Awakened Star Razor",
+    description:
+      "While holding this sword, I can speak its command word to cause it to glow bright light in 20 ft, dim light in 20 ft. While glowing, it adds +2 to hit and damage and grants resistance to radiant damage. Once per dawn per spell, I can cast (DC 15) faerie fire and see invisibility. See third page.",
+    weaponsAdd: ["Awakened Star Razor"],
+    weaponOptions: {
+      baseWeapon: "longsword",
+      regExpSearch: /^(?=.*awakened)(?=.*star razor).*$/i,
+      name: "Awakened Star Razor",
+      source: [["TDCSR", 210]],
+    },
+    action: [
+      ["bonus action", " (start/stop glow)"],
+      ["reaction", " (when hit in melee)"],
+    ],
+    calcChanges: {
+      atkCalc: [
+        function (fields, v, output) {
+          if (
+            /\bstar razor\b/i.test(v.WeaponTextName) &&
+            /\bglowing\b/i.test(v.WeaponTextName)
+          ) {
+            output.magic += 2;
+          }
+        },
+        "If I include the word 'Glowing' in Star Razor's name, the calculation will add +2 to hit and damage.",
+      ],
+    },
+    spellFirstColTitle: "Us",
+    fixedDC: 15,
+    spellcastingBonus: [
+      {
+        name: "Once per dawn",
+        spells: ["faerie fire"],
+        selection: ["faerie fire"],
+        firstCol: "checkbox",
+      },
+      {
+        name: "Once per dawn",
+        spells: ["see invisibility"],
+        selection: ["see invisibility"],
+        firstCol: "checkbox",
+      },
+    ],
+    extraLimitedFeatures: [
+      {
+        name: "Faerie Fire (Star Razor)",
+        usages: 1,
+        recovery: "dawn",
+      },
+      {
+        name: "See Invisibility (Star Razor)",
+        usages: 1,
+        recovery: "dawn",
+      },
+    ],
+    toNotesPage: [
+      {
+        name: "Features",
+        page3notes: true,
+        note: [
+          "When hit in melee, I can use my reaction to deal 1d8 damage to the attacker",
+        ],
+      },
+    ],
+  },
+  exalted: {
+    name: "Exalted Star Razor",
+    description:
+      "While holding this sword, I can speak its command word to cause it to glow bright light in 20 ft, dim light in 20 ft. While glowing, it adds +3 to hit and damage and grants resistance to radiant damage. Once per dawn per spell, I can cast (DC 15) faerie fire, see invisibility, and fly. See third page.",
+    weaponsAdd: ["Exalted Star Razor"],
+    weaponOptions: {
+      baseWeapon: "longsword",
+      regExpSearch: /^(?=.*exalted)(?=.*star razor).*$/i,
+      name: "Exalted Star Razor",
+      source: [["TDCSR", 210]],
+    },
+    action: [
+      ["bonus action", " (start/stop glow)"],
+      ["reaction", " (when hit in melee)"],
+    ],
+    calcChanges: {
+      atkCalc: [
+        function (fields, v, output) {
+          if (
+            /\bstar razor\b/i.test(v.WeaponTextName) &&
+            /\bglowing\b/i.test(v.WeaponTextName)
+          ) {
+            output.magic += 3;
+          }
+        },
+        "If I include the word 'Glowing' in Star Razor's name, the calculation will add +3 to hit and damage.",
+      ],
+    },
+    spellFirstColTitle: "Us",
+    fixedDC: 17,
+    spellcastingBonus: [
+      {
+        name: "Once per dawn",
+        spells: ["faerie fire"],
+        selection: ["faerie fire"],
+        firstCol: "checkbox",
+      },
+      {
+        name: "Once per dawn",
+        spells: ["see invisibility"],
+        selection: ["see invisibility"],
+        firstCol: "checkbox",
+      },
+      {
+        name: "Once per dawn",
+        spells: ["fly"],
+        selection: ["fly"],
+        firstCol: "checkbox",
+      },
+    ],
+    extraLimitedFeatures: [
+      {
+        name: "Faerie Fire (Star Razor)",
+        usages: 1,
+        recovery: "dawn",
+      },
+      {
+        name: "See Invisibility (Star Razor)",
+        usages: 1,
+        recovery: "dawn",
+      },
+      {
+        name: "Fly (Star Razor)",
+        usages: 1,
+        recovery: "dawn",
+      },
+    ],
+    toNotesPage: [
+      {
+        name: "Features",
+        page3notes: true,
+        note: [
+          "When hit in melee, I can use my reaction to deal 1d12 damage to the attacker",
+          "I can then teleport to a seen, unoccupied space within 15 ft",
+        ],
+      },
+    ],
+  },
+};
+
+MagicItemsList["titanstone knuckles"] = {
+  name: "Titanstone Knuckles",
+  source: [["TDCSR", 211]],
+  type: "wondrous item",
+  rarity: "legendary",
+  attunement: true,
+  description: "",
+  descriptionFull:
+    "Carved from the heartstone of a slain earth primordial, these gauntlets bestow immeasurable might to their wearer. In recent times, they were wielded by the legendary barbarian Grog Strongjaw, who continues to use them as he seeks worthy challengers across Tal'Dorei and Exandria." +
+    "\n" +
+    toUni("Dormant") +
+    "\n" +
+    "While the Titanstone Knuckles are in a dormant state, your Strength score becomes 22 while you wear these gauntlets. Additionally, your weapon attacks deal double damage to objects and structures.." +
+    "\n" +
+    toUni("Awakened") +
+    "\n" +
+    "When the Titanstone Knuckles reach an awakened state, they gain the following properties:" +
+    "\n" +
+    "\u2022 Your Strength score becomes 24." +
+    "\n" +
+    "\u2022 You can use an action to cast the enlarge/reduce spell from the gauntlets on yourself (enlarge only), with a duration of 10 minutes. This property of the gauntlets can't be used again until you finish a long rest." +
+    "\n" +
+    toUni("Exalted") +
+    "\n" +
+    "\u2022 When the Titanstone Knuckles reach an exalted state, they gain the following properties:" +
+    "\n" +
+    "\u2022 Your Strength score becomes 26." +
+    "\n" +
+    "\u2022 You are immune to the paralyzed and petrified conditions." +
+    "\n" +
+    "\u2022 While you are under the effect of the enlarge/reduce spell cast by the gauntlets, you have resistance to cold, fire, lightning, and thunder damage.",
+  allowDuplicates: false,
+  choices: ["Dormant", "Awakened", "Exalted"],
+  dormant: {
+    name: "Dormant Titanstone Knuckles",
+    description:
+      "While wearing these gauntlets my Strength score is 22 and my weapon attacks deal double damage to objects and structures.",
+    scoresOverride: [22, 0, 0, 0, 0, 0],
+    calcChanges: {
+      atkAdd: [
+        function (fields, v) {
+          if (v.isWeapon) {
+            fields.Description +=
+              (fields.Description ? "; " : "") +
+              "double damage to structures and objects";
+          }
+        },
+        "While wearing the Titanstone Knuckles, my weapon attacks deal double damage to objects and structures.",
+      ],
+    },
+  },
+  awakened: {
+    name: "Awakened Titanstone Knuckles",
+    description:
+      "While wearing these gauntlets my Strength score is 24 and my weapon attacks deal double damage to objects and structures. Once per long rest, I can cast enlarge/reduce on myself (enlarge only) with a duration of 10 min.",
+    scoresOverride: [24, 0, 0, 0, 0, 0],
+    calcChanges: {
+      atkAdd: [
+        function (fields, v) {
+          if (v.isWeapon) {
+            fields.Description +=
+              (fields.Description ? "; " : "") +
+              "double damage to structures and objects";
+          }
+        },
+        "While wearing the Titanstone Knuckles, my weapon attacks deal double damage to objects and structures.",
+      ],
+    },
+    spellFirstColTitle: "Us",
+    spellcastingBonus: [
+      {
+        name: "Once per long rest",
+        spells: ["enlarge/reduce"],
+        selection: ["enlarge/reduce"],
+        firstCol: "oncelr",
+      },
+    ],
+    spellChanges: {
+      "enlarge/reduce": {
+        allowUpCasting: false,
+        range: "Self",
+        duration: "10 min",
+        description: "I become enlarged (Str adv. +1d4 weapon dmg)",
+        changes:
+          "With the Titanstone Knuckles, I can cast Enlarge/Reduce on myself (enlarge only) with a duration of 10 min.",
+      },
+    },
+    extraLimitedFeatures: [
+      {
+        name: "Enlarge/Reduce (Titanstone Knuckles)",
+        usages: 1,
+        recovery: "long rest",
+      },
+    ],
+  },
+  exalted: {
+    name: "Exalted Titanstone Knuckles",
+    description:
+      "While wearing these gauntlets my Strength score is 26 and my weapon attacks deal double damage to objects and structures. Once per long rest, I can cast enlarge/reduce on myself (enlarge only) with a duration of 10 min and I have resistance to cold, fire, lightning, and thunder damage for the duration of the spell.",
+    scoresOverride: [26, 0, 0, 0, 0, 0],
+    calcChanges: {
+      atkAdd: [
+        function (fields, v) {
+          if (v.isWeapon) {
+            fields.Description +=
+              (fields.Description ? "; " : "") +
+              "double damage to structures and objects";
+          }
+        },
+        "While wearing the Titanstone Knuckles, my weapon attacks deal double damage to objects and structures.",
+      ],
+    },
+    spellFirstColTitle: "Us",
+    spellcastingBonus: [
+      {
+        name: "Once per long rest",
+        spells: ["enlarge/reduce"],
+        selection: ["enlarge/reduce"],
+        firstCol: "oncelr",
+      },
+    ],
+    spellChanges: {
+      "enlarge/reduce": {
+        allowUpCasting: false,
+        range: "Self",
+        duration: "10 min",
+        description: "I become enlarged (Str adv. +1d4 weapon dmg)",
+        changes:
+          "With the Titanstone Knuckles, I can cast Enlarge/Reduce on myself (enlarge only) with a duration of 10 min.",
+      },
+    },
+    extraLimitedFeatures: [
+      {
+        name: "Enlarge/Reduce (Titanstone Knuckles)",
+        usages: 1,
+        recovery: "long rest",
+      },
+    ],
+  },
+};
+
+MagicItemsList["whisper"] = {
+  name: "Whisper",
+  source: [["TDCSR", 211]],
+  type: "weapon (dagger)",
+  rarity: "legendary",
+  attunement: true,
+  description: "",
+  descriptionFull:
+    "Forged with a mercurial metal accidentally drawn from the Realms Beyond, this dagger shimmers with an unsettling sourceless light. It was once wielded by Vax'ildan, a legendary champion of the Matron of Ravens. Two raven feathers are linked to its pommel as a memento of its former bearer." +
+    "\n" +
+    toUni("Dormant") +
+    "\n" +
+    "While Whisper is in a dormant state, you gain a +1 bonus to attack and damage rolls made with this magic weapon." +
+    "\n   " +
+    "Additionally, when you score a critical hit with this dagger, the target must succeed on a DC 13 Wisdom saving throw or become frightened of you for 1 minute. On a success, the target is immune to this effect for 24 hours." +
+    "\n" +
+    toUni("Awakened") +
+    "\n" +
+    "When Whisper reaches an awakened state, you gain the following benefits:" +
+    "\n" +
+    "\u2022 The weapon's bonus to attack and damage rolls increases to +2. Additionally, when you hit with an attack using this dagger, the target takes an extra 1d6 psychic damage." +
+    "\n" +
+    "\u2022 The DC to resist being frightened from a critical hit increases to 15." +
+    "\n" +
+    toUni("Exalted") +
+    "\n" +
+    "\u2022 When Whisper reaches an exalted state, you gain the following benefits:" +
+    "\n" +
+    "\u2022 The weapon's bonus to attack and damage rolls increases to +3, and the extra psychic damage it deals increases to 1d8." +
+    "\n" +
+    "\u2022 The DC to resist being frightened from a critical hit increases to 17." +
+    "\n" +
+    "\u2022 When this dagger is used to make a ranged attack, you can choose to transform into shadow and merge with the blade as part of the action used to attack, teleporting to another location. If the attack hits, you appear in an unoccupied space of your choice within 5 feet of the target. If the attack misses, you appear where the GM determines the dagger lands (typically within 1d6 \u00D7 5 feet of the target). In either case, you appear with the dagger in your hand.",
+  allowDuplicates: false,
+  choices: ["Dormant", "Awakened", "Exalted"],
+  dormant: {
+    name: "Dormant Whisper",
+    description:
+      "This dagger adds +1 to hit and damage. When I score a critical hit with it, the target makes a DC 13 Wis save or is frightened of me for 1 min; on a success, target is immune for 24 hr.",
+    weaponsAdd: ["Dormant Whisper"],
+    weaponOptions: {
+      baseWeapon: "dagger",
+      regExpSearch: /^(?=.*dormant)(?=.*whisper).*$/i,
+      name: "Dormant Whisper",
+      source: [["TDCSR", 211]],
+      description : "Finesse, light, thrown; DC 13 Wis save on critical hit or frightened for 1 min",
+      modifiers: [1, 1],
+    },
+  },
+  awakened: {
+    name: "Awakened Whisper",
+    description:
+      "This dagger adds +2 to hit and damage and deals an extra 1d6 psychic damage. When I score a critical hit with it, the target makes a DC 15 Wis save or is frightened of me for 1 min; on a success, target is immune for 24 hr.",
+    weaponsAdd: ["Awakened Whisper"],
+    weaponOptions: {
+      baseWeapon: "dagger",
+      regExpSearch: /^(?=.*awakened)(?=.*whisper).*$/i,
+      name: "Awakened Whisper",
+      source: [["TDCSR", 211]],
+      description : "Finesse, light, thrown; +1d6 psychic damage; DC 15 Wis save on critical hit or frightened for 1 min",
+      modifiers: [2, 2],
+    },
+  },
+  exalted: {
+    name: "Exalted Whisper",
+    description:
+      "This dagger adds +3 to hit and damage and deals an extra 1d8 psychic damage. When I score a critical hit with it, the target makes a DC 17 Wis save or is frightened of me for 1 min; on a success, target is immune for 24 hr. When thrown, I can teleport to the dagger's location; see third page.",
+    weaponsAdd: ["Exalted Whisper"],
+    weaponOptions: {
+      baseWeapon: "dagger",
+      regExpSearch: /^(?=.*exalted)(?=.*whisper).*$/i,
+      name: "Exalted Whisper",
+      source: [["TDCSR", 212]],
+      description : "Finesse, light, thrown; +1d8 psychic damage; DC 17 Wis save on critical hit or frightened for 1 min",
+      modifiers: [3, 3],
+    },
+    toNotesPage: [
+      {
+        name: "Features",
+        page3notes: true,
+        note: [
+          "When I throw Whisper, I can teleport, appearing near where it lands",
+          "On a hit, I appear in an unoccupied space within 5 ft of the target",
+          "On a miss, I appear within 1d6 \u00D7 5 ft of the target (at DM's discretion)",
+          "In either case, I appear with the dagger in my hand"
+        ],
       },
     ],
   },
