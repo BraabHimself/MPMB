@@ -5050,7 +5050,7 @@ CreatureList["plainscow"] = {
   skills: {
     insight: 2,
   },
-  senses : "",
+  senses: "",
   passivePerception: 10,
   challengeRating: "2",
   proficiencyBonus: 2,
