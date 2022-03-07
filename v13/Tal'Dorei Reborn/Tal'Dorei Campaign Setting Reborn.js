@@ -19,7 +19,7 @@ SourceList["TDCSR"] = {
   name: "Tal'Dorei Campaign Setting Reborn",
   abbreviation: "TDCSR",
   group: "Third Party",
-  url: "https://shop.critrole.com/collections/new-products/products/taldorei-campaign-setting-reborn",
+  url: "https://shop.critrole.com/products/taldorei-campaign-setting-reborn",
   date: "2022-01-18",
 };
 
