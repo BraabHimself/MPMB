@@ -4668,7 +4668,7 @@ MagicItemsList["titanstone knuckles"] = {
     "\n" +
     toUni("Dormant") +
     "\n" +
-    "While the Titanstone Knuckles are in a dormant state, your Strength score becomes 22 while you wear these gauntlets. Additionally, your weapon attacks deal double damage to objects and structures.." +
+    "While the Titanstone Knuckles are in a dormant state, your Strength score becomes 22 while you wear these gauntlets. Additionally, your weapon attacks deal double damage to objects and structures." +
     "\n" +
     toUni("Awakened") +
     "\n" +
@@ -4842,7 +4842,8 @@ MagicItemsList["whisper"] = {
       regExpSearch: /^(?=.*dormant)(?=.*whisper).*$/i,
       name: "Dormant Whisper",
       source: [["TDCSR", 211]],
-      description : "Finesse, light, thrown; DC 13 Wis save on critical hit or frightened for 1 min",
+      description:
+        "Finesse, light, thrown; DC 13 Wis save on critical hit or frightened for 1 min",
       modifiers: [1, 1],
     },
   },
@@ -4856,7 +4857,8 @@ MagicItemsList["whisper"] = {
       regExpSearch: /^(?=.*awakened)(?=.*whisper).*$/i,
       name: "Awakened Whisper",
       source: [["TDCSR", 211]],
-      description : "Finesse, light, thrown; +1d6 psychic damage; DC 15 Wis save on critical hit or frightened for 1 min",
+      description:
+        "Finesse, light, thrown; +1d6 psychic damage; DC 15 Wis save on critical hit or frightened for 1 min",
       modifiers: [2, 2],
     },
   },
@@ -4870,7 +4872,8 @@ MagicItemsList["whisper"] = {
       regExpSearch: /^(?=.*exalted)(?=.*whisper).*$/i,
       name: "Exalted Whisper",
       source: [["TDCSR", 212]],
-      description : "Finesse, light, thrown; +1d8 psychic damage; DC 17 Wis save on critical hit or frightened for 1 min",
+      description:
+        "Finesse, light, thrown; +1d8 psychic damage; DC 17 Wis save on critical hit or frightened for 1 min",
       modifiers: [3, 3],
     },
     toNotesPage: [
@@ -4881,11 +4884,194 @@ MagicItemsList["whisper"] = {
           "When I throw Whisper, I can teleport, appearing near where it lands",
           "On a hit, I appear in an unoccupied space within 5 ft of the target",
           "On a miss, I appear within 1d6 \u00D7 5 ft of the target (at DM's discretion)",
-          "In either case, I appear with the dagger in my hand"
+          "In either case, I appear with the dagger in my hand",
         ],
       },
     ],
   },
+};
+
+MagicItemsList["wraps of dyamak"] = {
+  name: "Wraps of Dyamak",
+  source: [["TDCSR", 212]],
+  type: "wondrous item",
+  rarity: "legendary",
+  attunement: true,
+  prerequisite: "Requires attunement by a monk",
+  prereqeval: function (v) {
+    return classes.known.monk ? true : false;
+  },
+  description: "",
+  descriptionFull:
+    "Created and wielded by the ancient warrior-monk Dyamak, these thick strips of enchanted cloth are stained to appear dark crimson with blood of unknown origin. The current resting place of the wraps is unknown." +
+    "\n" +
+    toUni("Dormant") +
+    "\n" +
+    "When the Wraps of Dyamak are in a dormant state, you gain a +1 bonus to attack and damage rolls made with your unarmed strike while wearing them." +
+    "\n   " +
+    "In addition, when you finish a short or long rest, you gain a number of temporary hit points equal to your total number of ki points." +
+    "\n" +
+    toUni("Awakened") +
+    "\n" +
+    "When the Wraps of Dyamak reach an awakened state, they gain the following properties:" +
+    "\n" +
+    "\u2022 The bonus to attack and damage rolls with your unarmed strike increases to +2." +
+    "\n" +
+    "\u2022 You can cast the misty step spell from the wraps as a bonus action, vanishing in a cloud of crimson mist. This property of the wraps can't be used again until you finish a short or long rest, or until you score a critical hit with an unarmed strike against a hostile creature." +
+    "\n" +
+    toUni("Exalted") +
+    "\n" +
+    "\u2022 When the Wraps of Dyamak reach an exalted state, they gain the following properties:" +
+    "\n" +
+    "\u2022 The bonus to attack and damage rolls with your unarmed strike increases to +3." +
+    "\n" +
+    "\u2022 When you hit with an unarmed strike, you can choose to make the attack a ravenous strike. The target takes an extra 6d6 necrotic damage, and you regain hit points equal to the amount of necrotic damage dealt. This property of the wraps can't be used again until you finish a long rest, or until you score a critical hit with an unarmed strike against a hostile creature.",
+  allowDuplicates: false,
+  choices: ["Dormant", "Awakened", "Exalted"],
+  dormant: {
+    name: "Dormant Wraps of Dyamak",
+    description:
+      "These wraps add +1 to hit and damage to my unarmed strikes. When I finish a rest, I gain temp HP equal to my total Ki.",
+    calcChanges: {
+      atkCalc: [
+        function (fields, v, output) {
+          if (v.baseWeaponName === "unarmed strike") {
+            output.magic += 1;
+          }
+        },
+        "The Wraps of Dyamak add +1 to hit and damage to my unarmed strikes.",
+      ],
+    },
+  },
+  awakened: {
+    name: "Awakened Wraps of Dyamak",
+    description:
+      "These wraps add +2 to hit and damage to my unarmed strikes. When I finish a rest, I gain temp HP equal to my total Ki. I can cast misty step once, regaining the ability to do so after a rest or an unarmed strike critical hit.",
+    calcChanges: {
+      atkCalc: [
+        function (fields, v, output) {
+          if (v.baseWeaponName === "unarmed strike") {
+            output.magic += 2;
+          }
+        },
+        "The Wraps of Dyamak add +2 to hit and damage to my unarmed strikes.",
+      ],
+    },
+    spellFirstColTitle: "Us",
+    spellcastingBonus: [
+      {
+        name: "Once per short rest",
+        spells: ["misty step"],
+        selection: ["misty step"],
+        firstCol: "oncesr",
+      },
+    ],
+    extraLimitedFeatures: [
+      {
+        name: "Misty Step (Wraps of Dyamak)",
+        usages: 1,
+        recovery: "short rest",
+      },
+    ],
+  },
+  exalted: {
+    name: "Exalted Wraps of Dyamak",
+    description:
+      "These wraps add +3 to hit and damage to my unarmed strikes. When I finish a rest, I gain temp HP equal to my total Ki. I can cast misty step once; I regain the ability to do so after a rest or an unarmed strike critical hit. When I hit with an unarmed strike, I can make it a ravenous strike; see third page.",
+    calcChanges: {
+      atkAdd: [
+        function (fields, v) {
+          if (
+            v.baseWeaponName === "unarmed strike" &&
+            /\brevenous\b/i.test(v.WeaponTextName)
+          ) {
+            fields.Description +=
+              (fields.Description ? "; " : "") +
+              "+6d6 necrotic damage, I regain HP equal to amount of necrotic damage";
+          }
+        },
+        'If I include the word "Ravenous" in the name of an unarmed strike, it will be treated as a ravenous strike granted by the Wraps of Dyamak.',
+      ],
+      atkCalc: [
+        function (fields, v, output) {
+          if (v.baseWeaponName === "unarmed strike") {
+            output.magic += 3;
+          }
+        },
+        "The Wraps of Dyamak add +3 to hit and damage to my unarmed strikes.",
+      ],
+    },
+    spellFirstColTitle: "Us",
+    spellcastingBonus: [
+      {
+        name: "Once per short rest",
+        spells: ["misty step"],
+        selection: ["misty step"],
+        firstCol: "oncesr",
+      },
+    ],
+    extraLimitedFeatures: [
+      {
+        name: "Misty Step (Wraps of Dyamak)",
+        usages: 1,
+        recovery: "short rest",
+      },
+    ],
+    toNotesPage: [
+      {
+        name: "Features",
+        page3notes: true,
+        additional: "1 \u00D7 per short rest",
+        note: [
+          "When I hit with an unarmed strike, I can make it a ravenous strike",
+          "The target takes an extra 6d6 necrotic damage",
+          "I regain HP equal to the amount of necrotic damage dealt this way",
+          "I regain the ability to do so after a rest or an unarmed strike critical hit",
+        ],
+      },
+    ],
+  },
+};
+
+// Creatures
+CreatureList["plainscow"] = {
+  name: "Plainscow",
+  source: [["TDCSR", 248]],
+  size: 2,
+  type: "Beast",
+  alignment: "Unaligned",
+  ac: 13,
+  hp: 42,
+  hd: [5, 10],
+  speed: "40 ft",
+  scores: [18, 8, 16, 2, 10, 6],
+  damage_resistances:
+    "bludgeoning, piercing, and slashing from nonmagical attacks",
+  skills: {
+    insight: 2,
+  },
+  senses : "",
+  passivePerception: 10,
+  challengeRating: "2",
+  proficiencyBonus: 2,
+  attacksAction: 1,
+  attacks: [
+    {
+      name: "Hooves",
+      ability: 1,
+      damage: [2, 6, "bludgeoning"],
+      range: "Melee (5 ft)",
+      description:
+        "Can be also used as a bonus action (see Trampling Charge trait)",
+    },
+  ],
+  traits: [
+    {
+      name: "Trampling Charge",
+      description:
+        ". If the plainscow moves at least 20 feet straight toward a creature and then hits it with a hooves attack on the same turn, that target must succeed on a DC 14 Strength saving throw or be knocked prone. If the target is prone, the plainscow can make another attack with its hooves as a bonus action.",
+    },
+  ],
 };
 
 /*
