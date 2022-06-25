@@ -128,3 +128,18 @@ AddSubClass("paladin", "oath of the crystalline guardian", {
     },
   },
 });
+
+SpellsList["sacrificial shield"] = {
+	name : "Sacrificial Shield",
+	classes : ["paladin"],
+	source: ["OCG", 2],
+	level : 2,
+	school : "Trans",
+	time : "1 rea",
+	timeFull : "1 reaction, which you take when you make a saving throw against an area of effect spell or magical effect that requires a Dexterity, Constitution, or Strength saving throw",
+	range : "Self",
+	components : "V,S",
+	duration : "Instantaneous",
+	description : "Auto fail Dex/Con/Str save vs magic; create 10 ft cone of total cover behind me",
+	descriptionFull : "The spell strengthens you, turning you into a shield against disaster. You automatically fail the triggering saving throw, in exchange, creatures in a 10-feet-wide cone behind you are considered to be behind total cover against that spell or effect."
+};
