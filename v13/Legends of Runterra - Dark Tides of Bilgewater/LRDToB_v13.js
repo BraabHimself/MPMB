@@ -471,14 +471,14 @@ AddSubClass("fighter", "renegade", {
 						},""
 					]
 				},
-				usages : "Charisma modifier per ",
-				usagescalc : "event.value = Math.max(1, What('Cha Mod'));",
+				usages : 1,
 				recovery : "short rest",
 				action : ["action", ""]
 			},
 			"trial by fire (prereq: gunfighter form)" : {
 				name : "Trial by Fire",
 				source : ["LRDToB", 0],
+				prereqeval : function(v) { return GetFeatureChoice('class', 'fighter', 'subclassfeature3.1') != ''; },
 				description : desc([
 					"I can use a bonus action to charge my weapons fire",
 					"On a hit, I deal extra fire damage equal to half your fighter level, rounded up"
