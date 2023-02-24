@@ -2672,9 +2672,10 @@ MagicItemsList["oceanic weapon"] = {
     itemName1stPage: ["suffix", "Oceanic"],
     descriptionChange: ["replace", "weapon"],
     excludeCheck: function (inObjKey, inObj) {
-      return (
-        !inObj.description || !/thrown/i.test(inObj.description) || !inObj.range
-      );
+      var isThrown = /thrown/i.test(inObj.description);
+      var isMelee = (/melee/i).test(inObj.range);
+
+      return !isThrown && isMelee;
     },
   },
   calcChanges: {
