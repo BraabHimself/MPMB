@@ -71,7 +71,7 @@ AddSubClass("paladin", "oath of the red knight", {
       source: ["X:RK", 2],
       minlevel: 7,
       description: desc([
-        "Allies within range and I gain adv. until end of our next turn vs. creatures that damage us",
+        "Allies " + (typePF ? "with" : "") + "in range and I gain adv. until end of our next turn vs. creatures that damage us",
       ]),
       additional: levels.map(function (n) {
         if (n < 7) return "";
